@@ -31,7 +31,12 @@
                             <legend>Dados Pessoais</legend>
                             <b>id:</b> ${pessoas.id_Pessoa}
                             <br/>
-                            <b>Nome:</b> ${pessoas.nome}  ${pessoas.sobreNome}
+                            <c:if test="${pessoas.tipo.id == '2' }">
+                                <b>Nome do <i>AdMinistrador </i>:</b>  ${pessoas.nome}  ${pessoas.sobreNome}
+                            </c:if>
+                            <c:if test="${pessoas.tipo.id != '2' }">
+                                <b>Nome:</b> ${pessoas.nome}  ${pessoas.sobreNome}
+                            </c:if>
                             <br/>
                             <b>Idade:</b> ${pessoas.idade}
                             <br/>
