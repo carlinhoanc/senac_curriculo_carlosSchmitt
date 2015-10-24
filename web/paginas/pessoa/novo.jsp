@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
@@ -28,12 +29,14 @@
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
+
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-
-        <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Voltar</a>
-
+    <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
+    <div class="alert alert-warning" role="alert">
+        Você já possui um cadastro
+    </div>
+    <% } else { %> 
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAdicionar" method="post" >
-
             <fieldset>
                 <legend>Dados Pessoais</legend>
 
@@ -148,5 +151,10 @@
             var $clo = jQuery.noConflict();
             $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma opção"});
         </script>
+    
+    <% }%>
+    
     </div>
+
+    <%@ include file="../../includes/footer.jsp" %>
 </body>

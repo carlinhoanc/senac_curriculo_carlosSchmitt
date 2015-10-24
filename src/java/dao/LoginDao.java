@@ -36,7 +36,9 @@ public class LoginDao {
 
     public static int fazerLogin(PessoaBean pessoa) throws SQLException, ClassNotFoundException {
         PreparedStatement stmt = null;
-        String sql = "SELECT id_Pessoa FROM pessoa WHERE senha LIKE '" + pessoa.getSenha()+ "' "
+        String sql = "SELECT id_Pessoa FROM pessoa WHERE "
+                + "ativo = 1 "
+                + "AND senha LIKE '" + pessoa.getSenha()+ "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "'";
         ResultSet rs = stmt().executeQuery(sql);
         

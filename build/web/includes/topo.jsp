@@ -1,3 +1,19 @@
+<%
+    String id_tipo = null;
+    String id_pessoa = null;
+    if (session.getAttribute("id_tipo") != null) {
+        id_tipo = (String) session.getAttribute("id_tipo");
+    }else{
+        id_tipo = "0";
+    }
+    if (session.getAttribute("id_pessoa") != null) {
+        id_pessoa = (String) session.getAttribute("id_pessoa");
+    }else{
+        id_pessoa = "0";
+    }
+
+%>
+
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <ul class="nav nav-pills">
@@ -11,12 +27,24 @@
                 <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Lista</a>
             </li>
             <li role="presentation">
-                <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Meu Perfil</a>
+                <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Meu Perfil</a>
             </li>
+
+            <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
+            <li role="presentation">
+                <a href="Logoff">Sair</a>
+            </li>
+            <% } else { %> 
             <li role="presentation"> 
-                <button type="button" class="btn btn-info" data-toggle="modal" 
-                        data-target="#loginModal" >Login</button> </li>
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#loginModal" >Login</button> 
+            </li>
+            <% }%> 
+            
             <!--<li role="presentation">            </li>-->
+            
+            <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
+            <% } else { %> 
+            <% }%>
 
 
         </ul>

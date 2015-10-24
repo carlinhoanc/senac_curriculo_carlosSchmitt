@@ -11,15 +11,22 @@
     <%@ page import="java.util.*" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
-        <%@ include file="includes/heard.jsp" %>
+        <%@ include file="../../includes/heard.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
     </head>
     <body>
-        <%@ include file="includes/topo.jsp" %>
+        <%@ include file="../../includes/topo.jsp" %>
 
         <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <h1>Tela de login</h1>
+        <h1>Área de login</h1>
+            
+        <c:if test = "${falhalogin == 'erro' }" >
+            <div class="alert alert-danger" role="alert">
+                Usuário ou senha inválidos, tente novamente
+            </div>
+        </c:if>
+        
         <form action="Login" method="POST" >
             <p><input name="nome" id="nome" value="" placeholder="digite nome" type="text"/></p>
             <p><input name="senha"  id="senha" type="password"  placeholder="digite senha"/></p>
@@ -27,6 +34,6 @@
         </form>
         </div>
 
-        <%@ include file="includes/footer.jsp" %>
+        <%@ include file="../../includes/footer.jsp" %>
     </body>
 </html>

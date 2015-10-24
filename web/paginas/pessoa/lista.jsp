@@ -8,7 +8,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
+    <%@page session="true" %>
     <%@ page language="java"%> 
     <%@ page import="java.util.*" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -18,7 +18,7 @@
         <title>Lista</title>
 
         <%@ include file="../../includes/heard.jsp" %>
-    
+
     </head>
     <body>
         <%@ include file="../../includes/topo.jsp" %>
@@ -29,56 +29,72 @@
                     <div class="col-md-6">
                         <fieldset>
                             <legend>Dados Pessoais</legend>
-                            id : ${pessoas.id_Pessoa}
+                            <b>id:</b> ${pessoas.id_Pessoa}
                             <br/>
-                            Nome: ${pessoas.nome}  ${pessoas.sobreNome}
+                            <b>Nome:</b> ${pessoas.nome}  ${pessoas.sobreNome}
                             <br/>
-                            Idade: ${pessoas.idade}
+                            <b>Idade:</b> ${pessoas.idade}
                             <br/>
-                            Sexo: ${pessoas.sexo}
+                            <b>Sexo:</b> ${pessoas.sexo}
                             <br/>
-                            Cidade: ${pessoas.endereco.cidade.nome}  ${pessoas.endereco.cidade.estados}
+                            <b>Cidade:</b> ${pessoas.endereco.cidade.nome}  ${pessoas.endereco.cidade.estados}
                             <br/>
-                            <form id="editaPessoa${pessoas.id_Pessoa}" 
-                                  action="${pageContext.request.contextPath}/Pessoa?acao=PessoaEditar" method="post" >
-                                <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
 
-                                <div class="btn-group btn-group-sm" role="group" aria-label="...">
-                                    <button type="submit" class="btn btn-primary">Alterar</button>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal" 
-                                            data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
-                                </div>
-                            </form>
+                            <h4>
+                                <form id="editaPessoa${pessoas.id_Pessoa}" method="post" 
+                                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaCurriculo" >
+                                    <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
+                                    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+                                        <button type="submit" class="btn btn-lg">Ver Perfil  Completo</button>
+                                    </div>
+                                </form>
+                            </h4>
 
+                            <c:if test="${sessionScope.id_tipo == '2' || sessionScope.id_pessoa == pessoas.id_Pessoa }">
 
-                            <div class="modal fade" id="myModal${pessoas.id_Pessoa}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-footer ">
-                                            <div class="page-header">
-                                                <h3>
-                                                    Deseja realmente deletar ?
-                                                </h3>
-                                            </div>
-                                            <form id="deletaPessoa${pessoas.id_Pessoa}" 
-                                                  action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
+                                <form id="editaPessoa${pessoas.id_Pessoa}" 
+                                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaEditar" method="post" >
+                                    <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
 
-                                                <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
+                                    <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
+                                        <button type="submit" class="btn btn-primary">Alterar</button>
+                                        <c:if test="${sessionScope.id_tipo == '2' }">
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" 
+                                                    data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
+                                        </c:if>
+                                    </div>
+                                </form>
 
-                                                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                                                    <div class="btn-group" role="group">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                                    </div>
-                                                    <div class="btn-group" role="group">
-                                                        <button type="submit" class="btn btn-danger" >Deletar</button>
-                                                    </div>
+                                <div class="modal fade" id="myModal${pessoas.id_Pessoa}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-footer ">
+                                                <div class="page-header">
+                                                    <h3>
+                                                        Deseja realmente deletar ?
+                                                    </h3>
                                                 </div>
-                                            </form>
+                                                <form id="deletaPessoa${pessoas.id_Pessoa}" 
+                                                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
+
+                                                    <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
+
+                                                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                                        <div class="btn-group" role="group">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                        </div>
+                                                        <div class="btn-group" role="group">
+                                                            <button type="submit" class="btn btn-danger" >Deletar</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+
+                            </c:if>
                         </fieldset>
                         <br/>
                         <br/>

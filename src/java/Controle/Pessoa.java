@@ -12,10 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author CarlosRoberto
- */
 @WebServlet(name = "Pessoa", urlPatterns = {"/Pessoa"})
 public class Pessoa extends HttpServlet {
 
@@ -23,7 +19,6 @@ public class Pessoa extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
             String nomeClasse = "Acao." + request.getParameter("acao");
 //            System.out.println(nomeClasse);
             Class<?> classe = Class.forName(nomeClasse);
@@ -31,7 +26,6 @@ public class Pessoa extends HttpServlet {
             String paginaRetorno = acao.executar(request, response);
             RequestDispatcher disp = getServletContext().getRequestDispatcher(paginaRetorno);
             disp.forward(request, response);
-
         }
     }
 
@@ -66,6 +60,5 @@ public class Pessoa extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

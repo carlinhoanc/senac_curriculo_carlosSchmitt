@@ -24,3 +24,6 @@ select{width: 100%;padding: 6px;margin-bottom: 10px;}
 input{width: 100%;padding: 6px;margin-bottom: 10px;}
 .enviar{width: 140px;background: #06053E;border: 0;border-radius: 0;color: #fff;font-size: 18px;line-height: 1em;cursor: pointer;}
 .enviar:hover{background: #1E1C8C;}
+
+.grupo_botoes {width: 250px;}
+.grupo_botoes .btn {width: 50%;}

@@ -29,8 +29,6 @@
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
 
-        <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Voltar</a>
-
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
             <c:forEach var="editar" items="${edita}">
 
@@ -142,50 +140,56 @@
                         <div class="limpar"></div>
                     </div>
                 </fieldset>
+                <c:if test="${sessionScope.id_tipo == '2' }">
+                    <fieldset>
+                        <legend>Ações</legend>
+                        <div class="win100">
+                            <div class="win48 esq" >
+                                <label>Tipo de usuário</label>
+                                <select class="form-control" name="id_tipo" id="id_tipo">
+                                    <c:if test = "${editar.tipo.id == '1' }" >
+                                        <option value="1" selected="" >Registrado</option>
+                                        <option value="2" >Admin</option>
+                                    </c:if>
+                                    <c:if test = "${editar.tipo.id != '1' }" >
+                                        <option value="1" >Registrado</option>
+                                        <option value="2" selected="" >Admin</option>
+                                    </c:if>
+                                </select>
+                            </div>
 
-                <fieldset>
-                    <legend>Ações</legend>
-                    <div class="win100">
-                        <div class="win48 esq" >
-                            <label>Tipo de usuário</label>
-                            <select class="form-control" name="id_tipo" id="id_tipo">
-                                <c:if test = "${editar.tipo.id == '1' }" >
-                                    <option value="1" selected="" >Registrado</option>
-                                    <option value="2" >Admin</option>
-                                </c:if>
-                                <c:if test = "${editar.tipo.id != '1' }" >
-                                    <option value="1" >Registrado</option>
-                                    <option value="2" selected="" >Admin</option>
-                                </c:if>
-                            </select>
+                            <div class="win48 dir" >
+                                <label>Ativo?</label>
+                                <select class="form-control" name="ativo" id="ativo">
+                                    <c:if test = "${editar.ativo == '1' }" >
+                                        <option value="1" selected="" >Sim</option>
+                                        <option value="0" >Não</option>
+                                    </c:if>
+                                    <c:if test = "${editar.ativo != '1' }" >
+                                        <option value="1" >Sim</option>
+                                        <option value="0" selected="" >Não</option>
+                                    </c:if>
+                                </select>
+                            </div>
                         </div>
-
-                        <div class="win48 dir" >
-                            <label>Ativo?</label>
-                            <select class="form-control" name="ativo" id="ativo">
-                                <c:if test = "${editar.ativo == '1' }" >
-                                    <option value="1" selected="" >Sim</option>
-                                    <option value="0" >Não</option>
-                                </c:if>
-                                <c:if test = "${editar.ativo != '1' }" >
-                                    <option value="1" >Sim</option>
-                                    <option value="0" selected="" >Não</option>
-                                </c:if>
-                            </select>
-                        </div>
-                    </div>
-                </fieldset>
+                    </fieldset>
+                </c:if>
                 <br/>
                 <br/>
                 <input type="hidden" id="id_Pessoa" name="id_Pessoa" value="${editar.id_Pessoa}" />
             </c:forEach>
 
-            <input type="submit" value="enviar" class="enviar" />
+            <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa" type="button"  class="btn btn-danger">Voltar</a>
+                <input type="submit" value="Salvar" class="btn btn-success" />
+            </div>
         </form>
 
         <script>
             var $clo = jQuery.noConflict();
             $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma opção"});
         </script>
+
+        <%@ include file="../../includes/footer.jsp" %>
     </div>
 </body>
