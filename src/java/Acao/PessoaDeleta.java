@@ -6,6 +6,7 @@ import dao.PessoaDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class PessoaDeleta implements Acao {
 
@@ -19,7 +20,19 @@ public class PessoaDeleta implements Acao {
         end.deleta(Integer.parseInt(idd));
         pessoaDAO.delete(Integer.parseInt(idd));
 
-        List<PessoaBean> pessoas = pessoaDAO.listarPessoa();
+        HttpSession session = req.getSession();
+        String id_tipo = null;
+        if (session.getAttribute("id_tipo") != null) {
+            if (session.getAttribute("id_tipo").equals("2")) {
+                id_tipo = "2";
+            } else {
+                id_tipo = "0";
+            }
+        } else {
+            id_tipo = "0";
+        }
+
+        List<PessoaBean> pessoas = pessoaDAO.listarPessoa(id_tipo);
 
         req.setAttribute("pessoaslista", pessoas);
         return "/paginas/pessoa/lista.jsp";

@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class PessoaDao {
 
@@ -102,7 +104,7 @@ public class PessoaDao {
         EnderecoBean endereco = pessoa.getEndereco();
         EnderecoDao enderecoDAO = new EnderecoDao();
         String idd = pessoa.getId_Pessoa();
-        if (enderecoDAO.atualiza(endereco,idd) == false) {
+        if (enderecoDAO.atualiza(endereco, idd) == false) {
             return false;
         }
         try {
@@ -119,7 +121,7 @@ public class PessoaDao {
             stmt.setInt(10, pessoa.getAtivo());
             stmt.setInt(11, Integer.parseInt(pessoa.getId_Pessoa()));
             int ok = stmt.executeUpdate();
-            
+
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
@@ -129,13 +131,19 @@ public class PessoaDao {
         }
     }
 
-    public List<PessoaBean> listarPessoa() throws ClassNotFoundException, Exception {
+    public List<PessoaBean> listarPessoa(String id_tipo) throws ClassNotFoundException, Exception {
 
         List<PessoaBean> pessoas = new ArrayList<>();
         EnderecoDao enderecoDAO;
         TipoDeUsuarioDao tipoUserDao;
-        String sql = "SELECT * FROM pessoa";
-
+        String sql = null;
+        
+        if(id_tipo.equals("2")){
+            sql = "SELECT * FROM pessoa ";
+        }else{
+            sql = "SELECT * FROM pessoa WHERE id_tipo != 2 AND ativo = 1";
+        }
+     
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
