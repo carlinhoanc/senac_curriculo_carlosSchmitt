@@ -1,4 +1,5 @@
 <%@page session="true" %>
+<div style="padding-top: 70px;"></div>
 <nav class="navbar navbar-inverse navbar-fixed-bottom">
     <div class="container">
         <ul class="nav nav-pills">
@@ -52,3 +53,4 @@
     </div>
 </div>
 
+                

@@ -7,7 +7,6 @@ package dao;
 
 import bean.PessoaBean;
 import conexao.FabricaConexao;
-import static dao.PessoaDao.stmt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

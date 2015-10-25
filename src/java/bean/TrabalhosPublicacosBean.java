@@ -1,41 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bean;
 
-/**
- *
- * @author CarlosRoberto
- */
 public class TrabalhosPublicacosBean {
  
     private int id;
     
-    /**
-     * nome da publicacao
-     */
     private String nome;
     
-    /**
-     * ano de publicacao
-     */
     private int ano;
     
-    /**
-     * id do pais
-     */
     private PaisBean pais;
     
-    /*
-    id tipo de publicacao
-    */
     private TipoTrabalhoPublicadosBean id_TipoPublicados;
     
-    /**
-     * id do curriculo
-     */
     int id_Curriculo;
 
     public int getId() {

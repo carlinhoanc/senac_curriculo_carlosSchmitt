@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao;
 
 import conexao.FabricaConexao;
@@ -12,10 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author CarlosRoberto
- */
 public class PaisDao {
 
     public static Connection com() throws SQLException, ClassNotFoundException {

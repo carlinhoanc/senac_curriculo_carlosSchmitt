@@ -3,6 +3,7 @@
     Created on : 07/10/2015, 08:38:56
     Author     : CarlosRoberto
 --%>
+<%@page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -31,11 +32,12 @@
     <%@ include file="../../includes/topo.jsp" %>
 
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-    <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
-    <div class="alert alert-warning" role="alert">
-        Você já possui um cadastro
-    </div>
-    <% } else { %> 
+        <% // if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
+        <% if (id_tipo.equals("1")) { %>
+        <div class="alert alert-warning" role="alert">
+            Você já possui um cadastro
+        </div>
+        <% } else { %> 
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAdicionar" method="post" >
             <fieldset>
                 <legend>Dados Pessoais</legend>
@@ -121,39 +123,44 @@
                 </div>
             </fieldset>
 
-            <fieldset>
-                <legend>Ações</legend>
+            <c:if test="${sessionScope.id_tipo == '2' }">
+                <fieldset>
+                    <legend>Ações</legend>
 
-                <div class="win100">
-                    <div class="win48 esq" >
-                        <label>Tipo de usuário</label>
-                        <select class="form-control" name="id_tipo" id="id_tipo">
-                            <option value="1" >Registrado</option>
-                            <option value="2" >Admin</option>
-                        </select>
-                    </div>
+                    <div class="win100">
+                        <div class="win48 esq" >
+                            <label>Tipo de usuário</label>
+                            <select class="form-control" name="id_tipo" id="id_tipo">
+                                <option value="1" >Registrado</option>
+                                <option value="2" >Admin</option>
+                            </select>
+                        </div>
 
-                    <div class="win48 dir" >
-                        <label>Ativo?</label>
-                        <select class="form-control" name="ativo" id="ativo">
-                            <option value="1" >Sim</option>
-                            <option value="0" >Não</option>
-                        </select>
+                        <div class="win48 dir" >
+                            <label>Ativo?</label>
+                            <select class="form-control" name="ativo" id="ativo">
+                                <option value="1" >Sim</option>
+                                <option value="0" >Não</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-            </fieldset>
+                </fieldset>
+            </c:if>
             <br/>
             <br/>
-            <input type="submit" value="enviar" class="enviar" />
+            <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa" type="button"  class="btn btn-danger">Voltar</a>
+                <input type="submit" value="enviar" class=" btn-primary" />
+            </div>
         </form>
 
         <script>
             var $clo = jQuery.noConflict();
             $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma opção"});
         </script>
-    
-    <% }%>
-    
+
+        <% }%>
+
     </div>
 
     <%@ include file="../../includes/footer.jsp" %>

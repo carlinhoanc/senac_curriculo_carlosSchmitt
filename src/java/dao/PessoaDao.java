@@ -3,7 +3,6 @@ package dao;
 import bean.EnderecoBean;
 import conexao.FabricaConexao;
 import bean.PessoaBean;
-import bean.TipoTrabalhoPublicadosBean;
 import static dao.PessoaDao.stmt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 public class PessoaDao {
 

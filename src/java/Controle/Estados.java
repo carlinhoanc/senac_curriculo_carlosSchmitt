@@ -18,14 +18,7 @@ public class Estados extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        EstadoDao estados = new EstadoDao();
-        List<EstadosBean> lista = estados.listarEstados();
-
-        request.setAttribute("estados", lista);
-        RequestDispatcher disp = getServletContext().getRequestDispatcher("/paginas/pessoa/novo.jsp");
-        disp.forward(request, response);
-
+      
     }
 
     @Override

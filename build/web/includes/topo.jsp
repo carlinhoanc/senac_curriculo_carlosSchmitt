@@ -29,6 +29,11 @@
             <li role="presentation">
                 <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Meu Perfil</a>
             </li>
+            <% if (id_tipo.equals("2")) { %>
+            <li role="presentation">
+                <a href="${pageContext.request.contextPath}/paginas/curriculo">Admin Tipos</a>
+            </li>
+            <% }%> 
 
             <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
             <li role="presentation">
