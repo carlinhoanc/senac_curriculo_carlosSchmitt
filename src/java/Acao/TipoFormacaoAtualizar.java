@@ -10,8 +10,8 @@ public class TipoFormacaoAtualizar implements Acao {
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         TipoFormacaoBean tipos = new TipoFormacaoBean();
+        tipos.setId(request.getParameter("id_TipoFormacao"));
         tipos.setDescricao(request.getParameter("descricao"));
-        tipos.setId(Integer.parseInt(request.getParameter("id_tipoTrab")));
         TipoFormacaoDao tiposDao = new TipoFormacaoDao();
 
         if (tiposDao.atualiza(tipos) == true) {

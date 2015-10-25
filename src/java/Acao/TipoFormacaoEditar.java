@@ -14,8 +14,8 @@ public class TipoFormacaoEditar implements Acao {
         
         TipoFormacaoDao tipos = new TipoFormacaoDao(); 
 
-        List<TipoFormacaoBean> tiposTrab= tipos.listarTipoTrabID(idd);
-        req.setAttribute("edita", tiposTrab);
+        List<TipoFormacaoBean> tiposForma= tipos.listarTipoFormacaoID(idd);
+        req.setAttribute("editaforma", tiposForma);
         return "/paginas/formacao/editar.jsp";
     }
 }

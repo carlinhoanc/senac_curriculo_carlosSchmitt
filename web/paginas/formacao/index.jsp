@@ -15,7 +15,7 @@
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <h2>Tipos de trabalhos</h2>
+        <h2>Tipos de Formação</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
 
             <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo">Novo</a>

@@ -48,7 +48,7 @@
                                                 <h3>Deseja realmente deletar ?</h3>
                                             </div>
                                             <form id="deletaPessoa${tipoFormacao.id}" 
-                                                  action="${pageContext.request.contextPath}/Pessoa?acao=TipoTrabalhoDeleta" method="post" >
+                                                  action="${pageContext.request.contextPath}/Pessoa?acao=TipoFormacaoDeleta" method="post" >
 
                                                 <input type="hidden" value="${tipoFormacao.id}" name="id_TipoFormacao" id="id_TipoFormacao" />
 

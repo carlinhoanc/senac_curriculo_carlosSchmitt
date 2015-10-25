@@ -18,12 +18,13 @@
 
         <% if (id_tipo.equals("2")) { %>
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoAtualizar" method="post" >
-            <c:forEach var="editar" items="${edita}">
-                <h2>Editar tipo de formação $editar.descricao</h2>
+            <c:forEach var="editar" items="${editaforma}">
+                <h2>Editar tipo de formação ${editar.descricao}</h2>
                 <fieldset>
-                    <title>Editar tipo de trabalho: ${editar.descricao}</title>
+                    <title>Editar tipo de Formação: ${editar.descricao}</title>
                     <legend>Tipo de formação -- ${editar.descricao} </legend>
                     <div class="win100">
+                        <input type="hidden" value="${editaforma.id}" name="id_TipoFormacao" id="id_TipoFormacao" />
                         <input type="text" id="descricao" name="descricao" 
                                value="${editar.descricao}"
                                placeholder="Digite a descricao" required="required" />
@@ -34,7 +35,7 @@
             <br/>
             
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoListarTipoTrabalho" type="button"  class="btn btn-danger">Cancelar</a>
+                <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoListarTipoFormacao" type="button"  class="btn btn-danger">Cancelar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
