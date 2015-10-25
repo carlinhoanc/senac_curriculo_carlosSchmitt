@@ -15,7 +15,7 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista</title>
+        <title>Lista de Usuários</title>
 
         <%@ include file="../../includes/heard.jsp" %>
 
@@ -24,6 +24,7 @@
         <%@ include file="../../includes/topo.jsp" %>
 
         <div class="container theme-showcase" style="padding-top: 70px" role="main">
+            <h2>Lista de Usuários</h2>
             <div class="row">
                 <c:forEach items="${pessoaslista}" var="pessoas" >
                     <div class="col-md-6">

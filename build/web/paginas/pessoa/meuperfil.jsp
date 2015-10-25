@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
-
+    
     <script>
         var $maskk = jQuery.noConflict();
         jQuery(function ($maskk) {
@@ -32,6 +32,8 @@
         <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
             <c:forEach var="editar" items="${edita}">
+                <h2>Editar meu perfil: ${editar.nome} ${editar.sobreNome}</h2>
+                <title>Editar meu perfil: ${editar.nome} ${editar.sobreNome}</title>
                 <fieldset>
                     <legend>Dados Pessoais</legend>
                     <div class="win100">

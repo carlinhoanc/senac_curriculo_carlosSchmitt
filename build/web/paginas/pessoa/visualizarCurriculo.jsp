@@ -10,10 +10,10 @@
 
 <head>
     <%@ include file="../../includes/heard.jsp" %>
+    <title>Curriculo de: ${editar.nome} ${editar.sobreNome}</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
-
     <script>
         var $maskk = jQuery.noConflict();
         jQuery(function ($maskk) {
@@ -28,8 +28,8 @@
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-
         <div class="container theme-showcase" style="padding-top: 70px" role="main">
+            <h2>Curriculo de ${editar.nome} ${editar.sobreNome}</h2>
 
             <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
                 <c:forEach var="editar" items="${edita}">
@@ -72,7 +72,7 @@
             </form>
         </div>
     </div>
-                
+
     <%@ include file="../../includes/footer.jsp" %>
 
 </body>

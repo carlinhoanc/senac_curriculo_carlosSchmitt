@@ -14,6 +14,7 @@
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
 
+
     <script>
         var $maskk = jQuery.noConflict();
         jQuery(function ($maskk) {
@@ -32,8 +33,11 @@
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
             <c:forEach var="editar" items="${edita}">
 
+                <h2>Editar Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</h2>
+                <title>Editar Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</title>
+                
                 <fieldset>
-                    <legend>Dados Pessoais</legend>
+                    <legend>Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</legend>
 
                     <div class="win100">
                         <div class="win48 esq" >

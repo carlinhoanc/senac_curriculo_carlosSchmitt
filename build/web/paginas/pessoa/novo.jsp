@@ -10,13 +10,10 @@
 <head>
     <%@ include file="../../includes/heard.jsp" %>
 
+    <title>Cadastrar novo usuário</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
-
-
-
-
     <script>
         var $maskk = jQuery.noConflict();
         jQuery(function ($maskk) {

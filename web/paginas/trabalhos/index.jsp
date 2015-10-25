@@ -9,12 +9,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
+    <title>Tipos de trabalhos</title>
 </head>
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
+        <h2>Tipos de trabalhos</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
+            
             <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoNovo">Novo</a>
             <br/>
             <br/>
@@ -22,7 +25,6 @@
             <br/>
             <br/>
             <a href="${pageContext.request.contextPath}">Voltar</a>
-
 
         </c:if>
     </div>

@@ -9,21 +9,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    <title>Cadastrar novo tipo de trabalho</title>
 </head>
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
 
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <h2>Cadastrar novo tipo de trabalho</h2>
+
         <% if (id_tipo.equals("2")) { %>
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoAdiciona" method="post" >
-            <fieldset>
-                <div class="win100">
-                    <input type="text" id="descricao" name="descricao" placeholder="Digite a descricao" required="required" />
-                </div>
-            </fieldset>
+            <c:forEach var="editar" items="${edita}">
+                <h2>Editar tipo de trabalho: $editar.descricao</h2>
+                <fieldset>
+                    <title>Editar tipo de trabalho: ${editar.descricao}</title>
+                    <legend>Tipo de trabalho -- ${editar.descricao} </legend>
+                    <div class="win100">
+                        <input type="text" id="descricao" name="descricao" 
+                               value="${editar.descricao}"
+                               placeholder="Digite a descricao" required="required" />
+                    </div>
+                </fieldset>
+            </c:forEach>
             <br/>
             <br/>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
@@ -31,6 +37,7 @@
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
+
         <% }%>
     </div>
     <%@ include file="../../includes/footer.jsp" %>
