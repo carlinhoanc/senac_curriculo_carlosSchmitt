@@ -9,22 +9,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
+    <title>Cadastros de Tipos de trabalhos e formação</title>
 </head>
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <c:if test="${sessionScope.id_tipo == '2' }">
-
+            
+            <h2>Cadastros de Tipos de trabalhos e formação</h2>
 
             <a href="${pageContext.request.contextPath}/paginas/trabalhos">Tipos de Trabalhos</a>
             <br/>
             <br/>
             <a href="${pageContext.request.contextPath}/paginas/formacao">Formação</a>
-            <br/>
-            <br/>
-            <a href="${pageContext.request.contextPath}">Voltar</a>
 
+            <div class="page-header">
+                <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                    <a href="${pageContext.request.contextPath}"type="button" class="btn btn-danger">Voltar</a>
+                </div>
+            </div>
         </c:if>
     </div>
+    <%@ include file="../../includes/footer.jsp" %>
 </body>

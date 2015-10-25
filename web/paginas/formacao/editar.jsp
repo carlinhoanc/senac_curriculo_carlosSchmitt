@@ -17,14 +17,13 @@
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
 
         <% if (id_tipo.equals("2")) { %>
-        <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoAtualizar" method="post" >
+        <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoAtualizar" method="post" >
             <c:forEach var="editar" items="${edita}">
-                <h2>Editar tipo de trabalho: ${editar.descricao} </h2>
+                <h2>Editar tipo de formação $editar.descricao</h2>
                 <fieldset>
                     <title>Editar tipo de trabalho: ${editar.descricao}</title>
-                    <legend>Tipo de trabalho -- ${editar.descricao} </legend>
+                    <legend>Tipo de formação -- ${editar.descricao} </legend>
                     <div class="win100">
-                        <input value="${editar.id}" type="hidden" name="id_TipoPublicados" id="id_TipoPublicados" />
                         <input type="text" id="descricao" name="descricao" 
                                value="${editar.descricao}"
                                placeholder="Digite a descricao" required="required" />
@@ -35,7 +34,7 @@
             <br/>
             
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoListarTipoFormacao" type="button"  class="btn btn-danger">Cancelar</a>
+                <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoListarTipoTrabalho" type="button"  class="btn btn-danger">Cancelar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>

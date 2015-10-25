@@ -1,18 +1,18 @@
 package Acao;
 
-import bean.TipoTrabalhoPublicadosBean;
-import dao.TipoTrabalhoDao;
+import bean.TipoFormacaoBean;
+import dao.TipoFormacaoDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TipoTrabalhoAtualizar implements Acao {
+public class TipoFormacaoAtualizar implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        TipoTrabalhoPublicadosBean tipos = new TipoTrabalhoPublicadosBean();
-        tipos.setId(request.getParameter("id_TipoPublicados"));
+        TipoFormacaoBean tipos = new TipoFormacaoBean();
         tipos.setDescricao(request.getParameter("descricao"));
-        TipoTrabalhoDao tiposDao = new TipoTrabalhoDao();
+        tipos.setId(Integer.parseInt(request.getParameter("id_tipoTrab")));
+        TipoFormacaoDao tiposDao = new TipoFormacaoDao();
 
         if (tiposDao.atualiza(tipos) == true) {
             request.setAttribute("msg", "Pessoa inserida com sucesso");

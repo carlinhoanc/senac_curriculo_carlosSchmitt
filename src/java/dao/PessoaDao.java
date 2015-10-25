@@ -73,7 +73,6 @@ public class PessoaDao {
         PreparedStatement stmt = null;
         boolean removidoSucesso = false;
         String sql = "DELETE FROM pessoa WHERE id_Pessoa = ?";
-        System.out.println(sql);
         try {
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
