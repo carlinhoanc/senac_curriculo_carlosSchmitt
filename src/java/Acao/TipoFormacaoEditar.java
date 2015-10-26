@@ -10,11 +10,9 @@ public class TipoFormacaoEditar implements Acao {
 
     @Override
     public String executar(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String idd = req.getParameter("id_TipoFormacao");
-        
+        String idd = req.getParameter("id_Tipo");
         TipoFormacaoDao tipos = new TipoFormacaoDao(); 
-
-        List<TipoFormacaoBean> tiposForma= tipos.listarTipoFormacaoID(idd);
+        List<TipoFormacaoBean> tiposForma= tipos.listarTipoFormacaoID(""+idd);
         req.setAttribute("editaforma", tiposForma);
         return "/paginas/formacao/editar.jsp";
     }

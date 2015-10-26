@@ -2,16 +2,16 @@ package bean;
 
 public class TipoFormacaoBean {
 
-    private String id;
+    private String id_Tipo;
 
     private String descricao;
 
-    public String getId() {
-        return id;
+    public String getId_Tipo() {
+        return id_Tipo;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId_Tipo(String id_Tipo) {
+        this.id_Tipo = id_Tipo;
     }
 
     public String getDescricao() {

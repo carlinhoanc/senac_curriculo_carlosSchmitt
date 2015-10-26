@@ -10,10 +10,10 @@ public class TipoFormacaoDeleta implements Acao {
 
     @Override
     public String executar(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String idd = req.getParameter("id_TipoFormacao");
+        String idd = req.getParameter("id_Tipo");
 
         TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
-        tipoFormaDao.delete(Integer.parseInt(idd));
+        tipoFormaDao.delete(idd);
 
         List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoTrabalho();
         req.setAttribute("tipoForma", tipoForma);

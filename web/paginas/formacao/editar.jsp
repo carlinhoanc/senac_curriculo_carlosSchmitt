@@ -13,7 +13,6 @@
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
-
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
 
         <% if (id_tipo.equals("2")) { %>
@@ -24,7 +23,7 @@
                     <title>Editar tipo de Formação: ${editar.descricao}</title>
                     <legend>Tipo de formação -- ${editar.descricao} </legend>
                     <div class="win100">
-                        <input type="hidden" value="${editaforma.id}" name="id_TipoFormacao" id="id_TipoFormacao" />
+                        <input type="hidden" value="${editar.id_Tipo}" name="id_Tipo" id="id_Tipo" />
                         <input type="text" id="descricao" name="descricao" 
                                value="${editar.descricao}"
                                placeholder="Digite a descricao" required="required" />

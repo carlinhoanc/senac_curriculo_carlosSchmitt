@@ -26,31 +26,31 @@
                 <div>
                     <c:forEach items="${tipoForma}" var="tipoFormacao" >
                         <div class="col-md-6">
-                            <div><b>ID:</b> ${tipoFormacao.id}</div>
+                            <div><b>ID:</b> ${tipoFormacao.id_Tipo}</div>
                             <div><b>Descrição:</b> ${tipoFormacao.descricao}</div>
 
-                            <form id="editaPessoa${tipoFormacao.id}" 
+                            <form id="editaPessoa${tipoFormacao.id_Tipo}" 
                                   action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoEditar" method="post" >
-                                <input type="hidden" value="${tipoFormacao.id}" name="id_TipoFormacao" id="id_TipoFormacao" />
+                                <input type="hidden" value="${tipoFormacao.id_Tipo}" name="id_Tipo" id="id_Tipo" />
 
                                 <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
                                     <button type="submit" class="btn btn-primary">Alterar</button>
                                     <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#myModal${tipoFormacao.id}" >Deletar</button>
+                                            data-target="#myModal${tipoFormacao.id_Tipo}" >Deletar</button>
                                 </div>
                             </form>
 
-                            <div class="modal fade" id="myModal${tipoFormacao.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal fade" id="myModal${tipoFormacao.id_Tipo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-footer ">
                                             <div class="page-header">
                                                 <h3>Deseja realmente deletar ?</h3>
                                             </div>
-                                            <form id="deletaPessoa${tipoFormacao.id}" 
+                                            <form id="deletaPessoa${tipoFormacao.id_Tipo}" 
                                                   action="${pageContext.request.contextPath}/Pessoa?acao=TipoFormacaoDeleta" method="post" >
 
-                                                <input type="hidden" value="${tipoFormacao.id}" name="id_TipoFormacao" id="id_TipoFormacao" />
+                                                <input type="hidden" value="${tipoFormacao.id_Tipo}" name="id_Tipo" id="id_Tipo" />
 
                                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                                     <div class="btn-group" role="group">
