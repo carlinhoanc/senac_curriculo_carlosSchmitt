@@ -1,6 +1,7 @@
 package Controle;
 
 import bean.CidadeBean;
+import bean.CurriculoBean;
 import bean.PessoaBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
@@ -45,15 +46,17 @@ public class Login extends HttpServlet {
             List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(insereP + "");
             CurriculoDao curriDao = new CurriculoDao();
             int idCurri;
-
             HttpSession session = request.getSession();
+
             for (PessoaBean pessoa : pessoas) {
                 idCurri = curriDao.idCurri(Integer.parseInt(pessoa.getId_Pessoa()));
 
                 if (idCurri == 0) {
+                    session.setAttribute("id_curri", "0");
                     session.setAttribute("temCurri", "0");
-                }else{
+                } else {
                     session.setAttribute("temCurri", "1");
+                    session.setAttribute("id_curri", idCurri);
                 }
 
                 session.setAttribute("ativo", pessoa.getAtivo());
@@ -63,10 +66,9 @@ public class Login extends HttpServlet {
                 session.setAttribute("sobrenome", pessoa.getSobreNome());
                 session.setAttribute("email", pessoa.getEmail());
 
-                System.out.println(pessoa.getTipo().getId());
-
+                List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt(pessoa.getId_Pessoa()));
+                request.setAttribute("curriculo", curriculo);
             }
-
             request.setAttribute("cidades", lista);
             request.setAttribute("edita", pessoas);
             retorno = "/paginas/pessoa/meuperfil.jsp";

@@ -57,12 +57,11 @@
                 <div role="tabpanel" class="tab-pane active" id="perfil">
                     <%@ include file="../../paginas/pessoa/curriculo/perfil.jsp" %>
                 </div>
-
                 <div role="tabpanel" class="tab-pane" id="curriculo">
-                    <c:if test="${sessionScope.id_curri == '0' }">
+                    <c:if test="${sessionScope.temCurri == '0' }">
                         <%@ include file="../../paginas/pessoa/curriculo/curriculo.jsp" %>
                     </c:if>
-                    <c:if test="${sessionScope.id_curri == '1' }">
+                    <c:if test="${sessionScope.temCurri == '1' }">
                         <%@ include file="../../paginas/pessoa/curriculo/curriculoAtualizar.jsp" %>
                     </c:if>
                 </div>
