@@ -48,7 +48,7 @@
                             <c:if test="${sessionScope.id_tipo == '2' || sessionScope.id_pessoa == pessoas.id_Pessoa }">
 
                                 <form id="editaPessoa${pessoas.id_Pessoa}" 
-                                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaEditar" method="post" >
+                                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil" method="post" >
                                     <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
 
                                     <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
