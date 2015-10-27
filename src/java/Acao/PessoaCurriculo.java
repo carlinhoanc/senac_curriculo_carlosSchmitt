@@ -9,7 +9,6 @@ import dao.PessoaDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class PessoaCurriculo implements Acao {
 
@@ -23,16 +22,8 @@ public class PessoaCurriculo implements Acao {
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
          
-//        System.out.println("TAMANHO : " + pessoas.size());
-        
-        HttpSession session = request.getSession();
-        String temCurri = "" + session.getAttribute("temCurri");
-        String id_curri = "" + session.getAttribute("id_curri");
-        String id_pessoa = "" + session.getAttribute("id_pessoa");
-
-        CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
-        List<CurriculoBean> curriculo = curri.listaCurriculoUnico(Integer.parseInt(id_pessoa));
+        List<CurriculoBean> curriculo = curri.listaCurriculoUnico(Integer.parseInt(idd));
 
         request.setAttribute("curriculo", curriculo);
         request.setAttribute("cidades", lista);
