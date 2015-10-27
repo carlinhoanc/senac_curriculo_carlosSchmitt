@@ -35,17 +35,19 @@
 
                 <h2>Editar Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</h2>
                 <title>Editar Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</title>
-                
+
                 <fieldset>
                     <legend>Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</legend>
 
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>Nome</label>
                             <input type="text" id="nome" name="nome"
                                    value="${editar.nome}"
                                    placeholder="Digite nome" required="required" />
                         </div>
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
+                            <label>Sobre nome</label> 
                             <input type="text" id="sobreNome" name="sobreNome"
                                    value="${editar.sobreNome}"
                                    placeholder="Digite Sobrenome" required="required" />
@@ -53,13 +55,15 @@
                         <div class="limpar"></div>
                     </div>
 
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>Idade</label>
                             <input type="number" min="1" max="99 "id="idade"
                                    value="${editar.idade}"
                                    name="idade" placeholder="Digite Idade" required="required" />
                         </div>
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
+                            <label>Sexo</label>
                             <select id="sexo" name="sexo" >
                                 <option>Selecione sexo</option>
                                 <c:if test= "${editar.sexo == 'M'}">
@@ -80,20 +84,24 @@
                         <div class="limpar"></div>
                     </div>
 
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>CPF</label>
                             <input name="cpf" id="cpf" type="text" value="${editar.cpf}" placeholder="Digite CPF" required="required" />
                         </div>
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
+                            <label>Telefone</label>
                             <input name="telefone" id="telefone" value="${editar.telefone}" type="text" placeholder="Digite Telefone" required="required" />
                         </div>
                         <div class="limpar"></div>
                     </div>
-                    <div class="win100">
-                        <div class="win48 esq" >
-                            <input name="senha" type="text" id="senha" value="${editar.senha}" placeholder="Digite senha" required="required" />
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>Senha</label>
+                            <input name="senha" type="password" id="senha" value="${editar.senha}" placeholder="Digite senha" required="required" />
                         </div>
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
+                            <label>E-mail</label>
                             <input name="email" type="email" id="email" value="${editar.email}" placeholder="Digite E-mail" required="required" />
                         </div>
                         <div class="limpar"></div>
@@ -103,43 +111,50 @@
 
                 <fieldset class="mt20 mb20">
                     <legend>Endereço</legend>
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>Rua</label>
                             <input name="nomeRua" id="nomeRua" type="text" value="${editar.endereco.nomeRua}" placeholder="Digite Rua" required="required" />
                         </div>
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
+                            <label>Número</label>
                             <input name="numero" type="number" min="1" id="numero" value="${editar.endereco.numero}" placeholder="Digite Número" required="required" />
                         </div>
                         <div class="limpar"></div>
                     </div>
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>Complemento</label>
                             <input name="complemento" id="complemento" value="${editar.endereco.complemento}" type="text" placeholder="Digite complemento" />
                         </div>
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
+                            <label>Bairro</label>
                             <input name="bairro" type="text" id="bairro" value="${editar.endereco.bairro}" placeholder="Digite bairro" required="required" />
                         </div>
                         <div class="limpar"></div>
                     </div>
 
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <label>CEP</label>
                             <input id="cep" name="cep" type="text" value="${editar.endereco.cep}" placeholder="Digite CEP" />
                         </div>
-                        <div class="win48 dir" >
-                            <select id="id_cidade" name="id_cidade" class="chosen-select"  tabindex="2" required="">
-                                <option>Selecione uma Cidade</option>
-                                <c:forEach items="${cidades}" var="cidade" >
+                        <div class="col-md-6" >
+                            <label>Cidade</label>
+                            <div class="win100">
+                                <select id="id_cidade" name="id_cidade" class="chosen-select"  tabindex="2" required="">
+                                    <option>Selecione uma Cidade</option>
+                                    <c:forEach items="${cidades}" var="cidade" >
 
-                                    <c:if test = "${editar.endereco.cidade.id == cidade.id }" >
-                                        <option value="${cidade.id}" selected="">${cidade.cidadeUF}</option>
-                                    </c:if>
-                                    <c:if test = "${editar.endereco.cidade.id != cidade.id }" >
-                                        <option value="${cidade.id}">${cidade.cidadeUF}</option>
-                                    </c:if>
-                                </c:forEach>
-                            </select>
-
+                                        <c:if test = "${editar.endereco.cidade.id == cidade.id }" >
+                                            <option value="${cidade.id}" selected="">${cidade.cidadeUF}</option>
+                                        </c:if>
+                                        <c:if test = "${editar.endereco.cidade.id != cidade.id }" >
+                                            <option value="${cidade.id}">${cidade.cidadeUF}</option>
+                                        </c:if>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </div>
                         <div class="limpar"></div>
                     </div>
@@ -147,33 +162,37 @@
                 <c:if test="${sessionScope.id_tipo == '2' }">
                     <fieldset>
                         <legend>Ações</legend>
-                        <div class="win100">
-                            <div class="win48 esq" >
+                        <div class="row">
+                            <div class="col-md-6" >
                                 <label>Tipo de usuário</label>
-                                <select class="form-control" name="id_tipo" id="id_tipo">
-                                    <c:if test = "${editar.tipo.id == '1' }" >
-                                        <option value="1" selected="" >Registrado</option>
-                                        <option value="2" >Admin</option>
-                                    </c:if>
-                                    <c:if test = "${editar.tipo.id != '1' }" >
-                                        <option value="1" >Registrado</option>
-                                        <option value="2" selected="" >Admin</option>
-                                    </c:if>
-                                </select>
+                                <div class="win100">
+                                    <select class="form-control" name="id_tipo" id="id_tipo">
+                                        <c:if test = "${editar.tipo.id == '1' }" >
+                                            <option value="1" selected="" >Registrado</option>
+                                            <option value="2" >Admin</option>
+                                        </c:if>
+                                        <c:if test = "${editar.tipo.id != '1' }" >
+                                            <option value="1" >Registrado</option>
+                                            <option value="2" selected="" >Admin</option>
+                                        </c:if>
+                                    </select>
+                                </div>
                             </div>
 
-                            <div class="win48 dir" >
+                            <div class="col-md-6" >
                                 <label>Ativo?</label>
-                                <select class="form-control" name="ativo" id="ativo">
-                                    <c:if test = "${editar.ativo == '1' }" >
-                                        <option value="1" selected="" >Sim</option>
-                                        <option value="0" >Não</option>
-                                    </c:if>
-                                    <c:if test = "${editar.ativo != '1' }" >
-                                        <option value="1" >Sim</option>
-                                        <option value="0" selected="" >Não</option>
-                                    </c:if>
-                                </select>
+                                <div class="win100">
+                                    <select class="form-control" name="ativo" id="ativo">
+                                        <c:if test = "${editar.ativo == '1' }" >
+                                            <option value="1" selected="" >Sim</option>
+                                            <option value="0" >Não</option>
+                                        </c:if>
+                                        <c:if test = "${editar.ativo != '1' }" >
+                                            <option value="1" >Sim</option>
+                                            <option value="0" selected="" >Não</option>
+                                        </c:if>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </fieldset>

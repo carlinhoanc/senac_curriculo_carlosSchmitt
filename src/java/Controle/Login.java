@@ -3,6 +3,7 @@ package Controle;
 import bean.CidadeBean;
 import bean.PessoaBean;
 import dao.CidadeDao;
+import dao.CurriculoDao;
 import dao.LoginDao;
 import dao.PessoaDao;
 import java.io.IOException;
@@ -42,18 +43,28 @@ public class Login extends HttpServlet {
             List<CidadeBean> lista = cidades.listaCidades();
             PessoaDao pessoaDAO = new PessoaDao();
             List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(insereP + "");
+            CurriculoDao curriDao = new CurriculoDao();
+            int idCurri;
 
             HttpSession session = request.getSession();
             for (PessoaBean pessoa : pessoas) {
+                idCurri = curriDao.idCurri(Integer.parseInt(pessoa.getId_Pessoa()));
+
+                if (idCurri == 0) {
+                    session.setAttribute("temCurri", "0");
+                }else{
+                    session.setAttribute("temCurri", "1");
+                }
+
                 session.setAttribute("ativo", pessoa.getAtivo());
                 session.setAttribute("id_tipo", "" + pessoa.getTipo().getId());
                 session.setAttribute("id_pessoa", "" + pessoa.getId_Pessoa());
                 session.setAttribute("nome", pessoa.getNome());
                 session.setAttribute("sobrenome", pessoa.getSobreNome());
                 session.setAttribute("email", pessoa.getEmail());
-                
+
                 System.out.println(pessoa.getTipo().getId());
-                
+
             }
 
             request.setAttribute("cidades", lista);

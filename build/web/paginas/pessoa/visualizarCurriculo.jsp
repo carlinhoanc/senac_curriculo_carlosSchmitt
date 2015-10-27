@@ -27,50 +27,47 @@
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <div class="container theme-showcase" style="padding-top: 70px" role="main">
-            <h2>Curriculo de ${editar.nome} ${editar.sobreNome}</h2>
-            <title>Curriculo de: ${editar.nome} ${editar.sobreNome}</title>
+        <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
+            <c:forEach var="editar" items="${edita}">
+                <h2>Curriculo de ${editar.nome} ${editar.sobreNome}</h2>
+                <title>Curriculo de: ${editar.nome} ${editar.sobreNome}</title>
 
-            <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
-                <c:forEach var="editar" items="${edita}">
+                <fieldset>
+                    <legend>Dados Pessoais</legend>
+                    <h5><b>Nome: </b>${editar.nome} ${editar.sobreNome}</h5>
+                    <h5><b>Idade: </b>${editar.idade}</h5>
+                    <h5><b>Sexo: </b>
+                        <c:if test= "${editar.sexo == 'M'}">
+                            Masculino
+                        </c:if>
+                        <c:if test= "${editar.sexo == 'F'}">
+                            Feminino
+                        </c:if>
+                    </h5>
+                    <h5><b>CPF: </b>${editar.cpf}</h5>
+                    <h5><b>Telefone: </b>${editar.telefone}</h5>
+                    <h5><b>Email: </b>${editar.email}</h5>
+                </fieldset>
 
-                    <fieldset>
-                        <legend>Dados Pessoais</legend>
-                        <h5><b>Nome: </b>${editar.nome} ${editar.sobreNome}</h5>
-                        <h5><b>Idade: </b>${editar.idade}</h5>
-                        <h5><b>Sexo: </b>
-                            <c:if test= "${editar.sexo == 'M'}">
-                                Masculino
-                            </c:if>
-                            <c:if test= "${editar.sexo == 'F'}">
-                                Feminino
-                            </c:if>
-                        </h5>
-                        <h5><b>CPF: </b>${editar.cpf}</h5>
-                        <h5><b>Telefone: </b>${editar.telefone}</h5>
-                        <h5><b>Email: </b>${editar.email}</h5>
-                    </fieldset>
+                <fieldset>
+                    <legend>Endereço</legend>
+                    <h5><b>Rua: </b>${editar.endereco.nomeRua}</h5>
+                    <h5><b>Número: </b>${editar.endereco.numero}</h5>
+                    <h5><b>Complemento: </b>${editar.endereco.complemento}</h5>
+                    <h5><b>Bairro: </b>${editar.endereco.bairro}</h5>
+                    <h5><b>CEP: </b>${editar.endereco.cep}</h5>
+                    <h5><b>Cidade </b>${editar.endereco.cidade.nome}</h5>
+                    <h5><b>Estado </b>${editar.endereco.cidade.estados}</h5>
+                </fieldset>
 
-                    <fieldset>
-                        <legend>Endereço</legend>
-                        <h5><b>Rua: </b>${editar.endereco.nomeRua}</h5>
-                        <h5><b>Número: </b>${editar.endereco.numero}</h5>
-                        <h5><b>Complemento: </b>${editar.endereco.complemento}</h5>
-                        <h5><b>Bairro: </b>${editar.endereco.bairro}</h5>
-                        <h5><b>CEP: </b>${editar.endereco.cep}</h5>
-                        <h5><b>Cidade </b>${editar.endereco.cidade.nome}</h5>
-                        <h5><b>Estado </b>${editar.endereco.cidade.estados}</h5>
-                    </fieldset>
+                <br/>
 
-                    <br/>
+                <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Voltar</a>
+                </div>
 
-                    <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                        <a class="btn btn-warning" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Voltar</a>
-                    </div>
-
-                </c:forEach>
-            </form>
-        </div>
+            </c:forEach>
+        </form>
     </div>
 
     <%@ include file="../../includes/footer.jsp" %>

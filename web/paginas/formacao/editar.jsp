@@ -3,10 +3,11 @@
     Created on : 07/10/2015, 08:38:56
     Author     : CarlosRoberto
 --%>
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
 </head>
@@ -18,10 +19,10 @@
         <% if (id_tipo.equals("2")) { %>
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoAtualizar" method="post" >
             <c:forEach var="editar" items="${editaforma}">
-                <h2>Editar tipo de formação ${editar.descricao}</h2>
+                <h2>Editar tipo de formaÃ§Ã£o ${editar.descricao}</h2>
                 <fieldset>
-                    <title>Editar tipo de Formação: ${editar.descricao}</title>
-                    <legend>Tipo de formação -- ${editar.descricao} </legend>
+                    <title>Editar tipo de FormaÃ§Ã£o: ${editar.descricao}</title>
+                    <legend>Tipo de formaÃ§Ã£o -- ${editar.descricao} </legend>
                     <div class="win100">
                         <input type="hidden" value="${editar.id_Tipo}" name="id_Tipo" id="id_Tipo" />
                         <input type="text" id="descricao" name="descricao" 

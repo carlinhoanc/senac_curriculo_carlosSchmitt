@@ -39,21 +39,21 @@
             <fieldset>
                 <legend>Dados Pessoais</legend>
 
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input type="text" id="nome" name="nome" placeholder="Digite nome" required="required" />
                     </div>
-                    <div class="win48 dir" >
+                    <div class="col-md-6" >
                         <input type="text" id="sobreNome" name="sobreNome" placeholder="Digite Sobrenome" required="required" />
                     </div>
                     <div class="limpar"></div>
                 </div>
 
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input type="number" min="1" max="99 "id="idade" name="idade" placeholder="Digite Idade" required="required" />
                     </div>
-                    <div class="win48 dir" >
+                    <div class="col-md-6" >
                         <select id="sexo" name="sexo" >
                             <option value="M">Masculino</option>
                             <option value="F">Feminino</option>
@@ -62,20 +62,20 @@
                     <div class="limpar"></div>
                 </div>
 
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input name="cpf" id="cpf" type="text" placeholder="Digite CPF" required="required" />
                     </div>
-                    <div class="win48 dir" >
+                    <div class="col-md-6" >
                         <input name="telefone" id="telefone" type="text" placeholder="Digite Telefone" required="required" />
                     </div>
                     <div class="limpar"></div>
                 </div>
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input name="senha" type="text" id="senha" placeholder="Digite senha" required="required" />
                     </div>
-                    <div class="win48 dir" >
+                    <div class="col-md-6" >
                         <input name="email" type="email" id="email" placeholder="Digite E-mail" required="required" />
                     </div>
                     <div class="limpar"></div>
@@ -85,36 +85,38 @@
 
             <fieldset class="mt20 mb20">
                 <legend>Endereço</legend>
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input name="nomeRua" id="nomeRua" type="text" placeholder="Digite Rua" required="required" />
                     </div>
-                    <div class="win48 dir" >
+                    <div class="col-md-6" >
                         <input name="numero" type="number" min="1" id="numero" placeholder="Digite Número" required="required" />
                     </div>
                     <div class="limpar"></div>
                 </div>
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input name="complemento" id="complemento" type="text" placeholder="Digite complemento" />
                     </div>
-                    <div class="win48 dir" >
+                    <div class="col-md-6" >
                         <input name="bairro" type="text" id="bairro" placeholder="Digite bairro" required="required" />
                     </div>
                     <div class="limpar"></div>
                 </div>
 
-                <div class="win100">
-                    <div class="win48 esq" >
+                <div class="row">
+                    <div class="col-md-6" >
                         <input id="cep" name="cep" type="text" placeholder="Digite CEP" />
                     </div>
-                    <div class="win48 dir" >
-                        <select id="id_cidade" name="id_cidade" class="chosen-select"  tabindex="2" required="">
-                            <option>Selecione uma Cidade</option>
-                            <c:forEach items="${cidades}" var="cidade" >
-                                <option value="${cidade.id}">${cidade.cidadeUF}</option>
-                            </c:forEach>
-                        </select>
+                    <div class="col-md-6" >
+                        <div class="win100">
+                            <select id="id_cidade" name="id_cidade" class="chosen-select"  tabindex="2" required="">
+                                <option>Selecione uma Cidade</option>
+                                <c:forEach items="${cidades}" var="cidade" >
+                                    <option value="${cidade.id}">${cidade.cidadeUF}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                     <div class="limpar"></div>
                 </div>
@@ -124,21 +126,25 @@
                 <fieldset>
                     <legend>Ações</legend>
 
-                    <div class="win100">
-                        <div class="win48 esq" >
+                    <div class="row">
+                        <div class="col-md-6" >
                             <label>Tipo de usuário</label>
-                            <select class="form-control" name="id_tipo" id="id_tipo">
-                                <option value="1" >Registrado</option>
-                                <option value="2" >Admin</option>
-                            </select>
+                            <div class="win100">
+                                <select class="form-control" name="id_tipo" id="id_tipo">
+                                    <option value="1" >Registrado</option>
+                                    <option value="2" >Admin</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="win48 dir" >
+                        <div class="col-md-6" >
                             <label>Ativo?</label>
-                            <select class="form-control" name="ativo" id="ativo">
-                                <option value="1" >Sim</option>
-                                <option value="0" >Não</option>
-                            </select>
+                            <div class="win100">
+                                <select class="form-control" name="ativo" id="ativo">
+                                    <option value="1" >Sim</option>
+                                    <option value="0" >Não</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -147,7 +153,7 @@
             <br/>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa" type="button"  class="btn btn-danger">Voltar</a>
-                <input type="submit" value="enviar" class=" btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
 

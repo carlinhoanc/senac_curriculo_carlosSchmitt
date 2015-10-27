@@ -3,9 +3,10 @@
     Created on : 07/10/2015, 08:38:56
     Author     : CarlosRoberto
 --%>
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>

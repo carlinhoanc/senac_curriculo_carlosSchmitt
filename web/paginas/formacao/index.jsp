@@ -3,19 +3,20 @@
     Created on : 07/10/2015, 08:38:56
     Author     : CarlosRoberto
 --%>
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    <title>Tipos de Formação</title>
+    <title>Tipos de FormaÃ§Ã£o</title>
 </head>
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <h2>Tipos de Formação</h2>
+        <h2>Tipos de FormaÃ§Ã£o</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
 
             <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo">Novo</a>
