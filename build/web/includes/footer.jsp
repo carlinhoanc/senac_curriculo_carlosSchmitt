@@ -12,11 +12,11 @@
             <li role="presentation">
                 <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Lista</a>
             </li>
+            <c:if test="${sessionScope.id_tipo == '2' || sessionScope.id_tipo == '1' }">
             <li role="presentation">
                 <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Meu Perfil</a>
             </li>
 
-            <c:if test="${sessionScope.id_tipo == '2' || sessionScope.id_tipo == '1' }">
                 <li role="presentation">
                     <a href="Logoff">Sair</a>
                 </li>

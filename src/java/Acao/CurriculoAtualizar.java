@@ -3,9 +3,11 @@ package Acao;
 import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.PessoaBean;
+import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.PessoaDao;
+import dao.TrabalhosDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +20,11 @@ public class CurriculoAtualizar implements Acao {
         HttpSession session = request.getSession();
         String idd = "" + session.getAttribute("id_pessoa");
         String temCurri = "" + session.getAttribute("temCurri");
-
+        
         CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
 
-        int idCurri = curri.idCurri(Integer.parseInt(idd));
-
+        int idCurri = Integer.parseInt((String) session.getAttribute("id_curri"));
         if (idCurri == 0) {
             session.setAttribute("id_curri", "0");
         } else {
@@ -45,15 +46,20 @@ public class CurriculoAtualizar implements Acao {
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
+        request.setAttribute("cidades", lista);
 
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
+        request.setAttribute("edita", pessoas);
 
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
-
         request.setAttribute("curriculo", curriculo);
-        request.setAttribute("cidades", lista);
-        request.setAttribute("edita", pessoas);
+        
+        TrabalhosDao trabalhosDao = new TrabalhosDao();
+        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" +idCurri);
+                
+        request.setAttribute("trabalhos", trabalhos);
+
 
         return "/paginas/pessoa/meuperfil.jsp";
     }

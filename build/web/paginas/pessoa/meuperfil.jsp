@@ -1,4 +1,4 @@
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,12 +23,8 @@
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-
         <% if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
-
         <div>
-
-            <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#perfil" aria-controls="perfil" role="tab" data-toggle="tab">
@@ -67,11 +63,10 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="formacao">
-
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="trabalhos">
-
+                    <%@ include file="../../paginas/pessoa/curriculo/trabalhos.jsp" %>
                 </div>
             </div>
 

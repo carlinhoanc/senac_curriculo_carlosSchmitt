@@ -8,7 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class TipoTrabalhoNovo implements Acao {
+public class TrabalhoNovo implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -18,7 +18,7 @@ public class TipoTrabalhoNovo implements Acao {
         
         TipoTrabalhoDao tipoTrabalhoDao = new TipoTrabalhoDao();
         List<TipoTrabalhoPublicadosBean> tipoTrabalho = tipoTrabalhoDao.listarTipoTrabalho();
-        
+
         request.setAttribute("paises", paises);
         request.setAttribute("tipoTrabalho", tipoTrabalho);
         return "/paginas/pessoa/curriculo/novoTrabalho.jsp";

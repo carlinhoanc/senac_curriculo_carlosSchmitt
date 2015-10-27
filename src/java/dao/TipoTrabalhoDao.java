@@ -133,4 +133,20 @@ public class TipoTrabalhoDao {
             FabricaConexao.fechaConexao(TipoTrabalhoDao.connection, stmt());
         }
     }
+
+    public TipoTrabalhoPublicadosBean listarTipoID(String id) throws ClassNotFoundException, Exception {
+        TipoTrabalhoPublicadosBean tipopublicados = new TipoTrabalhoPublicadosBean();
+        String sql = "SELECT * FROM tipopublicados WHERE id_TipoPublicados = " + id;
+        System.out.println(sql);
+        PreparedStatement stmt = null;
+        stmt = com().prepareStatement(sql);
+        ResultSet rs = stmt().executeQuery(sql);
+
+        while (rs.next()) {
+            tipopublicados.setId(rs.getString("id_TipoPublicados"));
+            tipopublicados.setDescricao(rs.getString("descricao"));
+        }
+        stmt.close();
+        return tipopublicados;
+    }
 }

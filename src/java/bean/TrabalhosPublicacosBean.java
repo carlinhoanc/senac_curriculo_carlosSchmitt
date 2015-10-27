@@ -2,7 +2,7 @@ package bean;
 
 public class TrabalhosPublicacosBean {
  
-    private int id;
+    private int id_TbPublicados;
     
     private String nome;
     
@@ -12,14 +12,14 @@ public class TrabalhosPublicacosBean {
     
     private TipoTrabalhoPublicadosBean id_TipoPublicados;
     
-    int id_Curriculo;
+    private String id_Curriculo;
 
-    public int getId() {
-        return id;
+    public int getId_TbPublicados() {
+        return id_TbPublicados;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_TbPublicados(int id_TbPublicados) {
+        this.id_TbPublicados = id_TbPublicados;
     }
 
     public String getNome() {
@@ -46,11 +46,11 @@ public class TrabalhosPublicacosBean {
         this.pais = pais;
     }
 
-    public int getId_Curriculo() {
+    public String getId_Curriculo() {
         return id_Curriculo;
     }
 
-    public void setId_Curriculo(int id_Curriculo) {
+    public void setId_Curriculo(String id_Curriculo) {
         this.id_Curriculo = id_Curriculo;
     }
 
@@ -61,6 +61,5 @@ public class TrabalhosPublicacosBean {
     public void setId_TipoPublicados(TipoTrabalhoPublicadosBean id_TipoPublicados) {
         this.id_TipoPublicados = id_TipoPublicados;
     }
-    
     
 }
