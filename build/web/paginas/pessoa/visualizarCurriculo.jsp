@@ -31,42 +31,74 @@
             <c:forEach var="editar" items="${edita}">
                 <h2>Curriculo de ${editar.nome} ${editar.sobreNome}</h2>
                 <title>Curriculo de: ${editar.nome} ${editar.sobreNome}</title>
+                <div class="row">
+                    <div class="col-md-6" >
+                        <fieldset>
+                            <legend>Dados Pessoais</legend>
+                            <h5><b>Nome: </b>${editar.nome} ${editar.sobreNome}</h5>
+                            <h5><b>Idade: </b>${editar.idade}</h5>
+                            <h5><b>Sexo: </b>
+                                <c:if test= "${editar.sexo == 'M'}">
+                                    Masculino
+                                </c:if>
+                                <c:if test= "${editar.sexo == 'F'}">
+                                    Feminino
+                                </c:if>
+                            </h5>
+                            <h5><b>CPF: </b>${editar.cpf}</h5>
+                            <h5><b>Telefone: </b>${editar.telefone}</h5>
+                            <h5><b>Email: </b>${editar.email}</h5>
+                        </fieldset>
+                    </div>
 
-                <fieldset>
-                    <legend>Dados Pessoais</legend>
-                    <h5><b>Nome: </b>${editar.nome} ${editar.sobreNome}</h5>
-                    <h5><b>Idade: </b>${editar.idade}</h5>
-                    <h5><b>Sexo: </b>
-                        <c:if test= "${editar.sexo == 'M'}">
-                            Masculino
-                        </c:if>
-                        <c:if test= "${editar.sexo == 'F'}">
-                            Feminino
-                        </c:if>
-                    </h5>
-                    <h5><b>CPF: </b>${editar.cpf}</h5>
-                    <h5><b>Telefone: </b>${editar.telefone}</h5>
-                    <h5><b>Email: </b>${editar.email}</h5>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Endereço</legend>
-                    <h5><b>Rua: </b>${editar.endereco.nomeRua}</h5>
-                    <h5><b>Número: </b>${editar.endereco.numero}</h5>
-                    <h5><b>Complemento: </b>${editar.endereco.complemento}</h5>
-                    <h5><b>Bairro: </b>${editar.endereco.bairro}</h5>
-                    <h5><b>CEP: </b>${editar.endereco.cep}</h5>
-                    <h5><b>Cidade </b>${editar.endereco.cidade.nome}</h5>
-                    <h5><b>Estado </b>${editar.endereco.cidade.estados}</h5>
-                </fieldset>
-
-                <br/>
-
-                <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                    <a class="btn btn-warning" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Voltar</a>
-                </div>
-
+                    <div class="col-md-6" >
+                        <fieldset>
+                            <legend>Endereço</legend>
+                            <h5><b>Rua: </b>${editar.endereco.nomeRua}</h5>
+                            <h5><b>Número: </b>${editar.endereco.numero}</h5>
+                            <h5><b>Complemento: </b>${editar.endereco.complemento}</h5>
+                            <h5><b>Bairro: </b>${editar.endereco.bairro}</h5>
+                            <h5><b>CEP: </b>${editar.endereco.cep}</h5>
+                            <h5><b>Cidade </b>${editar.endereco.cidade.nome}</h5>
+                            <h5><b>Estado </b>${editar.endereco.cidade.estados}</h5>
+                        </fieldset>
+                    </div>
+                </div> 
             </c:forEach>
+
+            <c:forEach var="curriculo" items="${curriculo}">
+                <fieldset>
+                    <legend>Curriculo</legend>
+                    <div class="row">
+                        <div class="col-md-6" >  
+                            <b>Resumo</b>
+                            <div>
+                                ${curriculo.resumo}
+                            </div>
+
+                            <b>Experiência Profissional</b>
+                            <div>
+                                ${curriculo.expProfissional}
+                            </div>
+                        </div>
+                        <div class="col-md-6" >  
+                            <b>Formação Básica</b>
+                            <div>
+                                ${curriculo.forBasica}
+                            </div>
+                            <b>Formação Média</b>
+                            <div>
+                                ${curriculo.formMedio}
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </c:forEach>
+            <br/>
+            <br/>
+            <div class="btn-group btn-group grupo_botoes" role="group" aria-b="...">
+                <a class="btn btn-warning" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa">Voltar</a>
+            </div>
         </form>
     </div>
 
