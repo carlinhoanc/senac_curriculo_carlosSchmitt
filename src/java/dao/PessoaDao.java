@@ -90,9 +90,29 @@ public class PessoaDao {
             throw new RuntimeException(e);
         }
     }
+    public boolean desativa(int id) throws Exception {
+        PreparedStatement stmt = null;
+        boolean removidoSucesso = false;
+        String sql = "UPDATE pessoa SET ativo=0  WHERE id_Pessoa = ?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, id);
+            int ok = stmt.executeUpdate();
+            if (ok == 1) {
+                System.out.println("Pessoa desativada com sucesso no BD!");
+                removidoSucesso = true;
+            } else {
+                System.out.println("Erro ao desativar Pessoa no BD!");
+            }
+            stmt.close();
+            return removidoSucesso;
+        } catch (SQLException e) {
+            System.out.println("Erro ao desativar Pessoa no BD!");
+            throw new RuntimeException(e);
+        }
+    }
 
     public boolean atualiza(PessoaBean pessoa) throws ClassNotFoundException, Exception {
-
         boolean atualizadoSucesso = false;
         String sql = "UPDATE pessoa SET nome=?,sobreNome=?,idade=?,sexo=?,cpf=?, "
                 + "senha=?,email=?,telefone=?, id_tipo=? , ativo=? "

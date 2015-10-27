@@ -17,8 +17,9 @@ public class PessoaDeleta implements Acao {
         PessoaDao pessoaDAO = new PessoaDao();
         EnderecoDao end = new EnderecoDao();
 
-        end.deleta(Integer.parseInt(idd));
-        pessoaDAO.delete(Integer.parseInt(idd));
+//        end.deleta(Integer.parseInt(idd));
+//        pessoaDAO.delete(Integer.parseInt(idd));
+        pessoaDAO.desativa(Integer.parseInt(idd));
 
         HttpSession session = req.getSession();
         String id_tipo = null;
