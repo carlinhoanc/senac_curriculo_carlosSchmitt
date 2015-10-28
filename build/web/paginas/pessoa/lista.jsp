@@ -64,7 +64,7 @@
                     <tr>  
                         <th>ID</th>  
                         <th>Nome</th>  
-                        <th class="filter-select filter-exact" data-placeholder="Idade">Idade</th>  
+                        <th class="filter-select filter-exact" data-placeholder="Idade  ">Idade</th>  
                         <th class="filter-select filter-exact" data-placeholder="Sexo">Sexo</th>  
                         <th>Cidade</th>  
                         <th></th>
