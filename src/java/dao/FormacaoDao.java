@@ -74,16 +74,20 @@ public class FormacaoDao {
         }
     }
 
-    public boolean atualiza(FormacaoBean p, String id) throws Exception {
+    public boolean atualiza(FormacaoBean p) throws Exception {
         PreparedStatement stmt = null;
         boolean atualizadoSucesso = false;
-        String sql = "UPDATE formacao SET nomeInstitui=? ,dataInicio=? ,dataTermino=? ,id_Tipo=? ,"
+        String sql = "UPDATE formacao SET "
+                + "nomeInstitui= ? ,"
+                + "dataInicio=?,"
+                + "dataTermino=?,"
+                + "id_Tipo=? "
                 + "WHERE id_Formacao = ?";
         try {
             stmt = connection.prepareStatement(sql);
-
             stmt.setString(1, p.getNomeInstitui());
             stmt.setString(2, p.getDataInicio());
+            stmt.setString(3, p.getDataTermino());
             stmt.setString(3, p.getDataTermino());
             stmt.setString(4, p.getId_Tipo().getId_Tipo());
             stmt.setInt(5, p.getId());

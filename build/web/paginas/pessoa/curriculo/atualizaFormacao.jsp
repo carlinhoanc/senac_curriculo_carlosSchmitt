@@ -15,7 +15,7 @@
 <body>
     <%@ include file="../../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <form action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoAltera" method="post" >
+        <form action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoAtualiza" method="post" >
             <c:forEach var="formacao" items="${formacao}">
 
                 <div class="row">
@@ -88,6 +88,8 @@
                         </script>
                     </div>
                 </div>
+
+                <input type="hidden" value="${formacao.id}" id="id_formacao" name="id_formacao" />
             </c:forEach>
 
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">

@@ -1,26 +1,28 @@
-
 package Acao;
 
 import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
+import bean.TipoTrabalhoPublicadosBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PessoaDao;
 import dao.TipoFormacaoDao;
+import dao.TipoTrabalhoDao;
 import dao.TrabalhosDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class FormacaoAdiciona implements Acao {
+public class FormacaoAtualiza implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
         HttpSession session = request.getSession();
         String idCurri = "" + session.getAttribute("id_curri");
         String idd = "" + session.getAttribute("id_pessoa");
@@ -28,6 +30,7 @@ public class FormacaoAdiciona implements Acao {
         FormacaoBean formacaoBean = new FormacaoBean();
         TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
 
+        formacaoBean.setId(Integer.parseInt(request.getParameter("id_formacao")));
         formacaoBean.setNomeInstitui(request.getParameter("nomeInstitui"));
         formacaoBean.setDataInicio(request.getParameter("dataInicio"));
         formacaoBean.setDataTermino(request.getParameter("dataTermino"));
@@ -36,10 +39,10 @@ public class FormacaoAdiciona implements Acao {
 
         FormacaoDao formacaoDao = new FormacaoDao();
 
-        if (formacaoDao.insere(formacaoBean) == true) {
-            request.setAttribute("msg", "Pessoa inserida com sucesso");
+        if (formacaoDao.atualiza(formacaoBean) == true) {
+            request.setAttribute("msg", "Formação inserida com sucesso");
         } else {
-            request.setAttribute("msg", "Erro ao inserirr pessoa");
+            request.setAttribute("msg", "Erro ao inserir formação");
         }
 
         CidadeDao cidades = new CidadeDao();
@@ -64,6 +67,6 @@ public class FormacaoAdiciona implements Acao {
         session.setAttribute("temCurri", "1");
 
         return "/paginas/pessoa/meuperfil.jsp";
-    }
 
+    }
 }

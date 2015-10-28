@@ -108,6 +108,20 @@
                     </c:forEach>
                 </div>
             </fieldset>
+
+            <fieldset style="margin-top: 30px;">
+                <legend>Formação Academica</legend>
+                <div class="row">
+                    <c:forEach var="formacaos" items="${formacao}">
+                        <div class="col-md-6">
+                            <p><b>Nome da Instituição: </b>${formacaos.nomeInstitui}</p>
+                            <p><b>Formação Academica: </b>${formacaos.id_Tipo.descricao}</p>
+                            <p><b>Data Inicio: </b>${formacaos.dataInicio}</p>
+                            <p><b>Data Término: </b>${formacaos.dataTermino}</p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </fieldset>
             <br/>
             <br/>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-b="...">
