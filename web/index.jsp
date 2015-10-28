@@ -20,31 +20,6 @@
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         
     <h1>Projeto Seanc 4ª Fase</h1>
-    <p>
-        <a href="emulaerro">Emulando Erro 404</a>
-    </p>
-
-    <p>
-        <a href="Login.jsp">Login</a>
-    </p>
-
-    <p>
-        <a href="CadastroCurriculo.jsp">Cadastro Curriculo</a>
-    </p>
-
-    <p>
-        <a href="ExportarCurriculo.jsp">Exportar Curriculo</a>
-    </p>
-
-    
-
-    <p><a href="conexao">Conexão</a></p>
-
-    <p>
-        <a href="paginas/pessoa/index.jsp" >Pessoas</a>
-    </p>
-
-    </div>
     
     <%@ include file="includes/footer.jsp" %>
 </body>
