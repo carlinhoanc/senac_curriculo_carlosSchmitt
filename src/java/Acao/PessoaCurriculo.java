@@ -49,7 +49,7 @@ public class PessoaCurriculo implements Acao {
         FormacaoDao formacaoDao = new FormacaoDao();
         List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
         request.setAttribute("formacao", formacao);
-
+        
         return "/paginas/pessoa/visualizarCurriculo.jsp";
     }
 }

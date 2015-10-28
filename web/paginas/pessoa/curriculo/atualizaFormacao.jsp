@@ -28,11 +28,11 @@
                         <label>Formação Academica</label>
                         <select id="id_tipoFormacao" name="id_tidoFormacao" required="" >
                             <c:forEach var="tipoFormas" items="${tipoForma}">
-                                <c:if test="${formacao.id_Tipo.id == tipoFormas.id_Tipo}">
+                                <c:if test="${formacao.id_Tipo.id_Tipo == tipoFormas.id_Tipo}">
                                     <option selected="" value="${tipoFormas.id_Tipo}">${tipoFormas.descricao}</option>
                                 </c:if>
 
-                                <c:if test="${formacao.id_Tipo.id != tipoFormas.id_Tipo}">
+                                <c:if test="${formacao.id_Tipo.id_Tipo != tipoFormas.id_Tipo}">
                                     <option value="${tipoFormas.id_Tipo}">${tipoFormas.descricao}</option>
                                 </c:if>
                             </c:forEach>
