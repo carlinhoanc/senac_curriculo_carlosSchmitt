@@ -4,43 +4,39 @@ import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
+import bean.TipoFormacaoBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PessoaDao;
+import dao.TipoFormacaoDao;
 import dao.TrabalhosDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class CurriculoAtualizar implements Acao {
+public class FormacaoAdiciona implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
+        String idCurri = "" + session.getAttribute("id_curri");
         String idd = "" + session.getAttribute("id_pessoa");
-        String temCurri = "" + session.getAttribute("temCurri");
-        
-        CurriculoBean curriBeans = new CurriculoBean();
-        CurriculoDao curri = new CurriculoDao();
 
-        int idCurri = Integer.parseInt((String) session.getAttribute("id_curri"));
-        if (idCurri == 0) {
-            session.setAttribute("id_curri", "0");
-        } else {
-            session.setAttribute("id_curri", idCurri);
-        }
+        FormacaoBean formacaoBean = new FormacaoBean();
+        TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
 
-        curriBeans.setExpProfissional(request.getParameter("expProfissional"));
-        curriBeans.setForBasica(request.getParameter("forBasica"));
-        curriBeans.setFormMedio(request.getParameter("formMedio"));
-        curriBeans.setIdPessoa(idd);
-        curriBeans.setId(idCurri);
-        curriBeans.setResumo(request.getParameter("resumo"));
+        formacaoBean.setNomeInstitui(request.getParameter("nomeInstitui"));
+        formacaoBean.setDataInicio(request.getParameter("dataInicio"));
+        formacaoBean.setDataTermino(request.getParameter("dataTermino"));
+        formacaoBean.setId_Tipo(tipoFormacaoDao.listarTipoID(request.getParameter("id_tidoFormacao")));
+        formacaoBean.setCurriculo_id_Curriculo(idCurri);
 
-        if (curri.atualizar(curriBeans) == true) {
+        FormacaoDao formacaoDao = new FormacaoDao();
+
+        if (formacaoDao.insere(formacaoBean) == true) {
             request.setAttribute("msg", "Pessoa inserida com sucesso");
         } else {
             request.setAttribute("msg", "Erro ao inserirr pessoa");
@@ -54,17 +50,20 @@ public class CurriculoAtualizar implements Acao {
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         request.setAttribute("edita", pessoas);
 
+        CurriculoDao curri = new CurriculoDao();
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
-        
-        TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" +idCurri);
-        request.setAttribute("trabalhos", trabalhos);
-        
-        FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(idCurri);
         request.setAttribute("formacao", formacao);
+
+        TrabalhosDao trabalhosDao = new TrabalhosDao();
+        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        request.setAttribute("trabalhos", trabalhos);
+
+        session.setAttribute("temCurri", "1");
 
         return "/paginas/pessoa/meuperfil.jsp";
     }
+
 }

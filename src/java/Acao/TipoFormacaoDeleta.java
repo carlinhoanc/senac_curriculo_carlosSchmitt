@@ -15,7 +15,7 @@ public class TipoFormacaoDeleta implements Acao {
         TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
         tipoFormaDao.delete(idd);
 
-        List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoTrabalho();
+        List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
         req.setAttribute("tipoForma", tipoForma);
         return "/paginas/formacao/lista.jsp";
     }

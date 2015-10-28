@@ -15,12 +15,12 @@ public class TrabalhoNovo implements Acao {
 
         PaisDao paisDao = new PaisDao();
         List<PaisBean> paises = paisDao.listarPaises();
+        request.setAttribute("paises", paises);
         
         TipoTrabalhoDao tipoTrabalhoDao = new TipoTrabalhoDao();
         List<TipoTrabalhoPublicadosBean> tipoTrabalho = tipoTrabalhoDao.listarTipoTrabalho();
-
-        request.setAttribute("paises", paises);
         request.setAttribute("tipoTrabalho", tipoTrabalho);
+
         return "/paginas/pessoa/curriculo/novoTrabalho.jsp";
     }
 

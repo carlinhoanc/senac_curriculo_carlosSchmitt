@@ -24,7 +24,7 @@ public class TipoFormacaoAtualizar implements Acao {
 //        TipoTrabalhoListarTipoTrabalho obj = new TipoTrabalhoListarTipoTrabalho();
 //        return obj.executar(request, response);
         TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
-        List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoTrabalho();
+        List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
         request.setAttribute("tipoForma", tipoForma);
         return "/paginas/formacao/lista.jsp";
     }

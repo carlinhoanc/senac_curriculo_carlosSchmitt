@@ -3,10 +3,12 @@ package Controle;
 import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.PessoaBean;
+import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.LoginDao;
 import dao.PessoaDao;
+import dao.TrabalhosDao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -34,29 +36,36 @@ public class Login extends HttpServlet {
         String retorno = null;
 
         int insereP = LoginDao.fazerLogin(pessoaModel);
+
         if (insereP == 0) {
             request.setAttribute("falhalogin", "erro");
             retorno = "/paginas/login/login.jsp";
             RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
             disp.forward(request, response);
         } else {
-            CidadeDao cidades = new CidadeDao();
-            List<CidadeBean> lista = cidades.listaCidades();
-            PessoaDao pessoaDAO = new PessoaDao();
-            List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(insereP + "");
-            CurriculoDao curriDao = new CurriculoDao();
-            int idCurri;
+            String idCurri;
+
             HttpSession session = request.getSession();
 
-            for (PessoaBean pessoa : pessoas) {
-                idCurri = curriDao.idCurri(Integer.parseInt(pessoa.getId_Pessoa()));
+            CidadeDao cidades = new CidadeDao();
+            List<CidadeBean> lista = cidades.listaCidades();
+            request.setAttribute("cidades", lista);
 
-                if (idCurri == 0) {
+            PessoaDao pessoaDAO = new PessoaDao();
+            List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(insereP + "");
+            request.setAttribute("edita", pessoas);
+
+            CurriculoDao curriDao = new CurriculoDao();
+
+            for (PessoaBean pessoa : pessoas) {
+                idCurri = curriDao.idCurri(pessoa.getId_Pessoa());
+
+                if (idCurri.equals("0")) {
                     session.setAttribute("id_curri", "0");
                     session.setAttribute("temCurri", "0");
                 } else {
-                    session.setAttribute("temCurri", "1");
                     session.setAttribute("id_curri", idCurri);
+                    session.setAttribute("temCurri", "1");
                 }
 
                 session.setAttribute("ativo", pessoa.getAtivo());
@@ -68,6 +77,10 @@ public class Login extends HttpServlet {
 
                 List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt(pessoa.getId_Pessoa()));
                 request.setAttribute("curriculo", curriculo);
+
+                TrabalhosDao trabalhosDao = new TrabalhosDao();
+                List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
+                request.setAttribute("trabalhos", trabalhos);
             }
             request.setAttribute("cidades", lista);
             request.setAttribute("edita", pessoas);

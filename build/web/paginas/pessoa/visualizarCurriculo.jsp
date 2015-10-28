@@ -94,6 +94,20 @@
                     </div>
                 </fieldset>
             </c:forEach>
+
+            <fieldset style="margin-top: 30px;">
+                <legend>Trabalhos de academicos publicados</legend>
+                <div class="row">
+                    <c:forEach var="trabalho" items="${trabalhos}">
+                        <div class="col-md-6">
+                            <p><b>Nome do trabalho: </b>${trabalho.nome}</p>
+                            <p><b>Ano: </b>${trabalho.ano}</p>
+                            <p><b>Pais: </b>${trabalho.pais.nome}</p>
+                            <p><b>Tipo de trabalho</b>${trabalho.id_TipoPublicados.descricao}</p>
+                        </div>
+                    </c:forEach>
+                </div>
+            </fieldset>
             <br/>
             <br/>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-b="...">

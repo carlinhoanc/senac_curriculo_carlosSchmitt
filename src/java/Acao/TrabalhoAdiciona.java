@@ -2,10 +2,12 @@ package Acao;
 
 import bean.CidadeBean;
 import bean.CurriculoBean;
+import bean.FormacaoBean;
 import bean.PessoaBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
+import dao.FormacaoDao;
 import dao.PaisDao;
 import dao.PessoaDao;
 import dao.TipoTrabalhoDao;
@@ -56,8 +58,11 @@ public class TrabalhoAdiciona implements Acao {
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
-        session.setAttribute("temCurri", "1");
+        FormacaoDao formacaoDao = new FormacaoDao();
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        request.setAttribute("formacao", formacao);
 
+        session.setAttribute("temCurri", "1");
         return "/paginas/pessoa/meuperfil.jsp";
     }
 

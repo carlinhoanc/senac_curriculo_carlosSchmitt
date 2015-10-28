@@ -85,7 +85,7 @@ public class TipoFormacaoDao {
         }
     }
 
-    public List<TipoFormacaoBean> listarTipoTrabalho() throws ClassNotFoundException, Exception {
+    public List<TipoFormacaoBean> listarTipoFormacao() throws ClassNotFoundException, Exception {
         List<TipoFormacaoBean> tipoformacaos = new ArrayList<>();
         String sql = "SELECT * FROM tipoformacao";
         PreparedStatement stmt = null;
@@ -131,5 +131,20 @@ public class TipoFormacaoDao {
         } finally {
             FabricaConexao.fechaConexao(TipoFormacaoDao.connection, stmt());
         }
+    }
+    
+        public TipoFormacaoBean listarTipoID(String id) throws ClassNotFoundException, Exception {
+        TipoFormacaoBean tipoFormacaoBean = new TipoFormacaoBean();
+        String sql = "SELECT * FROM tipoformacao WHERE id_Tipo = " + id;
+        PreparedStatement stmt = null;
+        stmt = com().prepareStatement(sql);
+        ResultSet rs = stmt().executeQuery(sql);
+
+        while (rs.next()) {
+            tipoFormacaoBean.setId_Tipo(rs.getString("id_Tipo"));
+            tipoFormacaoBean.setDescricao(rs.getString("descricao"));
+        }
+        stmt.close();
+        return tipoFormacaoBean;
     }
 }

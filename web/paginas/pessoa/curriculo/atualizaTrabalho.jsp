@@ -6,9 +6,7 @@
 <head>
     <%@ include file="../../../includes/heard.jsp" %>
     <title>Adicionar trabalho</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
-    <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
     <script>
         var $maskk = jQuery.noConflict();
         jQuery(function ($maskk) {
@@ -20,44 +18,58 @@
 <body>
     <%@ include file="../../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <form action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoAdiciona" method="post" >
-            <div class="row">
-                <div class="col-md-6" >
-                    <label>Nome</label>
-                    <input required="" name="nome" type="text" id="nome" value="" placeholder="Digite nome" />
-                </div>
-                <div class="col-md-6" >
-                    <label>Ano</label>
-                    <input required="" name="ano" id="ano" value="" placeholder="Digite ano" type="number" min="1960" max="2050"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6" >
-                    <label>Pais</label>
-                    <div>
-                        <select  class="form-control" required="" id="pais" name="pais">
-                            <option>Selecione um pais</option>
-                            <c:forEach var="pais" items="${paises}">
-                                <option value="${pais.id}">${pais.nome}</option>
-                            </c:forEach>
-                        </select>
+        <form action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoAtualiza" method="post" >
+            <c:forEach var="trabalhos" items="${trabalhos}">
+                <div class="row">
+                    <div class="col-md-6" >
+                        <label>Nome</label>
+                        <input required="" name="nome" type="text" id="nome"
+                               value="${trabalhos.nome}" placeholder="Digite nome" />
+                    </div>
+                    <div class="col-md-6" >
+                        <label>Ano</label>
+                        <input required="" name="ano" id="ano" value="${trabalhos.ano}" 
+                               placeholder="Digite ano" type="number" min="1960" max="2050"/>
                     </div>
                 </div>
-                <div class="col-md-6" >
-                    <label>Tipo de trabalho</label>
-                    <div>
-                        <select  class="form-control" required="" id="id_tipoTrab" name="id_tipoTrab">
-                            <option>Selecione um tipo</option>
-                            <c:forEach var="tipoTrabalhos" items="${tipoTrabalho}">
-                                <option value="${tipoTrabalhos.id}">${tipoTrabalhos.descricao}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-6" >
+                        <label>Pais</label>
+                        <div>
+                            <select  class="form-control" required="" id="pais" name="pais">
+                                <c:forEach var="pais" items="${paises}">
+                                    <c:if test="${trabalhos.pais.id == pais.id}">
+                                        <option selected="" value="${pais.id}">${pais.nome}</option>
+                                    </c:if>
 
+                                    <c:if test="${trabalhos.pais.id != pais.id}">
+                                        <option value="${pais.id}">${pais.nome}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6" >
+                        <label>Tipo de trabalho</label>
+                        <div>
+                            <select  class="form-control" required="" id="id_tipoTrab" name="id_tipoTrab">
+                                <c:forEach var="tipoTrabalhos" items="${tipoTrabalho}">
+                                    <c:if test="${trabalhos.id_TipoPublicados.id == tipoTrabalhos.id}">
+                                        <option selected="" value="${tipoTrabalhos.id}">${tipoTrabalhos.descricao}</option>
+                                    </c:if>
+
+                                    <c:if test="${trabalhos.id_TipoPublicados.id != tipoTrabalhos.id}">
+                                        <option value="${tipoTrabalhos.id}">${tipoTrabalhos.descricao}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                <input type="submit" value="Salvar" class="btn btn-success" />
+                <a class="btn btn-danger" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Cancelar</a>
+                <input type="submit" value="Atualizar" class="btn btn-success" />
             </div>
         </form>
     </div>

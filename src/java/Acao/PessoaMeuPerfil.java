@@ -2,10 +2,12 @@ package Acao;
 
 import bean.CidadeBean;
 import bean.CurriculoBean;
+import bean.FormacaoBean;
 import bean.PessoaBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
+import dao.FormacaoDao;
 import dao.PessoaDao;
 import dao.TrabalhosDao;
 import java.util.List;
@@ -40,12 +42,12 @@ public class PessoaMeuPerfil implements Acao {
 
         String idCurri = "" + session.getAttribute("id_curri");
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
-        
-        System.out.println(trabalhos.size());
-        
         request.setAttribute("trabalhos", trabalhos);
+
+        FormacaoDao formacaoDao = new FormacaoDao();
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(idCurri);
+        request.setAttribute("formacao", formacao);
 
         return "/paginas/pessoa/meuperfil.jsp";
     }

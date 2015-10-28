@@ -137,7 +137,6 @@ public class TipoTrabalhoDao {
     public TipoTrabalhoPublicadosBean listarTipoID(String id) throws ClassNotFoundException, Exception {
         TipoTrabalhoPublicadosBean tipopublicados = new TipoTrabalhoPublicadosBean();
         String sql = "SELECT * FROM tipopublicados WHERE id_TipoPublicados = " + id;
-        System.out.println(sql);
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);

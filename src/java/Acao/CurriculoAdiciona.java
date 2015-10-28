@@ -2,10 +2,14 @@ package Acao;
 
 import bean.CidadeBean;
 import bean.CurriculoBean;
+import bean.FormacaoBean;
 import bean.PessoaBean;
+import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
+import dao.FormacaoDao;
 import dao.PessoaDao;
+import dao.TrabalhosDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,19 +38,28 @@ public class CurriculoAdiciona implements Acao {
         } else {
             request.setAttribute("msg", "Erro ao inserirr pessoa");
         }
-        
+
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
+        request.setAttribute("cidades", lista);
 
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
-        
+        request.setAttribute("edita", pessoas);
+
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
+        request.setAttribute("curriculo", curriculo);
+
+        int idCurri = Integer.parseInt((String) session.getAttribute("id_curri"));
+        TrabalhosDao trabalhosDao = new TrabalhosDao();
+        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
+        request.setAttribute("trabalhos", trabalhos);
+
+        FormacaoDao formacaoDao = new FormacaoDao();
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        request.setAttribute("formacao", formacao);
 
         session.setAttribute("temCurri", "1");
-        request.setAttribute("curriculo", curriculo);
-        request.setAttribute("cidades", lista);
-        request.setAttribute("edita", pessoas);
 
         return "/paginas/pessoa/meuperfil.jsp";
     }

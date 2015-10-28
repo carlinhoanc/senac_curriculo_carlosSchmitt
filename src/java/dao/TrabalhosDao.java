@@ -50,13 +50,13 @@ public class TrabalhosDao {
         }
     }
 
-    public boolean deleta(int id) throws SQLException, ClassNotFoundException, Exception {
+    public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         boolean removidoSucesso = false;
         String sql = "DELETE FROM tbpublicados WHERE id_TbPublicados  = ?";
         try {
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
+            stmt.setString(1, id);
             int ok = stmt.executeUpdate();
             if (ok == 1) {
                 System.out.println("Trabalhos removido com sucesso no BD!");
@@ -102,7 +102,6 @@ public class TrabalhosDao {
         PreparedStatement stmt = null;
         List<TrabalhosPublicacosBean> result = new ArrayList<>();
         String sql = "SELECT * FROM tbpublicados where Curriculo_id_Curriculo = " + idC;
-        System.out.println(sql);
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
         PaisDao paisdao;

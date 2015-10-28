@@ -12,7 +12,7 @@
 
             <div>
                 <form id="editaPessoa${trabalho.id_TbPublicados}" 
-                      action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoAtualiza" method="post" >
+                      action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoEditar" method="post" >
                     <input type="hidden" value="${trabalho.id_TbPublicados}}" name="id_trabalho" id="id_pessoa" />
 
                     <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
@@ -32,9 +32,9 @@
                                     </h3>
                                 </div>
                                 <form id="deletaPessoa${trabalho.id_TbPublicados}" 
-                                      action="${pageContext.request.contextPath}/PCurriculo?acao=TrabalhoDeleta" method="post" >
+                                      action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoDeleta" method="post" >
 
-                                    <input type="hidden" value="${trabalho.id_TbPublicados}" name="id_pessoa" id="id_pessoa" />
+                                    <input type="hidden" value="${trabalho.id_TbPublicados}" name="id_trabalho" id="id_pessoa" />
 
                                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                         <div class="btn-group" role="group">
@@ -58,8 +58,17 @@
 
 <br/>
 <br/>
-<div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-    <a href="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoNovo" class="btn btn-danger" >
-        Novo
-    </a>
-</div>
+<c:if test="${sessionScope.temCurri == '0' }">
+    <div class="jumbotron">
+        <h1>ATenção</h1>
+        <p>...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Preencha um curriculo antes</a></p>
+    </div>
+</c:if>
+<c:if test="${sessionScope.temCurri != '0' }">
+    <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+        <a href="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoNovo" class="btn btn-danger" >
+            Novo
+        </a>
+    </div>
+</c:if>

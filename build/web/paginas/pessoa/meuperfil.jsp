@@ -63,6 +63,7 @@
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="formacao">
+                    <%@ include file="../../paginas/pessoa/curriculo/formacao.jsp" %>
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="trabalhos">

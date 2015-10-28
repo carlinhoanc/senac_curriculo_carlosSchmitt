@@ -6,14 +6,16 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CurriculoListarCurriculo implements Acao {
+public class FormacaoNovo implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
-        List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
-        request.setAttribute("tipoForma", tipoForma);
-        return "/paginas/pessoa/meuperfil.jsp";
+
+        TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
+        List<TipoFormacaoBean> tipoFormacaoBean = tipoFormacaoDao.listarTipoFormacao();
+        request.setAttribute("tipoForma", tipoFormacaoBean);
+
+        return "/paginas/pessoa/curriculo/novaFormacao.jsp";
     }
 
 }

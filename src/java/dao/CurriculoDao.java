@@ -137,14 +137,29 @@ public class CurriculoDao {
         return result;
     }
 
-    public int idCurri(int idC) throws SQLException, ClassNotFoundException {
+    public String idCurri(String idC) throws SQLException, ClassNotFoundException {
         PreparedStatement stmt = null;
         String sql = "SELECT * FROM curriculo where id_Curriculo = " + idC;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        int id = 0;
+        String id = "0";
         while (rs.next()) {
-            id = Integer.parseInt(rs.getString("id_Curriculo"));
+            id = rs.getString("id_Curriculo");
+        }
+        stmt.close();
+        return id;
+    }
+
+    public String idCurriPorPessoa(String idC) throws SQLException, ClassNotFoundException {
+        PreparedStatement stmt = null;
+        String sql = "SELECT * FROM curriculo where pessoa_idPessoa = " + idC;
+        System.out.println(sql);
+        stmt = com().prepareStatement(sql);
+        ResultSet rs = stmt().executeQuery(sql);
+        String id = null;
+        while (rs.next()) {
+            id = rs.getString("id_Curriculo");
+            System.out.println(id);
         }
         stmt.close();
         return id;
