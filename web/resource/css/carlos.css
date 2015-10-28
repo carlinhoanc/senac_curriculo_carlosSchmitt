@@ -25,4 +25,7 @@ select.form-control {border-color: #bbb;border-radius: 0;border-right: 0 none;bo
 
 .listagem tr th:nth-child(6),.listagem tr th:nth-child(8),.listagem tr td:nth-child(6),.listagem tr td:nth-child(8){display: none;}
 
+.pagesize.input-mini {width: 70px;}
+.pagenum.input-mini {width: 50px;}
+
 

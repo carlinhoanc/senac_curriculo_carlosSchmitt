@@ -92,6 +92,7 @@
                             <span class="pagedisplay"></span> 
                             <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
                             <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+                            
                             <select class="pagesize input-mini" title="Select page size">
                                 <option value="1">1</option>
                                 <option value="5">5</option>
