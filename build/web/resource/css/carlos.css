@@ -23,6 +23,6 @@ input{width: 100%;padding: 6px;margin-bottom: 10px;}
 .chosen-single {border-radius: 0 !important;padding: 15px 0 16px !important;}
 select.form-control {border-color: #bbb;border-radius: 0;border-right: 0 none;box-shadow: 0 0 0 0 !important;}
 
-
+.listagem tr th:nth-child(6),.listagem tr th:nth-child(8),.listagem tr td:nth-child(6),.listagem tr td:nth-child(8){display: none;}
 
 
