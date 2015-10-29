@@ -2,12 +2,18 @@ package Controle;
 
 import bean.CidadeBean;
 import bean.CurriculoBean;
+import bean.FormacaoBean;
+import bean.PaisBean;
 import bean.PessoaBean;
+import bean.TipoFormacaoBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
+import dao.FormacaoDao;
 import dao.LoginDao;
+import dao.PaisDao;
 import dao.PessoaDao;
+import dao.TipoFormacaoDao;
 import dao.TrabalhosDao;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -36,6 +42,7 @@ public class Login extends HttpServlet {
         String retorno = null;
 
         int insereP = LoginDao.fazerLogin(pessoaModel);
+        System.out.println(insereP);
 
         if (insereP == 0) {
             request.setAttribute("falhalogin", "erro");
@@ -81,13 +88,26 @@ public class Login extends HttpServlet {
                 TrabalhosDao trabalhosDao = new TrabalhosDao();
                 List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
                 request.setAttribute("trabalhos", trabalhos);
+
+                FormacaoDao formacaoDao = new FormacaoDao();
+                List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
+                request.setAttribute("formacao", formacao);
             }
+
+            PaisDao paisDao = new PaisDao();
+            List<PaisBean> paises = paisDao.listarPaises();
+            request.setAttribute("paises", paises);
+
+            TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
+            List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
+            request.setAttribute("tipoForma", tipoForma);
+
             request.setAttribute("cidades", lista);
             request.setAttribute("edita", pessoas);
-            retorno = "/paginas/pessoa/meuperfil.jsp";
 
-            RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
-            disp.forward(request, response);
+//            RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
+//            disp.forward(request, response);
+            retorno = "/paginas/pessoa/meuperfil.jsp";
         }
     }
 

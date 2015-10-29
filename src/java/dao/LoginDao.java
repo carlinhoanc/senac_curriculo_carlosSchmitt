@@ -40,7 +40,7 @@ public class LoginDao {
                 + "AND senha LIKE '" + pessoa.getSenha()+ "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "'";
         ResultSet rs = stmt().executeQuery(sql);
-        
+//        System.out.println(sql);
         if(!rs.next()) {
             return 0;
         } else {
