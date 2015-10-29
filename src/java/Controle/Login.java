@@ -40,9 +40,7 @@ public class Login extends HttpServlet {
         pessoaModel.setEmail(nome);
 
         String retorno = null;
-
         int insereP = LoginDao.fazerLogin(pessoaModel);
-        System.out.println(insereP);
 
         if (insereP == 0) {
             request.setAttribute("falhalogin", "erro");
@@ -51,7 +49,6 @@ public class Login extends HttpServlet {
             disp.forward(request, response);
         } else {
             String idCurri;
-
             HttpSession session = request.getSession();
 
             CidadeDao cidades = new CidadeDao();

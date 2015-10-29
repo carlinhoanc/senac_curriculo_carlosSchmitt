@@ -153,7 +153,6 @@ public class CurriculoDao {
     public String idCurriPorPessoa(String idC) throws SQLException, ClassNotFoundException {
         PreparedStatement stmt = null;
         String sql = "SELECT * FROM curriculo where pessoa_idPessoa = " + idC;
-        System.out.println(sql);
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
         String id = null;
