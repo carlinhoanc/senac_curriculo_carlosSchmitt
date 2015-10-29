@@ -1,44 +1,42 @@
 package Acao;
 
-import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
+import bean.PaisBean;
 import bean.PessoaBean;
-import bean.TipoTrabalhoPublicadosBean;
+import bean.TipoFormacaoBean;
 import bean.TrabalhosPublicacosBean;
-import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
+import dao.PaisDao;
 import dao.PessoaDao;
-import dao.TipoTrabalhoDao;
+import dao.TipoFormacaoDao;
 import dao.TrabalhosDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class TrabalhoAtualiza implements Acao {
+public class FormacaoDeleta implements Acao {
 
     @Override
-    public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String executar(HttpServletRequest request, HttpServletResponse res) throws Exception {
+        String id_formacaos = "" + request.getParameter("id_formacaos");
+
+        FormacaoDao formacaoDao = new FormacaoDao();
+        formacaoDao.deleta(id_formacaos);
+
         HttpSession session = request.getSession();
-        String idCurri = "" + session.getAttribute("id_curri");
         String idd = "" + session.getAttribute("id_pessoa");
-        
-        TipoTrabalhoPublicadosBean tipos = new TipoTrabalhoPublicadosBean();
-        tipos.setId(request.getParameter("id_TipoPublicados"));
-        tipos.setDescricao(request.getParameter("descricao"));
-        TipoTrabalhoDao tiposDao = new TipoTrabalhoDao();
+        String idCurri = "" + session.getAttribute("id_curri");
 
-        if (tiposDao.atualiza(tipos) == true) {
-            request.setAttribute("msg", "Pessoa inserida com sucesso");
-        } else {
-            request.setAttribute("msg", "Erro ao inserirr pessoa");
-        }
+        PaisDao paisDao = new PaisDao();
+        List<PaisBean> paises = paisDao.listarPaises();
+        request.setAttribute("paises", paises);
 
-          CidadeDao cidades = new CidadeDao();
-        List<CidadeBean> lista = cidades.listaCidades();
-        request.setAttribute("cidades", lista);
+        TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
+        List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
+        request.setAttribute("tipoForma", tipoForma);
 
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
@@ -51,12 +49,11 @@ public class TrabalhoAtualiza implements Acao {
         TrabalhosDao trabalhosDao = new TrabalhosDao();
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
-
-        FormacaoDao formacaoDao = new FormacaoDao();
+        
+//           FormacaoDao formacaoDao = new FormacaoDao();
         List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
         request.setAttribute("formacao", formacao);
 
-        session.setAttribute("temCurri", "1");
         return "/paginas/pessoa/meuperfil.jsp";
     }
 }

@@ -31,7 +31,7 @@
                                     </h3>
                                 </div>
                                 <form id="deletaPessoa${formacaos.id}" 
-                                      action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoDeleta" method="post" >
+                                      action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoDeleta" method="post" >
 
                                     <input type="hidden" value="${formacaos.id}" name="id_formacaos" id="id_pessoa" />
 

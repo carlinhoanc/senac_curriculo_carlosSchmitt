@@ -146,6 +146,38 @@ public class PessoaDao {
             FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
+    public boolean atualizaUser(PessoaBean pessoa) throws ClassNotFoundException, Exception {
+        boolean atualizadoSucesso = false;
+        String sql = "UPDATE pessoa SET nome=?,sobreNome=?,idade=?,sexo=?,cpf=?, "
+                + "senha=?,email=?,telefone=? "
+                + "WHERE id_Pessoa= ?";
+        EnderecoBean endereco = pessoa.getEndereco();
+        EnderecoDao enderecoDAO = new EnderecoDao();
+        String idd = pessoa.getId_Pessoa();
+        if (enderecoDAO.atualiza(endereco, idd) == false) {
+            return false;
+        }
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, pessoa.getNome());
+            stmt.setString(2, pessoa.getSobreNome());
+            stmt.setInt(3, pessoa.getIdade());
+            stmt.setString(4, pessoa.getSexo());
+            stmt.setString(5, pessoa.getCpf());
+            stmt.setString(6, pessoa.getSenha());
+            stmt.setString(7, pessoa.getEmail());
+            stmt.setString(8, pessoa.getTelefone());
+            stmt.setInt(9, Integer.parseInt(pessoa.getId_Pessoa()));
+            int ok = stmt.executeUpdate();
+
+            return atualizadoSucesso;
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar Pessoa no BD!");
+            throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(PessoaDao.connection);
+        }
+    }
 
     public List<PessoaBean> listarPessoa(String id_tipo) throws ClassNotFoundException, Exception {
 
