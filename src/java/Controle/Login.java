@@ -105,9 +105,9 @@ public class Login extends HttpServlet {
             request.setAttribute("cidades", lista);
             request.setAttribute("edita", pessoas);
 
-//            RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
-//            disp.forward(request, response);
             retorno = "/paginas/pessoa/meuperfil.jsp";
+            RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
+            disp.forward(request, response);
         }
     }
 
