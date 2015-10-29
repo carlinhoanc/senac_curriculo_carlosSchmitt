@@ -1,9 +1,9 @@
--- phpMyAdmin SQL Dump
+ -- phpMyAdmin SQL Dump
 -- version 4.3.3
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 24-Out-2015 às 06:16
+-- Generation Time: 29-Out-2015 às 02:13
 -- Versão do servidor: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -9767,10 +9767,18 @@ CREATE TABLE IF NOT EXISTS `curriculo` (
   `id_Curriculo` int(11) NOT NULL,
   `resumo` text,
   `expProfissional` text,
-  `forBasica` varchar(45) DEFAULT NULL,
-  `FormMedio` varchar(45) DEFAULT NULL,
+  `forBasica` text,
+  `formMedio` text,
   `pessoa_idPessoa` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `curriculo`
+--
+
+INSERT INTO `curriculo` (`id_Curriculo`, `resumo`, `expProfissional`, `forBasica`, `formMedio`, `pessoa_idPessoa`) VALUES
+(6, 'resumoxxxddd', 'profissional dsddd dddd', 'basica ffffff', 'media', 6),
+(7, 'teste', 'outyt', 'outyt', 'outyt', 7);
 
 -- --------------------------------------------------------
 
@@ -9787,17 +9795,20 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   `id_cidade` int(11) DEFAULT NULL,
   `cep` varchar(10) NOT NULL,
   `id_estado` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `endereco`
 --
 
 INSERT INTO `endereco` (`id_Endereco`, `nomeRua`, `numero`, `complemento`, `bairro`, `id_cidade`, `cep`, `id_estado`) VALUES
-(1, 'Rua X ', 1, 'casa', 'centro', 10, '88190000', NULL),
+(1, 'Rua X ', 1, 'casa', 'centro', 10, '88.190-000', NULL),
+(10, 'ddddddddddddd', 11, 'xc', 'centro', 500, '22.222-222', NULL),
 (18, 'rua teste', 1, 'casa', 'centro', 1140, '45.484-874', NULL),
-(19, 'ee', 99999, 'casa', 'centro', 322, '29.292-929', NULL),
-(20, 'deletado', 12, '', 'centro', 1995, '88.888-888', NULL);
+(19, 'rerere', 99999, 'casa', 'centro', 322, '29.292-929', NULL),
+(20, 'outro', 3, 'outro', 'outro', 1995, '55.555-555', NULL),
+(21, 'novo', 222, 'novo', 'novo', 322, '22.222-222', NULL),
+(22, 'denovo', 22, 'denovo', 'denovo', 6658, '36.333-333', NULL);
 
 -- --------------------------------------------------------
 
@@ -9857,7 +9868,14 @@ CREATE TABLE IF NOT EXISTS `formacao` (
   `dataTermino` date DEFAULT NULL,
   `id_Tipo` int(11) NOT NULL,
   `Curriculo_id_Curriculo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `formacao`
+--
+
+INSERT INTO `formacao` (`id_Formacao`, `nomeInstitui`, `dataInicio`, `dataTermino`, `id_Tipo`, `Curriculo_id_Curriculo`) VALUES
+(1, 'casa mÃ?Â£e joana', '2015-10-08', '2015-10-05', 5, 6);
 
 -- --------------------------------------------------------
 
@@ -10148,17 +10166,20 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `email` varchar(150) NOT NULL,
   `telefone` varchar(45) NOT NULL,
   `ativo` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `pessoa`
 --
 
 INSERT INTO `pessoa` (`id_Pessoa`, `nome`, `sobreNome`, `idade`, `sexo`, `cpf`, `Curriculo_id_Curriculo`, `Endereco_id_Endereco`, `senha`, `id_tipo`, `email`, `telefone`, `ativo`) VALUES
-(1, 'admin', 'site', 1, 'M', '000.000.000-00', NULL, 1, 'admin', 2, 'admin@meusite.com', '(23) 2323-23232 	', 1),
+(1, 'admin', 'site', 1, 'M', '000.000.000-00', NULL, 1, 'admin', 2, 'admin@meusite.com', '(23) 2323-23232', 1),
 (5, 'carlos', 'schmitt', 41, 'M', '522.222.223-33', NULL, 18, '123456', 2, 'carlos@carlos.com', '(23) 2323-23232', 0),
-(6, 'teste', 'teste', 23, 'F', '999.944.449-49', NULL, 19, 'teste', 1, 'teste@teste.com', '(92) 2929-29292', 1),
-(7, 'deletado', 'deletado', 15, 'M', '145.878.787-87', NULL, 20, 'deletado', 1, 'deletado@deletado.com', '(88) 8888-88', 1);
+(6, 'teste 01', 'teste', 27, 'F', '999.944.449-49', NULL, 19, 'teste', 1, 'teste@teste.com', '(92) 2929-29292', 1),
+(7, 'deletado', 'deletado', 15, 'M', '145.878.787-87', NULL, 10, 'deletado', 1, 'deletado@deletado.com', '(88) 8888-88', 1),
+(8, 'outro', 'outro', 45, 'M', '656.565.658', NULL, 20, 'outro', 1, 'outro@outro.com', '(66) 6666-6666', 0),
+(9, 'novo', 'novo', 36, 'M', '664.499.898', NULL, 21, 'novo', 1, 'novo@novo.com', '(22) 2222-222', 1),
+(10, 'denovo', 'denovo', 32, 'M', '323.899.852-63', NULL, 22, 'denovo', 1, 'denovo@denovo.com', '(32) 3232-323232', 1);
 
 -- --------------------------------------------------------
 
@@ -10173,7 +10194,15 @@ CREATE TABLE IF NOT EXISTS `tbpublicados` (
   `pais` int(11) DEFAULT NULL,
   `TipoPublicados_id_TipoPublicados` int(11) NOT NULL,
   `Curriculo_id_Curriculo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tbpublicados`
+--
+
+INSERT INTO `tbpublicados` (`id_TbPublicados`, `nome`, `ano`, `pais`, `TipoPublicados_id_TipoPublicados`, `Curriculo_id_Curriculo`) VALUES
+(3, 'comida', 1962, 8, 6, 7),
+(4, 'teste', 1977, 2, 3, 6);
 
 -- --------------------------------------------------------
 
@@ -10183,8 +10212,28 @@ CREATE TABLE IF NOT EXISTS `tbpublicados` (
 
 CREATE TABLE IF NOT EXISTS `tipoformacao` (
   `id_Tipo` int(11) NOT NULL,
-  `descricao` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `descricao` varchar(45) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tipoformacao`
+--
+
+INSERT INTO `tipoformacao` (`id_Tipo`, `descricao`) VALUES
+(1, 'Primeiro Grau Incompleto'),
+(2, 'Primeiro Grau Completo'),
+(3, 'Segundo Grau Incompleto'),
+(4, 'Segundo Grau Completo'),
+(5, 'Terceiro Grau incompleto'),
+(6, 'Terceiro Grau Completo'),
+(7, 'Pós-graduação Incompleto'),
+(8, 'Pós-graduação Completo'),
+(9, 'Mestrado Incompleto'),
+(10, 'Mestrado Completo'),
+(11, 'Doutorado Incompleto'),
+(12, 'Doutorado Completo'),
+(13, 'Pós Doutorado Incompleto'),
+(14, 'Pós Doutorado Completo');
 
 -- --------------------------------------------------------
 
@@ -10195,7 +10244,18 @@ CREATE TABLE IF NOT EXISTS `tipoformacao` (
 CREATE TABLE IF NOT EXISTS `tipopublicados` (
   `id_TipoPublicados` int(11) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tipopublicados`
+--
+
+INSERT INTO `tipopublicados` (`id_TipoPublicados`, `descricao`) VALUES
+(2, 'livro'),
+(3, 'documentarios'),
+(6, 'jornal'),
+(7, 'blog'),
+(8, 'revista');
 
 -- --------------------------------------------------------
 
@@ -10300,12 +10360,12 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `curriculo`
 --
 ALTER TABLE `curriculo`
-  MODIFY `id_Curriculo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Curriculo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id_Endereco` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id_Endereco` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `estado`
 --
@@ -10315,7 +10375,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT for table `formacao`
 --
 ALTER TABLE `formacao`
-  MODIFY `id_Formacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Formacao` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `pais`
 --
@@ -10325,22 +10385,22 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `id_Pessoa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `id_Pessoa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `tbpublicados`
 --
 ALTER TABLE `tbpublicados`
-  MODIFY `id_TbPublicados` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_TbPublicados` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `tipoformacao`
 --
 ALTER TABLE `tipoformacao`
-  MODIFY `id_Tipo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Tipo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `tipopublicados`
 --
 ALTER TABLE `tipopublicados`
-  MODIFY `id_TipoPublicados` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_TipoPublicados` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `tipouser`
 --
