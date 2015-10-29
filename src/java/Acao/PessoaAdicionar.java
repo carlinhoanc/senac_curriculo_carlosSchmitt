@@ -25,14 +25,13 @@ public class PessoaAdicionar implements Acao {
         pessoa.setIdade(Integer.parseInt(req.getParameter("idade")));
         pessoa.setSexo(req.getParameter("sexo"));
         pessoa.setCpf(req.getParameter("cpf"));
-        pessoa.setAtivo(Integer.parseInt(req.getParameter("ativo")));
         pessoa.setSenha(req.getParameter("senha"));
         pessoa.setTelefone(req.getParameter("telefone"));
         pessoa.setEmail(req.getParameter("email"));
         pessoa.setEndereco(endereco);
         PessoaDao pessoaDAO = new PessoaDao();
 
-        if (pessoaDAO.insere(pessoa, 1) == true) {
+        if (pessoaDAO.insereNaoAdmin(pessoa, 1) == true) {
             req.setAttribute("msg", "Pessoa inserida com sucesso");
         } else {
             req.setAttribute("msg", "Erro ao inserirr pessoa");

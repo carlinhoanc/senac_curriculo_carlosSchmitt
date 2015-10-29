@@ -68,6 +68,44 @@ public class PessoaDao {
             return false;
         }
     }
+    public boolean insereNaoAdmin(PessoaBean pessoa, int tipUser) throws SQLException, ClassNotFoundException, Exception {
+        EnderecoDao end = new EnderecoDao();
+        PreparedStatement stmt = null;
+        String sql1 = "SELECT id_Pessoa FROM pessoa WHERE cpf= '" + pessoa.getCpf() + "' OR email = '" + pessoa.getEmail() + "'";
+        ResultSet rs = stmt().executeQuery(sql1);
+        int idEndereco;
+        if (!rs.next()) {
+            idEndereco = end.insere(pessoa.getEndereco());
+            String sql = "INSERT INTO pessoa( nome, sobreNome, idade, sexo, cpf, Endereco_id_Endereco, "
+                    + "senha , id_tipo, email, telefone, ativo) VALUES(?,?,?,?,?,?,?,?,?,?, ?)";
+            try {
+                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, pessoa.getNome());
+                stmt.setString(2, pessoa.getSobreNome());
+                stmt.setInt(3, pessoa.getIdade());
+                stmt.setString(4, pessoa.getSexo());
+                stmt.setString(5, pessoa.getCpf());
+                stmt.setInt(6, idEndereco);
+                stmt.setString(7, pessoa.getSenha());
+                stmt.setInt(8, 1);
+                stmt.setString(9, pessoa.getEmail());
+                stmt.setString(10, pessoa.getTelefone());
+                stmt.setInt(11, 1);
+                stmt.executeUpdate();
+                stmt.close();
+
+                return true;
+
+            } catch (SQLException | ClassNotFoundException e) {
+                System.out.println(e);
+                return false;
+            } finally {
+                FabricaConexao.fechaConexao(EnderecoDao.connection);
+            }
+        } else {
+            return false;
+        }
+    }
 
     public boolean delete(int id) throws Exception {
         PreparedStatement stmt = null;
