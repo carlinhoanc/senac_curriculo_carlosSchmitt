@@ -129,7 +129,6 @@ public class FormacaoDao {
         PreparedStatement stmt = null;
         List<FormacaoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM formacao where id_Formacao = " + idC;
-        System.out.println(sql);
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
         TipoFormacaoDao tipoFormacaoDao ;

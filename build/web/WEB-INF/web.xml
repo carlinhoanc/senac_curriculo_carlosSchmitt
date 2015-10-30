@@ -6,14 +6,12 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <!--<welcome-file>index.jsp</welcome-file>-->
-        <welcome-file>Pessoa?acao=PessoaListarPessoa</welcome-file>
-        <location>/Pessoa?acao=PessoaListarPessoa</location>
+        <welcome-file>/Pessoa?acao=PessoaListarPessoa</welcome-file>
     </welcome-file-list>
+
     <error-page>
         <error-code>404</error-code>
         <!--<location>/Erro404</location>-->
         <location>/Pessoa?acao=PessoaListarPessoa</location>
     </error-page>
-    <location>/Pessoa?acao=PessoaListarPessoa</location>
 </web-app>

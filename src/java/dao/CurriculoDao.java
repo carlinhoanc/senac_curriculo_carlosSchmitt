@@ -172,7 +172,6 @@ public class CurriculoDao {
                 + "forBasica='" + curri.getForBasica() + "',"
                 + "formMedio='" + curri.getFormMedio() + "'"
                 + "WHERE id_Curriculo= " + curri.getId();
-        System.out.println(sql);
         boolean atualizadoSucesso = false;
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
