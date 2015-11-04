@@ -26,14 +26,8 @@ public class PessoaListarPessoa implements Acao {
             id_tipo = "0";
         }
 
-
-        
         List<PessoaBean> pessoas = pessoaDAO.listarPessoa(id_tipo);
-//        System.out.println("TAMANHO : " + pessoas.size());
-//        System.out.println(pessoas.toString());
         request.setAttribute("pessoaslista", pessoas);
         return "/paginas/pessoa/lista.jsp";
-
     }
-
 }

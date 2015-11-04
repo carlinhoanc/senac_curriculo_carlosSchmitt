@@ -35,8 +35,6 @@ public class PessoaAtualizar implements Acao {
         
         pessoaDAO.atualizaUser(pessoa);
 
-        
-        
         PessoaListarPessoa obj = new PessoaListarPessoa();
         return obj.executar(req, res);
     }

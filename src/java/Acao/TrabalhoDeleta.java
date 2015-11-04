@@ -5,7 +5,6 @@ import bean.FormacaoBean;
 import bean.PaisBean;
 import bean.PessoaBean;
 import bean.TipoFormacaoBean;
-import bean.TipoTrabalhoPublicadosBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CurriculoDao;
 import dao.FormacaoDao;

@@ -16,14 +16,12 @@ public class PessoaEditar implements Acao {
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
+        req.setAttribute("cidades", lista);
         
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
-         
-//        System.out.println("TAMANHO : " + pessoas.size());
-        req.setAttribute("cidades", lista);
         req.setAttribute("edita", pessoas);
-
+         
         return "/paginas/pessoa/editar.jsp";
     }
 }

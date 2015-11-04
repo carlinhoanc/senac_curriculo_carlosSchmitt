@@ -21,8 +21,6 @@ public class TipoFormacaoAtualizar implements Acao {
             request.setAttribute("msg", "Erro ao inserirr pessoa");
         }
 
-//        TipoTrabalhoListarTipoTrabalho obj = new TipoTrabalhoListarTipoTrabalho();
-//        return obj.executar(request, response);
         TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
         List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
         request.setAttribute("tipoForma", tipoForma);
