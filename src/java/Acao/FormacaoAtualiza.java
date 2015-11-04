@@ -4,14 +4,12 @@ import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
-import bean.TipoTrabalhoPublicadosBean;
 import bean.TrabalhosPublicacosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PessoaDao;
 import dao.TipoFormacaoDao;
-import dao.TipoTrabalhoDao;
 import dao.TrabalhosDao;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +25,7 @@ public class FormacaoAtualiza implements Acao {
         String idCurri = "" + session.getAttribute("id_curri");
         String idd = "" + session.getAttribute("id_pessoa");
 
+        
         FormacaoBean formacaoBean = new FormacaoBean();
         TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
 
@@ -38,12 +37,7 @@ public class FormacaoAtualiza implements Acao {
         formacaoBean.setCurriculo_id_Curriculo(idCurri);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-
-        if (formacaoDao.atualiza(formacaoBean) == true) {
-            request.setAttribute("msg", "Formação inserida com sucesso");
-        } else {
-            request.setAttribute("msg", "Erro ao inserir formação");
-        }
+        formacaoDao.atualiza(formacaoBean);
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();

@@ -46,7 +46,7 @@ public class TrabalhosDao {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(TrabalhosDao.connection);
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
     }
 
@@ -94,7 +94,7 @@ public class TrabalhosDao {
             System.out.println("Erro ao atualizar Trabalhos no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(TrabalhosDao.connection);
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
     }
 
@@ -143,7 +143,7 @@ public class TrabalhosDao {
             System.out.println("Erro ao buscar tbpublicados no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(TrabalhosDao.connection);
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
     }
 

@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.http.HttpSession;
-
 /**
  *
  * @author CarlosRoberto
@@ -158,7 +156,6 @@ public class CurriculoDao {
         String id = null;
         while (rs.next()) {
             id = rs.getString("id_Curriculo");
-            System.out.println(id);
         }
         stmt.close();
         return id;
@@ -181,7 +178,7 @@ public class CurriculoDao {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(CurriculoDao.connection, stmt());
         }
     }
 }

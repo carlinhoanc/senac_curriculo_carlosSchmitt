@@ -43,7 +43,7 @@ public class TipoTrabalhoDao {
             System.out.println(e);
             return false;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
     }
 
@@ -82,7 +82,7 @@ public class TipoTrabalhoDao {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(TipoTrabalhoDao.connection);
+            FabricaConexao.fechaConexao(TipoTrabalhoDao.connection, stmt());
         }
     }
 

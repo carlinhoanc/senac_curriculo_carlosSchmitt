@@ -33,11 +33,10 @@ public class PessoaAtualizar implements Acao {
         pessoa.setEndereco(endereco);
         PessoaDao pessoaDAO = new PessoaDao();
         
-        if (pessoaDAO.atualizaUser(pessoa) == true) {
-            req.setAttribute("msg", "Pessoa inserida com sucesso");
-        } else {
-            req.setAttribute("msg", "Erro ao inserirr pessoa");
-        }
+        pessoaDAO.atualizaUser(pessoa);
+
+        
+        
         PessoaListarPessoa obj = new PessoaListarPessoa();
         return obj.executar(req, res);
     }

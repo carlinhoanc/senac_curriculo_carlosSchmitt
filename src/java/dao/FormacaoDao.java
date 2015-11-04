@@ -30,12 +30,9 @@ public class FormacaoDao {
 
     public boolean insere(FormacaoBean p) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
-        
         String sql = "INSERT INTO formacao "
                 + "(nomeInstitui, dataInicio, dataTermino, id_Tipo, Curriculo_id_Curriculo)"
                 + " VALUES(?,?,?,?,?)";
-        try {
-
             stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, p.getNomeInstitui());
             stmt.setString(2, p.getDataInicio());
@@ -45,11 +42,6 @@ public class FormacaoDao {
             stmt.executeUpdate();
             stmt.close();
             return true;
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
-        }
     }
 
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
@@ -100,7 +92,7 @@ public class FormacaoDao {
             System.out.println("Erro ao atualizar Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
         }
     }
 
@@ -169,7 +161,7 @@ public class FormacaoDao {
             System.out.println("Erro ao buscar tbpublicados no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
         }
     }
 

@@ -58,7 +58,7 @@ public class TipoDeUsuarioDao {
             System.out.println("Erro ao buscar Tipo de user no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection);
+            FabricaConexao.fechaConexao(this.connection, stmt());
         }
     }
 }

@@ -56,7 +56,7 @@ public class CidadeDao {
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection);
+            FabricaConexao.fechaConexao(this.connection, stmt());
         }
     }
 
@@ -82,7 +82,7 @@ public class CidadeDao {
             System.out.println("Erro ao buscar sscidade no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection);
+            FabricaConexao.fechaConexao(this.connection, stmt());
         }
     }
 
@@ -107,7 +107,7 @@ public class CidadeDao {
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection);
+            FabricaConexao.fechaConexao(this.connection, stmt());
         }
     }
 
@@ -136,7 +136,7 @@ public class CidadeDao {
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection);
+            FabricaConexao.fechaConexao(this.connection, stmt());
         }
     }
 
@@ -162,7 +162,7 @@ public class CidadeDao {
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection);
+            FabricaConexao.fechaConexao(this.connection, stmt());
         }
 
     }

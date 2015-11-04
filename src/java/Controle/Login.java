@@ -62,7 +62,7 @@ public class Login extends HttpServlet {
             CurriculoDao curriDao = new CurriculoDao();
 
             for (PessoaBean pessoa : pessoas) {
-                idCurri = curriDao.idCurri(pessoa.getId_Pessoa());
+                idCurri = curriDao.idCurriPorPessoa(pessoa.getId_Pessoa());
 
                 if (idCurri.equals("0")) {
                     session.setAttribute("id_curri", "0");

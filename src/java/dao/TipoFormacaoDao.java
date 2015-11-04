@@ -42,7 +42,7 @@ public class TipoFormacaoDao {
             System.out.println(e);
             return false;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
     }
 
@@ -81,7 +81,7 @@ public class TipoFormacaoDao {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(TipoFormacaoDao.connection);
+            FabricaConexao.fechaConexao(TipoFormacaoDao.connection, stmt());
         }
     }
 

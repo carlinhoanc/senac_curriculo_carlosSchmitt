@@ -1,4 +1,3 @@
-
 package Acao;
 
 import bean.CidadeBean;
@@ -22,8 +21,15 @@ public class FormacaoAdiciona implements Acao {
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
-        String idCurri = "" + session.getAttribute("id_curri");
+        CurriculoDao curri = new CurriculoDao();
         String idd = "" + session.getAttribute("id_pessoa");
+
+        String idCurri = null;
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        }else{
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
 
         FormacaoBean formacaoBean = new FormacaoBean();
         TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
@@ -35,12 +41,7 @@ public class FormacaoAdiciona implements Acao {
         formacaoBean.setCurriculo_id_Curriculo(idCurri);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-
-        if (formacaoDao.insere(formacaoBean) == true) {
-            request.setAttribute("msg", "Pessoa inserida com sucesso");
-        } else {
-            request.setAttribute("msg", "Erro ao inserirr pessoa");
-        }
+        formacaoDao.insere(formacaoBean);
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
@@ -50,7 +51,6 @@ public class FormacaoAdiciona implements Acao {
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         request.setAttribute("edita", pessoas);
 
-        CurriculoDao curri = new CurriculoDao();
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
 

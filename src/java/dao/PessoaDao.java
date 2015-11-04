@@ -62,7 +62,7 @@ public class PessoaDao {
                 System.out.println(e);
                 return false;
             } finally {
-                FabricaConexao.fechaConexao(EnderecoDao.connection);
+                FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
             }
         } else {
             return false;
@@ -100,7 +100,7 @@ public class PessoaDao {
                 System.out.println(e);
                 return false;
             } finally {
-                FabricaConexao.fechaConexao(EnderecoDao.connection);
+                FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
             }
         } else {
             return false;
@@ -181,7 +181,7 @@ public class PessoaDao {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PessoaDao.connection);
+            FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
         }
     }
     public boolean atualizaUser(PessoaBean pessoa) throws ClassNotFoundException, Exception {
@@ -213,7 +213,7 @@ public class PessoaDao {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PessoaDao.connection);
+            FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
         }
     }
 

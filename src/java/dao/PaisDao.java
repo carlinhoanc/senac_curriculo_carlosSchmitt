@@ -45,7 +45,7 @@ public class PaisDao {
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection);
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
 
     }

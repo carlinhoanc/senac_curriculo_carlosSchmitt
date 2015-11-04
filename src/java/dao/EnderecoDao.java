@@ -48,7 +48,7 @@ public class EnderecoDao {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
     }
 
@@ -99,7 +99,7 @@ public class EnderecoDao {
             System.out.println("Erro ao atualizar Endereco no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
     }
 
@@ -130,7 +130,7 @@ public class EnderecoDao {
             System.out.println("Erro ao buscar endereco no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
     }
 

@@ -44,21 +44,8 @@ public class FabricaConexao {
         }
     }
 
-    public static void fechaConexao(Connection conn, Statement stmt, ResultSet rs) throws Exception {
-        fecha(conn, stmt, rs);
-    }
-
     public static void fechaConexao(Connection conn, Statement stmt) throws Exception {
         fecha(conn, stmt, null);
     }
 
-    public static void fechaConexao(Connection conn) throws Exception {
-        fecha(conn, null, null);
-    }
-
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        try (Connection connection = new FabricaConexao().getConnection()) {
-            System.out.println("Conexão aberta!");
-        }
-    }
 }

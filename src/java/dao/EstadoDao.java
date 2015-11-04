@@ -52,7 +52,7 @@ public class EstadoDao {
         }
 
         finally{
-        FabricaConexao.fechaConexao(EstadoDao.connection);
+        FabricaConexao.fechaConexao(EstadoDao.connection, stmt());
         }
     }
 
@@ -82,7 +82,7 @@ public class EstadoDao {
         }
 
         finally{
-        FabricaConexao.fechaConexao(EstadoDao.connection);
+        FabricaConexao.fechaConexao(EstadoDao.connection, stmt());
         }
     }
 }
