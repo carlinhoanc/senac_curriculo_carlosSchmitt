@@ -1,16 +1,14 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%@page session="true" %>
+    <%@ page session="true" %>
     <%@ page language="java"%> 
     <%@ page import="java.util.*" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
+        <%@ page contentType="text/html" pageEncoding="UTF-8"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista de Usuários</title>
         <%@ include file="../../includes/heard.jsp" %>
-
-
 
         <script src="${pageContext.request.contextPath}/resource/js/jquery.tablesorter.js"></script>
         <script src="${pageContext.request.contextPath}/resource/js/jquery.tablesorter.widgets.js"></script>
@@ -19,8 +17,6 @@
         <script src="${pageContext.request.contextPath}/resource/js/tabela.js"></script>
         <script>
                     $(function () {
-
-                    // filter button demo code
                     $('button.filter').click(function () {
                     var col = $(this).data('column'),
                             txt = $(this).data('filter');
@@ -28,7 +24,6 @@
                             $('table').trigger('search', false);
                             return false;
                     });
-                            // toggle zebra widget
                             $('button.zebra').click(function () {
                     var t = $(this).hasClass('btn-success');
                             if (t) {

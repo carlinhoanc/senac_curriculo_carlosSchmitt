@@ -5,7 +5,6 @@
 --%>
 
 
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%@ page session="true" %>
@@ -14,6 +13,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <head>
+        <%@ page contentType="text/html" pageEncoding="UTF-8"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Lista Tipos de formação</title>
         <%@ include file="../../includes/heard.jsp" %>

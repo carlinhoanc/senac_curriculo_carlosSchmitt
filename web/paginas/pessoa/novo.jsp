@@ -3,14 +3,15 @@
     Created on : 07/10/2015, 08:38:56
     Author     : CarlosRoberto
 --%>
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-
-    <title>Cadastrar novo usu·rio</title>
+    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Cadastrar novo usu√°rio</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
@@ -32,7 +33,7 @@
         <% // if (id_tipo.equals("2") || id_tipo.equals("1")) { %>
         <% if (id_tipo.equals("1")) { %>
         <div class="alert alert-warning" role="alert">
-            VocÍ j· possui um cadastro
+            Voc√™ j√° possui um cadastro
         </div>
         <% } else { %> 
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAdicionar" method="post" >
@@ -84,13 +85,13 @@
             </fieldset>
 
             <fieldset class="mt20 mb20">
-                <legend>EndereÁo</legend>
+                <legend>Endere√ßo</legend>
                 <div class="row">
                     <div class="col-md-6" >
                         <input name="nomeRua" id="nomeRua" type="text" placeholder="Digite Rua" required="required" />
                     </div>
                     <div class="col-md-6" >
-                        <input name="numero" type="number" min="1" id="numero" placeholder="Digite N˙mero" required="required" />
+                        <input name="numero" type="number" min="1" id="numero" placeholder="Digite N√∫mero" required="required" />
                     </div>
                     <div class="limpar"></div>
                 </div>
@@ -124,11 +125,11 @@
 
             <c:if test="${sessionScope.id_tipo == '2' }">
                 <fieldset>
-                    <legend>AÁıes</legend>
+                    <legend>A√ß√µes</legend>
 
                     <div class="row">
                         <div class="col-md-6" >
-                            <label>Tipo de usu·rio</label>
+                            <label>Tipo de usu√°rio</label>
                             <div class="win100">
                                 <select class="form-control" name="id_tipo" id="id_tipo">
                                     <option value="1" >Registrado</option>
@@ -142,7 +143,7 @@
                             <div class="win100">
                                 <select class="form-control" name="ativo" id="ativo">
                                     <option value="1" >Sim</option>
-                                    <option value="0" >N„o</option>
+                                    <option value="0" >N√£o</option>
                                 </select>
                             </div>
                         </div>
@@ -159,7 +160,7 @@
 
         <script>
             var $clo = jQuery.noConflict();
-            $clo(".chosen-select").chosen({no_results_text: "Oops, n„o encontrado!", single_text: "Selecione uma opÁ„o"});
+            $clo(".chosen-select").chosen({no_results_text: "Oops, n√£o encontrado!", single_text: "Selecione uma op√ß√£o"});
         </script>
 
         <% }%>
