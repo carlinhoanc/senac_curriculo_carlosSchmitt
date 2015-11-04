@@ -206,7 +206,7 @@ public class PessoaDao {
             stmt.setString(7, pessoa.getEmail());
             stmt.setString(8, pessoa.getTelefone());
             stmt.setInt(9, Integer.parseInt(pessoa.getId_Pessoa()));
-            int ok = stmt.executeUpdate();
+            stmt.executeUpdate();
 
             return atualizadoSucesso;
         } catch (SQLException e) {
@@ -292,7 +292,6 @@ public class PessoaDao {
                 pessoa.setAtivo(rs.getInt("ativo"));
                 pessoa.setTipo(tipoUserDao.obtemTipoUser(pessoa.getId_Pessoa()));
                 pessoas.add(pessoa);
-
             }
             stmt.close();
             return pessoas;
@@ -303,9 +302,5 @@ public class PessoaDao {
         } finally {
             FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
         }
-    }
-
-    public static ArrayList<Object[]> selectUsuario(int insereP) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

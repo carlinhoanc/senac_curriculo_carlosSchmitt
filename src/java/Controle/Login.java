@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 
         String retorno = null;
         int insereP = LoginDao.fazerLogin(pessoaModel);
-
+        
         if (insereP == 0) {
             request.setAttribute("falhalogin", "erro");
             retorno = "/paginas/login/login.jsp";
@@ -64,7 +64,6 @@ public class Login extends HttpServlet {
             for (PessoaBean pessoa : pessoas) {
                 idCurri = curriDao.idCurriPorPessoa(pessoa.getId_Pessoa());
 
-                System.out.println(idCurri);
                 if (idCurri.equals("0")) {
                     session.setAttribute("id_curri", "0");
                     session.setAttribute("temCurri", "0");
