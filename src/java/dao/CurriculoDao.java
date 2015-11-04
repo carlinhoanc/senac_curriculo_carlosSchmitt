@@ -153,7 +153,7 @@ public class CurriculoDao {
         String sql = "SELECT * FROM curriculo where pessoa_idPessoa = " + idC;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        String id = null;
+        String id = "0";
         while (rs.next()) {
             id = rs.getString("id_Curriculo");
         }
