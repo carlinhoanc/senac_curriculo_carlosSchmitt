@@ -3,12 +3,12 @@
     Created on : 07/10/2015, 08:38:56
     Author     : CarlosRoberto
 --%>
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
+    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ include file="../../includes/heard.jsp" %>
     <title>Cadastrar novo tipo de trabalho</title>
 </head>

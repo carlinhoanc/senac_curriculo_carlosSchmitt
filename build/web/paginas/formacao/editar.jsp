@@ -7,8 +7,8 @@
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
+    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ include file="../../includes/heard.jsp" %>
 </head>
 
@@ -33,7 +33,7 @@
             </c:forEach>
             <br/>
             <br/>
-            
+
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoListarTipoFormacao" type="button"  class="btn btn-danger">Cancelar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />

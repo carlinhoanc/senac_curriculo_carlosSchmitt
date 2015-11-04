@@ -25,9 +25,9 @@ public class CurriculoAtualizar implements Acao {
         
         CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
-
-        int idCurri = Integer.parseInt((String) session.getAttribute("id_curri"));
-        if (idCurri == 0) {
+        
+        String idCurri = "" + session.getAttribute("id_curri");
+        if (idCurri.equals("0")) {
             session.setAttribute("id_curri", "0");
         } else {
             session.setAttribute("id_curri", idCurri);
@@ -37,7 +37,7 @@ public class CurriculoAtualizar implements Acao {
         curriBeans.setForBasica(request.getParameter("forBasica"));
         curriBeans.setFormMedio(request.getParameter("formMedio"));
         curriBeans.setIdPessoa(idd);
-        curriBeans.setId(idCurri);
+        curriBeans.setId(Integer.parseInt(idCurri));
         curriBeans.setResumo(request.getParameter("resumo"));
 
         if (curri.atualizar(curriBeans) == true) {

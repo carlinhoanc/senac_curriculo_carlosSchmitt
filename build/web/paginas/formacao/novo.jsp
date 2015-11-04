@@ -7,9 +7,9 @@
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
+    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
     <title>Cadastrar novo tipo de Formação</title>
 </head>
 
