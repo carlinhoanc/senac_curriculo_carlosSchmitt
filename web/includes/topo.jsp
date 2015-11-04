@@ -33,7 +33,7 @@
             <% }%> 
             <% if (id_tipo.equals("2")) { %>
             <li role="presentation">
-                <a href="${pageContext.request.contextPath}/paginas/curriculo">Admin Tipos</a>
+                <a href="${pageContext.request.contextPath}/paginas/curriculo/index.jsp">Admin Tipos</a>
             </li>
             <% }%> 
 

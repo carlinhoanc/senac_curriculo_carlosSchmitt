@@ -71,7 +71,7 @@
                 </div>
                 <div class="page-header">
                     <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                        <a href="${pageContext.request.contextPath}/paginas/formacao"type="button" class="btn btn-danger">Voltar</a>
+                        <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp"type="button" class="btn btn-danger">Voltar</a>
                     </div>
                 </div>
             </div>

@@ -28,7 +28,7 @@
             <br/>
             <br/>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                <a href="${pageContext.request.contextPath}/paginas/formacao/" type="button"  class="btn btn-danger">Cancelar</a>
+                <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp" type="button"  class="btn btn-danger">Cancelar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>

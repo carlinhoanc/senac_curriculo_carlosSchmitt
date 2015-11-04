@@ -19,10 +19,10 @@
             
             <h2>Cadastros de Tipos de trabalhos e formação</h2>
 
-            <a href="${pageContext.request.contextPath}/paginas/trabalhos">Tipos de Trabalhos</a>
+            <a href="${pageContext.request.contextPath}/paginas/trabalhos/index.jsp">Tipos de Trabalhos</a>
             <br/>
             <br/>
-            <a href="${pageContext.request.contextPath}/paginas/formacao">Formação</a>
+            <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp">Formação</a>
 
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">

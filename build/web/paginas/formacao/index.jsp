@@ -26,7 +26,7 @@
 
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                    <a href="${pageContext.request.contextPath}/paginas/curriculo"type="button" class="btn btn-danger">Voltar</a>
+                    <a href="${pageContext.request.contextPath}/paginas/curriculo/index.jsp"type="button" class="btn btn-danger">Voltar</a>
                 </div>
             </div>
         </c:if>
