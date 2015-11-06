@@ -7,6 +7,7 @@ public class TipoTrabalhoNovo implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         return "/paginas/trabalhos/novo.jsp";
     }
 

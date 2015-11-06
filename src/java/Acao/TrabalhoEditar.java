@@ -17,14 +17,14 @@ public class TrabalhoEditar implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String idCurri = "" + session.getAttribute("id_curri");
 
         PaisDao paisDao = new PaisDao();
         List<PaisBean> paises = paisDao.listarPaises();
         request.setAttribute("paises", paises);
-        
+
         TipoTrabalhoDao tipoTrabalhoDao = new TipoTrabalhoDao();
         List<TipoTrabalhoPublicadosBean> tipoTrabalho = tipoTrabalhoDao.listarTipoTrabalho();
         request.setAttribute("tipoTrabalho", tipoTrabalho);
@@ -34,9 +34,9 @@ public class TrabalhoEditar implements Acao {
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
-        
+
         return "/paginas/pessoa/curriculo/atualizaTrabalho.jsp";
     }
 }

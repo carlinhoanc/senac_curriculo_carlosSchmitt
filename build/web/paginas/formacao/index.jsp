@@ -9,14 +9,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <title>Tipos de Formação</title>
+    <title>Tipos de Forma&ccedil;&atilde;o</title>
 </head>
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        <h2>Tipos de Formação</h2>
+        <h2>Tipos de Forma&ccedil;&atilde;o</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
 
             <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo">Novo</a>

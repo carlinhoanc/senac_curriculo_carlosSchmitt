@@ -9,9 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Cadastros de Tipos de trabalhos e formação</title>
+    <title>Cadastros de Tipos de trabalhos e forma&ccedil;&atilde;o</title>
 </head>
 
 <body>
@@ -19,12 +17,12 @@
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <c:if test="${sessionScope.id_tipo == '2' }">
             
-            <h2>Cadastros de Tipos de trabalhos e formação</h2>
+            <h2>Cadastros de Tipos de trabalhos e formao</h2>
 
             <a href="${pageContext.request.contextPath}/paginas/trabalhos/index.jsp">Tipos de Trabalhos</a>
             <br/>
             <br/>
-            <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp">Formação</a>
+            <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp">Forma&ccedil;&atilde;o</a>
 
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">

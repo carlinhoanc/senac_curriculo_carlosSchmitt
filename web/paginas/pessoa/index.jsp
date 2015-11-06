@@ -7,13 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <head>  
         <title>JSP Page</title>
     </head>
     <body>
-
-
         <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaNovo">Novo</a>
         <br/>
         <br/>
@@ -21,8 +18,5 @@
         <br/>
         <br/>
         <a href="${pageContext.request.contextPath}">Voltar</a>
-
-        
-
     </body>
 </html>

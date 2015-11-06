@@ -19,13 +19,14 @@ public class CurriculoAtualizar implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String idd = "" + session.getAttribute("id_pessoa");
         String temCurri = "" + session.getAttribute("temCurri");
-        
+
         CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
-        
+
         String idCurri = "" + session.getAttribute("id_curri");
         if (idCurri.equals("0")) {
             session.setAttribute("id_curri", "0");
@@ -56,13 +57,13 @@ public class CurriculoAtualizar implements Acao {
 
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
-        
+
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" +idCurri);
+        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
         request.setAttribute("trabalhos", trabalhos);
-        
+
         FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
 
         return "/paginas/pessoa/meuperfil.jsp";

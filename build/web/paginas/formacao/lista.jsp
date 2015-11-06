@@ -13,21 +13,19 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <head>
-        <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista Tipos de formação</title>
         <%@ include file="../../includes/heard.jsp" %>
+        <title>Lista Tipos de forma&ccedil;&atilde;o</title>
     </head>
     <body>
         <%@ include file="../../includes/topo.jsp" %>
         <c:if test="${sessionScope.id_tipo == '2' }">
             <div class="container theme-showcase" style="padding-top: 70px" role="main">
-                <h2>Lista Tipos de Formações</h2>
+                <h2>Lista Tipos de Forma&ccedil;&otilde;es</h2>
                 <div>
                     <c:forEach items="${tipoForma}" var="tipoFormacao" >
                         <div class="col-md-6">
                             <div><b>ID:</b> ${tipoFormacao.id_Tipo}</div>
-                            <div><b>Descrição:</b> ${tipoFormacao.descricao}</div>
+                            <div><b>Descri&ccedil;&atilde;o:</b> ${tipoFormacao.descricao}</div>
 
                             <form id="editaPessoa${tipoFormacao.id_Tipo}" 
                                   action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoEditar" method="post" >

@@ -11,8 +11,8 @@
 <head>
     <%@ include file="../../includes/heard.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
     <script>
@@ -110,15 +110,15 @@
                 </fieldset>
 
                 <fieldset class="mt20 mb20">
-                    <legend>Endere√ßo</legend>
+                    <legend>EndereÁo</legend>
                     <div class="row">
                         <div class="col-md-6" >
                             <label>Rua</label>
                             <input name="nomeRua" id="nomeRua" type="text" value="${editar.endereco.nomeRua}" placeholder="Digite Rua" required="required" />
                         </div>
                         <div class="col-md-6" >
-                            <label>N√∫mero</label>
-                            <input name="numero" type="number" min="1" id="numero" value="${editar.endereco.numero}" placeholder="Digite N√∫mero" required="required" />
+                            <label>N˙mero</label>
+                            <input name="numero" type="number" min="1" id="numero" value="${editar.endereco.numero}" placeholder="Digite N˙mero" required="required" />
                         </div>
                         <div class="limpar"></div>
                     </div>
@@ -161,10 +161,10 @@
                 </fieldset>
                 <c:if test="${sessionScope.id_tipo == '2' }">
                     <fieldset>
-                        <legend>A√ß√µes</legend>
+                        <legend>A&ccedil;&otilde;es</legend>
                         <div class="row">
                             <div class="col-md-6" >
-                                <label>Tipo de usu√°rio</label>
+                                <label>Tipo de usu·rio</label>
                                 <div class="win100">
                                     <select class="form-control" name="id_tipo" id="id_tipo">
                                         <c:if test = "${editar.tipo.id == '1' }" >
@@ -185,11 +185,11 @@
                                     <select class="form-control" name="ativo" id="ativo">
                                         <c:if test = "${editar.ativo == '1' }" >
                                             <option value="1" selected="" >Sim</option>
-                                            <option value="0" >N√£o</option>
+                                            <option value="0" >N„o</option>
                                         </c:if>
                                         <c:if test = "${editar.ativo != '1' }" >
                                             <option value="1" >Sim</option>
-                                            <option value="0" selected="" >N√£o</option>
+                                            <option value="0" selected="" >N„o</option>
                                         </c:if>
                                     </select>
                                 </div>
@@ -210,7 +210,7 @@
 
         <script>
             var $clo = jQuery.noConflict();
-            $clo(".chosen-select").chosen({no_results_text: "Oops, n√£o encontrado!", single_text: "Selecione uma op√ß√£o"});
+            $clo(".chosen-select").chosen({no_results_text: "Oops, n„o encontrado!", single_text: "Selecione uma op&ccedil;&atilde;o"});
         </script>
 
         <%@ include file="../../includes/footer.jsp" %>

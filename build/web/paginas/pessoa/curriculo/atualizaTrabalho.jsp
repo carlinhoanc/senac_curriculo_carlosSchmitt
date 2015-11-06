@@ -4,9 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
-    <%@ include file="../../../includes/heard.jsp" %>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <%@ include file="../../../includes/heard.jsp" %>  
     <title>Adicionar trabalho</title>
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script>

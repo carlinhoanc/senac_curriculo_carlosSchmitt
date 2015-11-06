@@ -6,8 +6,6 @@
 
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
@@ -40,7 +38,7 @@
                 </li>
                 <li role="presentation">
                     <a href="#formacao" aria-controls="formacao" role="tab" data-toggle="tab">
-                        Formação academica
+                        Forma&ccedil;&atilde;o academica
                     </a>
                 </li>
                 <li role="presentation">

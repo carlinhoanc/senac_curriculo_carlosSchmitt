@@ -3,9 +3,6 @@
     Created on : 07/10/2015, 08:36:22
     Author     : CarlosRoberto
 --%>
-
-
-<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <%@ page session="true" %>
@@ -14,10 +11,8 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
     <head>
-        <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista Tipos de trabalhos</title>
         <%@ include file="../../includes/heard.jsp" %>
+        <title>Lista Tipos de trabalhos</title>
     </head>
     <body>
         <%@ include file="../../includes/topo.jsp" %>
@@ -28,7 +23,7 @@
                     <c:forEach items="${tipoTrabalho}" var="tipoTrabalhos" >
                         <div class="col-md-6">
                             <div><b>ID:</b> ${tipoTrabalhos.id}</div>
-                            <div><b>Descrição:</b> ${tipoTrabalhos.descricao}</div>
+                            <div><b>Descri&ccedil;&atilde;o:</b> ${tipoTrabalhos.descricao}</div>
 
                             <form id="editaPessoa${tipoTrabalhos.id}" 
                                   action="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoEditar" method="post" >

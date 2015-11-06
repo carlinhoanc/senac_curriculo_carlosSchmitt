@@ -14,12 +14,12 @@
         </div>
 
         <div class="row">
-            <label>Formação Básica</label>
+            <label>Forma&ccedil;&atilde;o Básica</label>
             <textarea id="forBasica" name="forBasica" >${curriculo.forBasica}</textarea>
         </div>
 
         <div class="row">
-            <label>Formação Média</label>
+            <label>Forma&ccedil;&atilde;o Média</label>
             <textarea id="formMedio" name="formMedio" >${curriculo.formMedio}</textarea>
         </div>
 

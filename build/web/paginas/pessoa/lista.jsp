@@ -4,10 +4,8 @@
     <%@ page language="java"%> 
     <%@ page import="java.util.*" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <head>
-        <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Lista de Usuários</title>
+    <head>        
+        <title>Lista de Usu�rios</title>
         <%@ include file="../../includes/heard.jsp" %>
 
         <script src="${pageContext.request.contextPath}/resource/js/jquery.tablesorter.js"></script>
@@ -65,7 +63,7 @@
                             <th></th>
                             <th class="filter-select filter-exact" data-placeholder="UF">Uf</th>  
                             <th></th>
-                            <th>Ações</th>  
+                            <th>A&ccedil;&otilde;es</th>  
                         </tr>  
                     </thead>
                     <tfoot>
@@ -78,7 +76,7 @@
                             <th></th>
                             <th>UF</th>  
                             <th></th>
-                            <th>Ações</th>  
+                            <th>A&ccedil;&otilde;es</th>  
                         </tr>
                         <tr>
                             <th colspan="7" class="ts-pager form-horizontal">

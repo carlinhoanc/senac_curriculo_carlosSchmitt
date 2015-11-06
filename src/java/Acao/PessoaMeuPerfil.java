@@ -19,6 +19,7 @@ public class PessoaMeuPerfil implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse res) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         String idd = null;
         HttpSession session = request.getSession();
 

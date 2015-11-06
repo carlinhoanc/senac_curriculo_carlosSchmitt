@@ -12,16 +12,17 @@ public class PessoaEditar implements Acao {
 
     @Override
     public String executar(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String idd= req.getParameter("id_pessoa");
+        req.setCharacterEncoding("UTF-8");
+        String idd = req.getParameter("id_pessoa");
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
         req.setAttribute("cidades", lista);
-        
+
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         req.setAttribute("edita", pessoas);
-         
+
         return "/paginas/pessoa/editar.jsp";
     }
 }

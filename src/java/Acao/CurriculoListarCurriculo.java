@@ -10,6 +10,7 @@ public class CurriculoListarCurriculo implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         TipoFormacaoDao tipoFormaDao = new TipoFormacaoDao();
         List<TipoFormacaoBean> tipoForma = tipoFormaDao.listarTipoFormacao();
         request.setAttribute("tipoForma", tipoForma);

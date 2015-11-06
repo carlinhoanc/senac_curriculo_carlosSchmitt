@@ -17,8 +17,8 @@ public class Pessoa extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException, InstantiationException, IllegalAccessException, Exception {
-        response.setContentType("text/html;charset=UTF-8");
-        
+//        response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
             String nomeClasse = "Acao." + request.getParameter("acao");
             Class<?> classe = Class.forName(nomeClasse);

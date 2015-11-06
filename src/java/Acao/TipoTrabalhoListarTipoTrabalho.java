@@ -10,6 +10,7 @@ public class TipoTrabalhoListarTipoTrabalho implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         TipoTrabalhoDao tipoTrabalhoDao = new TipoTrabalhoDao();
         List<TipoTrabalhoPublicadosBean> tipoTrabalho = tipoTrabalhoDao.listarTipoTrabalho();
         request.setAttribute("tipoTrabalho", tipoTrabalho);

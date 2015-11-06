@@ -137,5 +137,5 @@
 
 <script>
     var $clo = jQuery.noConflict();
-    $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma opção"});
+    $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma op&ccedil;&atilde;o"});
 </script>

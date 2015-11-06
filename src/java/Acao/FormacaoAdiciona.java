@@ -20,6 +20,7 @@ public class FormacaoAdiciona implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         CurriculoDao curri = new CurriculoDao();
         String idd = "" + session.getAttribute("id_pessoa");
@@ -27,7 +28,7 @@ public class FormacaoAdiciona implements Acao {
         String idCurri = null;
         if (curri.idCurriPorPessoa(idd).equals("0")) {
             idCurri = "" + session.getAttribute("id_curri");
-        }else{
+        } else {
             idCurri = curri.idCurriPorPessoa(idd);
         }
 

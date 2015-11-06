@@ -7,15 +7,12 @@
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<head>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<head> 
     <%@ include file="../../includes/heard.jsp" %>
 </head>
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
-
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
 
         <% if (id_tipo.equals("2")) { %>

@@ -21,6 +21,7 @@ public class FormacaoDeleta implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse res) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         String id_formacaos = "" + request.getParameter("id_formacaos");
 
         FormacaoDao formacaoDao = new FormacaoDao();
@@ -49,9 +50,9 @@ public class FormacaoDeleta implements Acao {
         TrabalhosDao trabalhosDao = new TrabalhosDao();
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
-        
+
 //           FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
 
         return "/paginas/pessoa/meuperfil.jsp";

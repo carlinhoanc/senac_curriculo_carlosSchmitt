@@ -4,8 +4,8 @@
 <div class="row">
     <c:forEach var="formacaos" items="${formacao}">
         <div class="col-md-6">
-            <p><b>Nome da Instituição: </b>${formacaos.nomeInstitui}</p>
-            <p><b>Formação Academica: </b>${formacaos.id_Tipo.descricao}</p>
+            <p><b>Nome da Institui&ccedil;&atilde;o: </b>${formacaos.nomeInstitui}</p>
+            <p><b>Forma&ccedil;&atilde;o Academica: </b>${formacaos.id_Tipo.descricao}</p>
             <p><b>Data Inicio: </b>${formacaos.dataInicio}</p>
             <p><b>Data Término: </b>${formacaos.dataTermino}</p>
 
@@ -59,7 +59,7 @@
 <br/>
 <c:if test="${sessionScope.temCurri == '0' }">
     <div class="jumbotron">
-        <h1>ATenção</h1>
+        <h1>ATen&ccedil;&atilde;o</h1>
         <p>...</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Preencha um curriculo antes</a></p>
     </div>

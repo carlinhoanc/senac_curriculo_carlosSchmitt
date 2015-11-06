@@ -11,6 +11,7 @@ public class PessoaListarPessoa implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         PessoaDao pessoaDAO = new PessoaDao();
 
         HttpSession session = request.getSession();

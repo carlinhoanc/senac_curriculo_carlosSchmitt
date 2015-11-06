@@ -10,6 +10,7 @@ public class TipoTrabalhoDeleta implements Acao {
 
     @Override
     public String executar(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        req.setCharacterEncoding("UTF-8");
         String idd = req.getParameter("id_TipoPublicados");
 
         TipoTrabalhoDao tipoTrabalhoDao = new TipoTrabalhoDao();

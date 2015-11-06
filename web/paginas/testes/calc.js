@@ -5,7 +5,7 @@ $(function () {
         $('#inputResult').val($('#inputResult').val() + this.value)
     });
 
-    /*pega operação clicada e inseri no input*/
+    /*pega opera&ccedil;&atilde;o clicada e inseri no input*/
     $('.btnOperacao').click(function () {
         console.log(this.value)
         /*verifica se a tecla clicada é a LIMPAR, se sim apaga os valores do input*/

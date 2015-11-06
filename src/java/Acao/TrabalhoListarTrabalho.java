@@ -19,11 +19,11 @@ public class TrabalhoListarTrabalho implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String idd = "" + session.getAttribute("id_pessoa");
         String idCurri = "" + session.getAttribute("id_curri");
-        
+
         PaisDao paisDao = new PaisDao();
         List<PaisBean> paises = paisDao.listarPaises();
         request.setAttribute("paises", paises);
@@ -41,9 +41,9 @@ public class TrabalhoListarTrabalho implements Acao {
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
-        
+
         return "/paginas/pessoa/meuperfil.jsp";
     }
 

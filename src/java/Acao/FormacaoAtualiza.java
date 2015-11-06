@@ -20,12 +20,11 @@ public class FormacaoAtualiza implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String idCurri = "" + session.getAttribute("id_curri");
         String idd = "" + session.getAttribute("id_pessoa");
 
-        
         FormacaoBean formacaoBean = new FormacaoBean();
         TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
 

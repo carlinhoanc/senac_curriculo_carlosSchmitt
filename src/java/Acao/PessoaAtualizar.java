@@ -10,6 +10,7 @@ public class PessoaAtualizar implements Acao {
 
     @Override
     public String executar(HttpServletRequest req, HttpServletResponse res) throws Exception {
+        req.setCharacterEncoding("UTF-8");
         EnderecoBean endereco = new EnderecoBean();
         PessoaBean pessoa = new PessoaBean();
 
@@ -32,7 +33,7 @@ public class PessoaAtualizar implements Acao {
         pessoa.setId_Pessoa(req.getParameter("id_Pessoa"));
         pessoa.setEndereco(endereco);
         PessoaDao pessoaDAO = new PessoaDao();
-        
+
         pessoaDAO.atualizaUser(pessoa);
 
         PessoaListarPessoa obj = new PessoaListarPessoa();

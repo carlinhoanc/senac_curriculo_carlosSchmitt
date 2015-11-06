@@ -19,6 +19,7 @@ public class PessoaCurriculo implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse res) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         String idd = "" + request.getParameter("id_pessoa");
 
         CidadeDao cidades = new CidadeDao();
@@ -47,9 +48,9 @@ public class PessoaCurriculo implements Acao {
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
-        
+
         return "/paginas/pessoa/visualizarCurriculo.jsp";
     }
 }

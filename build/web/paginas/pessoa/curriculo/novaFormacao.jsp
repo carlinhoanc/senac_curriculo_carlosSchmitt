@@ -6,8 +6,6 @@
 <head>
     <%@ include file="../../../includes/heard.jsp" %>
     <title>Adicionar trabalho</title>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap-datetimepicker.css">
     <script src="${pageContext.request.contextPath}/resource/js/moment.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/pt-br.js"></script>
@@ -20,13 +18,13 @@
         <form action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoAdiciona" method="post" >
             <div class="row">
                 <div class="col-md-6" >
-                    <label>Nome da Instituição</label>
-                    <input required="" name="nomeInstitui" type="text" id="nomeInstitui" value="" placeholder="Digite nome da Instituição" />
+                    <label>Nome da Institui&ccedil;&atilde;o</label>
+                    <input required="" name="nomeInstitui" type="text" id="nomeInstitui" value="" placeholder="Digite nome da Institui&ccedil;&atilde;o" />
                 </div>
                 <div class="col-md-6" >
-                    <label>Formação Academica</label>
+                    <label>Forma&ccedil;&atilde;o Academica</label>
                     <select id="id_tipoFormacao" name="id_tidoFormacao" required="" >
-                        <option>Selecione uma formação</option>
+                        <option>Selecione uma forma&ccedil;&atilde;o</option>
                         <c:forEach var="tipoFormas" items="${tipoForma}">
                             <option value="${tipoFormas.id_Tipo}">${tipoFormas.descricao}</option>
                         </c:forEach>
@@ -59,12 +57,12 @@
                 </div>
 
                 <div class="col-md-6" >
-                    <label>Data Término</label>
+                    <label>Data T�rmino</label>
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker1'>
                             <input type='text' class="form-control" 
                                    required="" name="dataTermino" id="dataTermino"
-                                   value="" placeholder="Digite data Término"  />
+                                   value="" placeholder="Digite data T�rmino"  />
 
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>

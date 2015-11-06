@@ -60,7 +60,7 @@
 <br/>
 <c:if test="${sessionScope.temCurri == '0' }">
     <div class="jumbotron">
-        <h1>ATenção</h1>
+        <h1>ATen&ccedil;&atilde;o</h1>
         <p>...</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Preencha um curriculo antes</a></p>
     </div>

@@ -21,10 +21,11 @@ public class TrabalhoAtualiza implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String idCurri = "" + session.getAttribute("id_curri");
         String idd = "" + session.getAttribute("id_pessoa");
-        
+
         TipoTrabalhoPublicadosBean tipos = new TipoTrabalhoPublicadosBean();
         tipos.setId(request.getParameter("id_TipoPublicados"));
         tipos.setDescricao(request.getParameter("descricao"));
@@ -36,7 +37,7 @@ public class TrabalhoAtualiza implements Acao {
             request.setAttribute("msg", "Erro ao inserirr pessoa");
         }
 
-          CidadeDao cidades = new CidadeDao();
+        CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
         request.setAttribute("cidades", lista);
 
@@ -53,7 +54,7 @@ public class TrabalhoAtualiza implements Acao {
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
 
         session.setAttribute("temCurri", "1");

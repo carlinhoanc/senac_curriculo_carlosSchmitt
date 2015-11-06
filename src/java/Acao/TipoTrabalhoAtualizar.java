@@ -9,6 +9,7 @@ public class TipoTrabalhoAtualizar implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         TipoTrabalhoPublicadosBean tipos = new TipoTrabalhoPublicadosBean();
         tipos.setId(request.getParameter("id_TipoPublicados"));
         tipos.setDescricao(request.getParameter("descricao"));

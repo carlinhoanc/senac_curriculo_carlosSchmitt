@@ -9,6 +9,7 @@ public class TipoFormacaoAdiciona implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         TipoFormacaoBean tipos = new TipoFormacaoBean();
         tipos.setId_Tipo(request.getParameter("id_Tipo"));
         tipos.setDescricao(request.getParameter("descricao"));

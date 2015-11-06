@@ -21,6 +21,7 @@ public class TrabalhoDeleta implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse res) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         String idTrab = "" + request.getParameter("id_trabalho");
 
         TrabalhosDao trabalhosDao = new TrabalhosDao();

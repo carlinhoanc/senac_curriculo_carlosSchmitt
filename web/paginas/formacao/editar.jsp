@@ -8,7 +8,6 @@
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ include file="../../includes/heard.jsp" %>
 </head>
 
@@ -19,10 +18,10 @@
         <% if (id_tipo.equals("2")) { %>
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoAtualizar" method="post" >
             <c:forEach var="editar" items="${editaforma}">
-                <h2>Editar tipo de formação ${editar.descricao}</h2>
+                <h2>Editar tipo de forma&ccedil;&atilde;o ${editar.descricao}</h2>
                 <fieldset>
-                    <title>Editar tipo de Formação: ${editar.descricao}</title>
-                    <legend>Tipo de formação -- ${editar.descricao} </legend>
+                    <title>Editar tipo de Forma&ccedil;&atilde;o: ${editar.descricao}</title>
+                    <legend>Tipo de forma&ccedil;&atilde;o -- ${editar.descricao} </legend>
                     <div class="win100">
                         <input type="hidden" value="${editar.id_Tipo}" name="id_Tipo" id="id_Tipo" />
                         <input type="text" id="descricao" name="descricao" 

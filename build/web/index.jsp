@@ -12,14 +12,10 @@
     <title>Cadastro de curriculo Carlos</title>
 </head>
 
-
 <body>
     <%@ include file="includes/topo.jsp" %>
-    
-    
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-        
-    <h1>Projeto Seanc 4ª Fase</h1>
-    
+        <h1>Projeto Seanc 4ª Fase</h1>
+    </div>
     <%@ include file="includes/footer.jsp" %>
 </body>

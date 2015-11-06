@@ -10,8 +10,8 @@
 
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
@@ -55,9 +55,9 @@
 
                     <div class="col-md-6" >
                         <fieldset>
-                            <legend>Endereço</legend>
+                            <legend>Endere�o</legend>
                             <h5><b>Rua: </b>${editar.endereco.nomeRua}</h5>
-                            <h5><b>Número: </b>${editar.endereco.numero}</h5>
+                            <h5><b>N�mero: </b>${editar.endereco.numero}</h5>
                             <h5><b>Complemento: </b>${editar.endereco.complemento}</h5>
                             <h5><b>Bairro: </b>${editar.endereco.bairro}</h5>
                             <h5><b>CEP: </b>${editar.endereco.cep}</h5>
@@ -78,17 +78,17 @@
                                 ${curriculo.resumo}
                             </div>
 
-                            <b>Experiência Profissional</b>
+                            <b>Experi�ncia Profissional</b>
                             <div>
                                 ${curriculo.expProfissional}
                             </div>
                         </div>
                         <div class="col-md-6" >  
-                            <b>Formação Básica</b>
+                            <b>Forma&ccedil;&atilde;o B�sica</b>
                             <div>
                                 ${curriculo.forBasica}
                             </div>
-                            <b>Formação Média</b>
+                            <b>Forma&ccedil;&atilde;o M�dia</b>
                             <div>
                                 ${curriculo.formMedio}
                             </div>
@@ -112,14 +112,14 @@
             </fieldset>
 
             <fieldset style="margin-top: 30px;">
-                <legend>Formação Academica</legend>
+                <legend>Forma&ccedil;&atilde;o Academica</legend>
                 <div class="row">
                     <c:forEach var="formacaos" items="${formacao}">
                         <div class="col-md-6">
-                            <p><b>Nome da Instituição: </b>${formacaos.nomeInstitui}</p>
-                            <p><b>Formação Academica: </b>${formacaos.id_Tipo.descricao}</p>
+                            <p><b>Nome da Institui&ccedil;&atilde;o: </b>${formacaos.nomeInstitui}</p>
+                            <p><b>Forma&ccedil;&atilde;o Academica: </b>${formacaos.id_Tipo.descricao}</p>
                             <p><b>Data Inicio: </b>${formacaos.dataInicio}</p>
-                            <p><b>Data Término: </b>${formacaos.dataTermino}</p>
+                            <p><b>Data T�rmino: </b>${formacaos.dataTermino}</p>
                         </div>
                     </c:forEach>
                 </div>

@@ -19,6 +19,7 @@ public class CurriculoAdiciona implements Acao {
 
     @Override
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         CurriculoDao curri = new CurriculoDao();
 
@@ -56,7 +57,7 @@ public class CurriculoAdiciona implements Acao {
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(""+idCurri);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
 
         session.setAttribute("temCurri", "1");
