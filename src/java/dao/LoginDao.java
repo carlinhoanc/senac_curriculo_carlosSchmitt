@@ -38,8 +38,8 @@ public class LoginDao {
         } else {
             retorno = rs.getInt("id_Pessoa");
         }
-        rs.close();
         stmt.close();
+        rs.close();
         return retorno;
     }
 
@@ -56,8 +56,8 @@ public class LoginDao {
         } else {
             retorno = rs.getInt("id_Pessoa");
         }
-        rs.close();
         stmt.close();
+        rs.close();
         return retorno;
     }
 }
