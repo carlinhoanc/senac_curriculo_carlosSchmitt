@@ -54,9 +54,7 @@ public class CidadeDao {
     public CidadeBean obtemCidade(String cdPessoa) throws Exception {
         PreparedStatement stmt = null;
         CidadeBean cidade = null;
-        
         String sql = "SELECT c.* FROM cidade c INNER JOIN endereco e ON c.id = e.id_cidade WHERE e.id_Endereco = " + cdPessoa;
-        
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
         try {
@@ -84,17 +82,14 @@ public class CidadeDao {
         try {
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
-
             while (rs.next()) {
                 cidade = new CidadeBean();
                 cidade.setEstados(rs.getString("estado"));
                 cidade.setId(rs.getInt("id"));
                 cidade.setNome(rs.getString("nome"));
             }
-
             stmt.close();
             return cidade;
-
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
@@ -106,24 +101,20 @@ public class CidadeDao {
         PreparedStatement stmt = null;
         CidadeBean cidade = null;
         String sql = "SELECT * FROM cidade WHERE estados LIKE '%" + UF + "%'";
-
         List<CidadeBean> cidades = new ArrayList<>();
         try {
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
-
             while (rs.next()) {
                 cidade = new CidadeBean();
                 cidade.setEstados(rs.getString("estado"));
                 cidade.setId(rs.getInt("id"));
                 cidade.setNome(rs.getString("nome"));
-
                 cidades.add(cidade);
             }
-
             stmt.close();
+            rs.clearWarnings();
             return cidades;
-
         } catch (SQLException | ClassNotFoundException e) {
             return null;
         } finally {
@@ -136,7 +127,6 @@ public class CidadeDao {
         PreparedStatement stmt = null;
         String sql = "SELECT * FROM cidade order by nome";
         List<CidadeBean> cidades = new ArrayList<>();
-
         try {
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);

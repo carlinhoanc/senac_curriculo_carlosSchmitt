@@ -28,14 +28,13 @@ public class CurriculoDao {
         CurriculoDao.connection = new FabricaConexao().getConnection();
     }
 
+    @SuppressWarnings("null")
     public boolean insere(CurriculoBean curri) throws SQLException, ClassNotFoundException {
         PreparedStatement stmt = null;
-        System.out.println(curri.getIdPessoa());
-
+        boolean retorno = true;
         String sql1 = "SELECT id_Curriculo FROM curriculo WHERE pessoa_idPessoa= '" + curri.getIdPessoa() + "'";
         ResultSet rs = stmt().executeQuery(sql1);
         if (!rs.next()) {
-
             String sql = "INSERT INTO curriculo( resumo, expProfissional, forBasica, formMedio, pessoa_idPessoa) VALUES(?,?,?,?,?)";
             stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, curri.getResumo());
@@ -44,11 +43,13 @@ public class CurriculoDao {
             stmt.setString(4, curri.getFormMedio());
             stmt.setString(5, curri.getIdPessoa());
             stmt.executeUpdate();
-            stmt.close();
-            return true;
+            retorno = true;
         } else {
-            return false;
+            retorno = false;
         }
+        stmt.close();
+        rs.close();
+        return retorno;
     }
 
     public boolean deleta(int id) throws SQLException, ClassNotFoundException {
@@ -79,8 +80,8 @@ public class CurriculoDao {
             curriBean.setIdPessoa(rs.getString("pessoa_idPessoa"));
             result.add(curriBean);
         }
-
         stmt.close();
+        rs.close();
         return result;
     }
 
@@ -102,6 +103,7 @@ public class CurriculoDao {
             result.add(curriBean);
         }
         stmt.close();
+        rs.close();
         return result;
     }
 
@@ -137,6 +139,7 @@ public class CurriculoDao {
             id = rs.getString("id_Curriculo");
         }
         stmt.close();
+        rs.close();
         return id;
     }
 

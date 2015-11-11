@@ -146,6 +146,7 @@ public class TipoTrabalhoDao {
             tipopublicados.setDescricao(rs.getString("descricao"));
         }
         stmt.close();
+        rs.close();
         return tipopublicados;
     }
 }

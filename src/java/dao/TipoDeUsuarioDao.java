@@ -29,12 +29,9 @@ public class TipoDeUsuarioDao {
     public TipoAcessoBean obtemTipoUser(String cdPessoa) throws Exception {
         PreparedStatement stmt = null;
         TipoAcessoBean tipouser = null;
-        
         String sql = "SELECT t.* FROM tipouser t INNER JOIN pessoa p ON t.id_tipo = p.id_tipo WHERE p.id_Pessoa = " + cdPessoa;
-        
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        
         try {
             while (rs.next()) {
                 tipouser = new TipoAcessoBean();

@@ -135,6 +135,7 @@ public class FormacaoDao {
             result.add(formacaoBean);
         }
         stmt.close();
+        rs.close();
         return result;
     }
 

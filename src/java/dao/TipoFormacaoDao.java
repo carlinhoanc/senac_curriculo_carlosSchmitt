@@ -145,6 +145,7 @@ public class TipoFormacaoDao {
             tipoFormacaoBean.setDescricao(rs.getString("descricao"));
         }
         stmt.close();
+        rs.close();
         return tipoFormacaoBean;
     }
 }

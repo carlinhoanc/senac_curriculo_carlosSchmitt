@@ -24,29 +24,40 @@ public class LoginDao {
 
     }
 
+    @SuppressWarnings({"null", "ConvertToTryWithResources"})
     public static int fazerLogin(PessoaBean pessoa) throws SQLException, ClassNotFoundException {
         PreparedStatement stmt = null;
         String sql = "SELECT id_Pessoa FROM pessoa WHERE "
                 + "ativo = 1 "
-                + "AND senha LIKE '" + pessoa.getSenha()+ "' "
+                + "AND senha LIKE '" + pessoa.getSenha() + "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "'";
         ResultSet rs = stmt().executeQuery(sql);
-        if(!rs.next()) {
-            return 0;
+        int retorno;
+        if (!rs.next()) {
+            retorno = 0;
         } else {
-            return rs.getInt("id_Pessoa");
+            retorno = rs.getInt("id_Pessoa");
         }
+        rs.close();
+        stmt.close();
+        return retorno;
     }
+
+    @SuppressWarnings({"null", "ConvertToTryWithResources"})
     public static int fazerLoginAdmin(PessoaBean pessoa) throws SQLException, ClassNotFoundException {
         PreparedStatement stmt = null;
-        String sql = "SELECT id_Pessoa FROM pessoa WHERE senha LIKE '" + pessoa.getSenha()+ "' "
+        String sql = "SELECT id_Pessoa FROM pessoa WHERE senha LIKE '" + pessoa.getSenha() + "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "' "
-                + "AND id_tipo= " + pessoa.getTipo() ;
+                + "AND id_tipo= " + pessoa.getTipo();
         ResultSet rs = stmt().executeQuery(sql);
-        if(!rs.next()) {
-            return 0;
+        int retorno;
+        if (!rs.next()) {
+            retorno = 0;
         } else {
-            return rs.getInt("id_Pessoa");
+            retorno = rs.getInt("id_Pessoa");
         }
+        rs.close();
+        stmt.close();
+        return retorno;
     }
 }
