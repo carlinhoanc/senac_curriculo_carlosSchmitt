@@ -3,7 +3,7 @@
 
 <!--<meta charset="UTF-8" />-->
 <%--<%@ page contentType="text/html" pageEncoding="UTF-8"%>--%>
-<!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/bootstrap.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/theme.bootstrap.css">
