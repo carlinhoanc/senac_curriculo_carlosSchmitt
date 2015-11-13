@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 06-Nov-2015 às 12:25
+-- Generation Time: 13-Nov-2015 às 11:31
 -- Versão do servidor: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -9770,7 +9770,7 @@ CREATE TABLE IF NOT EXISTS `curriculo` (
   `forBasica` text,
   `formMedio` text,
   `pessoa_idPessoa` bigint(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `curriculo`
@@ -9780,7 +9780,8 @@ INSERT INTO `curriculo` (`id_Curriculo`, `resumo`, `expProfissional`, `forBasica
 (6, 'resumoxxxddd', 'profissional dsddd dddd', 'basica ffffff', 'media éé', 6),
 (7, 'teste', 'outyt', 'outyt', 'outyt', 7),
 (8, 'ad gfajhdgfkajdshgajkhg fakjgh fakjsg fakjgf kj', 'agsjdg ksjdgha jhg aj', 'computaÃ?Â§Ã?Â£', 'Ã§Ã£po', 11),
-(9, 'note', 'note', 'note ãã', 'ãã', 12);
+(9, 'note', 'note', 'note ãã', 'ãã', 12),
+(10, 'açõa ã', 'açõa ã', 'açõa ã', 'açõa ã', 13);
 
 -- --------------------------------------------------------
 
@@ -9796,7 +9797,7 @@ CREATE TABLE IF NOT EXISTS `endereco` (
   `bairro` varchar(60) NOT NULL,
   `id_cidade` int(11) DEFAULT NULL,
   `cep` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `endereco`
@@ -9810,8 +9811,9 @@ INSERT INTO `endereco` (`id_Endereco`, `nomeRua`, `numero`, `complemento`, `bair
 (20, 'outro', 3, 'outro', 'outro', 1995, '55.555-555'),
 (21, 'novo', 222, 'novo', 'novo', 322, '22.222-222'),
 (22, 'denovo', 22, 'denovo', 'denovo', 6658, '36.333-333'),
-(23, 'asfaaa', 232, 'fasdfasdf asd f', 'costa azul', 2799, '43.423-424'),
-(24, 'nono', 3, 'casa', 'centro', 275, '22.222-222');
+(23, 'asfaaa', 232, 'fasdfasdf asd f', 'costa azul', 359, '43.423-424'),
+(24, 'nono', 3, 'casa', 'centro', 275, '22.222-222'),
+(25, 'teste1', 4, 'casa', 'centro', 2567, '89.992-292');
 
 -- --------------------------------------------------------
 
@@ -9871,7 +9873,7 @@ CREATE TABLE IF NOT EXISTS `formacao` (
   `dataTermino` date DEFAULT NULL,
   `id_Tipo` int(11) NOT NULL,
   `Curriculo_id_Curriculo` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `formacao`
@@ -9879,7 +9881,10 @@ CREATE TABLE IF NOT EXISTS `formacao` (
 
 INSERT INTO `formacao` (`id_Formacao`, `nomeInstitui`, `dataInicio`, `dataTermino`, `id_Tipo`, `Curriculo_id_Curriculo`) VALUES
 (1, 'casa mÃ?Â£e joana', '2015-10-08', '2015-10-05', 5, 6),
-(16, 'Ã£pÃ©', '2015-11-04', '2015-11-04', 2, 8);
+(16, 'é', '2015-11-04', '2015-11-04', 2, 8),
+(17, 'asas', '2015-11-06', '2015-11-17', 1, 7),
+(18, 'ffff', '2015-11-23', '2015-11-25', 9, 7),
+(19, 'açõa ã', '2015-11-06', '2015-11-06', 2, 10);
 
 -- --------------------------------------------------------
 
@@ -10169,7 +10174,7 @@ CREATE TABLE IF NOT EXISTS `pessoa` (
   `email` varchar(150) NOT NULL,
   `telefone` varchar(45) NOT NULL,
   `ativo` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `pessoa`
@@ -10183,8 +10188,9 @@ INSERT INTO `pessoa` (`id_Pessoa`, `nome`, `sobreNome`, `idade`, `sexo`, `cpf`, 
 (8, 'outro', 'outro', 45, 'M', '656.565.658', 20, 'outro', 1, 'outro@outro.com', '(66) 6666-6666', 0),
 (9, 'novo', 'novo', 36, 'M', '664.499.898', 21, 'novo', 1, 'novo@novo.com', '(22) 2222-222', 1),
 (10, 'denovo', 'denovo', 32, 'M', '323.899.852-63', 22, 'denovo', 1, 'denovo@denovo.com', '(32) 3232-323232', 1),
-(11, 'ríad', 'Nassiffe', 30, 'M', '234.123.765-63', 23, 'qwerty', 1, 'riad@sc.senac.br', '(85) 3453-43453', 1),
-(12, 'nono', 'nono', 89, 'M', '111.111.111-11', 24, 'nono', 1, 'nono@nono.com', '(11) 1111-1111', 1);
+(11, 'ríad', 'Nassiffe', 31, 'M', '234.123.765-63', 23, 'qwerty', 1, 'riad@sc.senac.br', '(85) 3453-43453', 1),
+(12, 'nono', 'nono', 89, 'M', '111.111.111-11', 24, 'nono', 1, 'nono@nono.com', '(11) 1111-1111', 1),
+(13, 'teste1 ação', 'teste1  é ', 23, 'M', '206.928.572-71', 25, 'teste1', 1, 'teste1@teste1.com', '(22) 2222-22222', 1);
 
 -- --------------------------------------------------------
 
@@ -10219,7 +10225,7 @@ INSERT INTO `tbpublicados` (`id_TbPublicados`, `nome`, `ano`, `pais`, `TipoPubli
 CREATE TABLE IF NOT EXISTS `tipoformacao` (
   `id_Tipo` int(11) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tipoformacao`
@@ -10250,7 +10256,7 @@ INSERT INTO `tipoformacao` (`id_Tipo`, `descricao`) VALUES
 CREATE TABLE IF NOT EXISTS `tipopublicados` (
   `id_TipoPublicados` int(11) NOT NULL,
   `descricao` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `tipopublicados`
@@ -10366,12 +10372,12 @@ ALTER TABLE `cidade`
 -- AUTO_INCREMENT for table `curriculo`
 --
 ALTER TABLE `curriculo`
-  MODIFY `id_Curriculo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id_Curriculo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `endereco`
 --
 ALTER TABLE `endereco`
-  MODIFY `id_Endereco` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+  MODIFY `id_Endereco` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `estado`
 --
@@ -10381,7 +10387,7 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT for table `formacao`
 --
 ALTER TABLE `formacao`
-  MODIFY `id_Formacao` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id_Formacao` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `pais`
 --
@@ -10391,7 +10397,7 @@ ALTER TABLE `pais`
 -- AUTO_INCREMENT for table `pessoa`
 --
 ALTER TABLE `pessoa`
-  MODIFY `id_Pessoa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `id_Pessoa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `tbpublicados`
 --
@@ -10401,12 +10407,12 @@ ALTER TABLE `tbpublicados`
 -- AUTO_INCREMENT for table `tipoformacao`
 --
 ALTER TABLE `tipoformacao`
-  MODIFY `id_Tipo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `id_Tipo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `tipopublicados`
 --
 ALTER TABLE `tipopublicados`
-  MODIFY `id_TipoPublicados` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id_TipoPublicados` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `tipouser`
 --
