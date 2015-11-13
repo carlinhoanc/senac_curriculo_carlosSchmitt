@@ -43,6 +43,28 @@ public class TrabalhosDao {
         return true;
     }
 
+    public boolean deletaPorCurriculo(String id) throws SQLException, ClassNotFoundException, Exception {
+        PreparedStatement stmt = null;
+        boolean removidoSucesso = false;
+        String sql = "DELETE FROM tbpublicados WHERE Curriculo_id_Curriculoo  = ?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setString(1, id);
+            int ok = stmt.executeUpdate();
+            if (ok == 1) {
+                System.out.println("Trabalhos removido com sucesso no BD!");
+                removidoSucesso = true;
+            } else {
+                System.out.println("Erro ao remover Trabalhos no BD!");
+            }
+            stmt.close();
+            return removidoSucesso;
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover Trabalhos no BD!");
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         boolean removidoSucesso = false;

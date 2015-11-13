@@ -66,6 +66,28 @@ public class FormacaoDao {
         }
     }
 
+    public boolean deletaPorCurriculo(String id) throws SQLException, ClassNotFoundException, Exception {
+        PreparedStatement stmt = null;
+        boolean removidoSucesso = false;
+        String sql = "DELETE FROM formacao WHERE Curriculo_id_Curriculoo  = ?";
+        try {
+            stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, Integer.parseInt(id));
+            int ok = stmt.executeUpdate();
+            if (ok == 1) {
+                System.out.println("Formação removido com sucesso no BD!");
+                removidoSucesso = true;
+            } else {
+                System.out.println("Erro ao remover Formação no BD!");
+            }
+            stmt.close();
+            return removidoSucesso;
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover Formação no BD!");
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean atualiza(FormacaoBean p) throws Exception {
         PreparedStatement stmt = null;
         boolean atualizadoSucesso = false;

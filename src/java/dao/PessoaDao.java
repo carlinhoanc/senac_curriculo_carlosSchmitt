@@ -119,7 +119,7 @@ public class PessoaDao {
                 System.out.println("Endereco Pessoa com sucesso no BD!");
                 removidoSucesso = true;
             } else {
-                System.out.println("Erro ao remover Pessoa no BD!");
+                System.out.println("Erro ao remover Pessoa no BD! 00");
             }
             stmt.close();
             return removidoSucesso;
