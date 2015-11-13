@@ -32,22 +32,15 @@ public class TrabalhosDao {
         PreparedStatement stmt = null;
         String sql = "INSERT INTO tbpublicados"
                 + "(nome, ano, pais, TipoPublicados_id_TipoPublicados, Curriculo_id_Curriculo) VALUES(?,?,?,?,?)";
-        try {
-
-            stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, p.getNome());
-            stmt.setInt(2, p.getAno());
-            stmt.setString(3, p.getPais().getId());
-            stmt.setString(4, p.getId_TipoPublicados().getId());
-            stmt.setString(5, p.getId_Curriculo());
-            stmt.executeUpdate();
-            stmt.close();
-            return true;
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
-        }
+        stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+        stmt.setString(1, p.getNome());
+        stmt.setInt(2, p.getAno());
+        stmt.setString(3, p.getPais().getId());
+        stmt.setString(4, p.getId_TipoPublicados().getId());
+        stmt.setString(5, p.getId_Curriculo());
+        stmt.executeUpdate();
+        stmt.close();
+        return true;
     }
 
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
@@ -105,7 +98,7 @@ public class TrabalhosDao {
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
         PaisDao paisdao;
-        TipoTrabalhoDao tipoTrab ;
+        TipoTrabalhoDao tipoTrab;
         while (rs.next()) {
             tipoTrab = new TipoTrabalhoDao();
             paisdao = new PaisDao();

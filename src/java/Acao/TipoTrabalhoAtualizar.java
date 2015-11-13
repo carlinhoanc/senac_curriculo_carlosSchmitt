@@ -20,7 +20,7 @@ public class TipoTrabalhoAtualizar implements Acao {
         } else {
             request.setAttribute("msg", "Erro ao inserirr pessoa");
         }
-
+        
         TipoTrabalhoListarTipoTrabalho obj = new TipoTrabalhoListarTipoTrabalho();
         return obj.executar(request, response);
     }

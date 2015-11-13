@@ -128,6 +128,7 @@ public class PessoaDao {
             throw new RuntimeException(e);
         }
     }
+    
     public boolean desativa(int id) throws Exception {
         PreparedStatement stmt = null;
         boolean removidoSucesso = false;

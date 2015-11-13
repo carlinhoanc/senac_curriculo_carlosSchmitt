@@ -4,6 +4,7 @@ import bean.FormacaoBean;
 import bean.PaisBean;
 import bean.TipoTrabalhoPublicadosBean;
 import bean.TrabalhosPublicacosBean;
+import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PaisDao;
 import dao.TipoTrabalhoDao;
@@ -21,6 +22,14 @@ public class TrabalhoEditar implements Acao {
         HttpSession session = request.getSession();
         String idCurri = "" + session.getAttribute("id_curri");
 
+        String idd = "" + session.getAttribute("id_pessoa");
+        CurriculoDao curri = new CurriculoDao();
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
+        
         PaisDao paisDao = new PaisDao();
         List<PaisBean> paises = paisDao.listarPaises();
         request.setAttribute("paises", paises);

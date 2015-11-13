@@ -23,8 +23,15 @@ public class TrabalhoAdiciona implements Acao {
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        String idCurri = "" + session.getAttribute("id_curri");
+        String idCurri =  null;
         String idd = "" + session.getAttribute("id_pessoa");
+        
+        CurriculoDao curri = new CurriculoDao();
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
 
         TipoTrabalhoDao tipodao = new TipoTrabalhoDao();
         PaisDao paisDao = new PaisDao();
@@ -52,7 +59,6 @@ public class TrabalhoAdiciona implements Acao {
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         request.setAttribute("edita", pessoas);
 
-        CurriculoDao curri = new CurriculoDao();
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
 

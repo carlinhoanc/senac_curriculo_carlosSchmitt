@@ -29,7 +29,7 @@ public class FormacaoDeleta implements Acao {
 
         HttpSession session = request.getSession();
         String idd = "" + session.getAttribute("id_pessoa");
-        String idCurri = "" + session.getAttribute("id_curri");
+        String idCurri = null;
 
         PaisDao paisDao = new PaisDao();
         List<PaisBean> paises = paisDao.listarPaises();
@@ -47,11 +47,16 @@ public class FormacaoDeleta implements Acao {
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
 
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
+
         TrabalhosDao trabalhosDao = new TrabalhosDao();
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
-//           FormacaoDao formacaoDao = new FormacaoDao();
         List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);
         request.setAttribute("formacao", formacao);
 

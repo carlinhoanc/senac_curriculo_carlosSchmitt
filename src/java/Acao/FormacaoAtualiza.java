@@ -22,9 +22,9 @@ public class FormacaoAtualiza implements Acao {
     public String executar(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        String idCurri = "" + session.getAttribute("id_curri");
-        String idd = "" + session.getAttribute("id_pessoa");
+        String idCurri = null;
 
+        String idd = "" + session.getAttribute("id_pessoa");
         FormacaoBean formacaoBean = new FormacaoBean();
         TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
 
@@ -49,6 +49,12 @@ public class FormacaoAtualiza implements Acao {
         CurriculoDao curri = new CurriculoDao();
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
+
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
 
         List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(idCurri);
         request.setAttribute("formacao", formacao);

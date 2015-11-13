@@ -31,7 +31,7 @@ public class FormacaoAdiciona implements Acao {
         } else {
             idCurri = curri.idCurriPorPessoa(idd);
         }
-
+        
         FormacaoBean formacaoBean = new FormacaoBean();
         TipoFormacaoDao tipoFormacaoDao = new TipoFormacaoDao();
 

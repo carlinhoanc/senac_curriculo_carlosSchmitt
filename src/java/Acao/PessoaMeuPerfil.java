@@ -41,7 +41,13 @@ public class PessoaMeuPerfil implements Acao {
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
 
-        String idCurri = "" + session.getAttribute("id_curri");
+        String idCurri = null;
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
+
         TrabalhosDao trabalhosDao = new TrabalhosDao();
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);

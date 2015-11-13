@@ -16,7 +16,6 @@
     
     <%@ include file="../../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-    çaã
         <form action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoAdiciona" method="post" >
             <div class="row">
                 <div class="col-md-6" >
