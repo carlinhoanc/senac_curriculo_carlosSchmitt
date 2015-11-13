@@ -135,6 +135,38 @@
     </div>
 </form>
 
+<c:if test="${sessionScope.id_tipo == '1' }">
+    <button type="button" class="btn btn-danger" data-toggle="modal" 
+            data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
+</c:if>
+<div class="modal fade" id="myModal${editar.id_Pessoa}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-footer ">
+                <div class="page-header">
+                    <h3>
+                        Deseja realmente deletar ?
+                    </h3>
+                </div>
+                <form id="deletaPessoa${editar.id_Pessoa}" 
+                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
+
+                    <input type="hidden" value="${editar.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
+
+                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="submit" class="btn btn-danger" >Deletar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     var $clo = jQuery.noConflict();
     $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma op&ccedil;&atilde;o"});
