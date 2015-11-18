@@ -30,14 +30,20 @@ public class TipoFormacaoDao {
 
     public boolean insere(TipoFormacaoBean tipoformacao) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
+        String sql1 = "SELECT * FROM tipoformacao WHERE descricao= '" + tipoformacao.getDescricao() + "' ";
+        ResultSet rs = stmt().executeQuery(sql1);
+
         String sql = "INSERT INTO tipoformacao(descricao) VALUES(?)";
         try {
-            stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, tipoformacao.getDescricao());
-            stmt.executeUpdate();
-            stmt.close();
-            return true;
-
+            if (!rs.next()) {
+                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, tipoformacao.getDescricao());
+                stmt.executeUpdate();
+                stmt.close();
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e);
             return false;
@@ -70,7 +76,7 @@ public class TipoFormacaoDao {
     public boolean atualiza(TipoFormacaoBean tipoformacao) throws ClassNotFoundException, Exception {
 
         boolean atualizadoSucesso = false;
-        String sql = "UPDATE tipoformacao SET descricao='"+tipoformacao.getDescricao()+"'"
+        String sql = "UPDATE tipoformacao SET descricao='" + tipoformacao.getDescricao() + "'"
                 + " WHERE id_Tipo= " + tipoformacao.getId_Tipo();
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
@@ -132,8 +138,8 @@ public class TipoFormacaoDao {
             FabricaConexao.fechaConexao(TipoFormacaoDao.connection, stmt());
         }
     }
-    
-        public TipoFormacaoBean listarTipoID(String id) throws ClassNotFoundException, Exception {
+
+    public TipoFormacaoBean listarTipoID(String id) throws ClassNotFoundException, Exception {
         TipoFormacaoBean tipoFormacaoBean = new TipoFormacaoBean();
         String sql = "SELECT * FROM tipoformacao WHERE id_Tipo = " + id;
         PreparedStatement stmt = null;

@@ -30,9 +30,19 @@ public class FormacaoDao {
 
     public boolean insere(FormacaoBean p) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO formacao "
-                + "(nomeInstitui, dataInicio, dataTermino, id_Tipo, Curriculo_id_Curriculo)"
-                + " VALUES(?,?,?,?,?)";
+
+        String sql1 = "SELECT * FROM formacao "
+                + "WHERE nomeInstitui= '" + p.getNomeInstitui() + "' "
+                + "AND dataInicio='" + p.getDataInicio() + "' "
+                + "AND dataTermino= '" + p.getDataTermino() + "' "
+                + "AND id_Tipo='" + p.getId_Tipo().getId_Tipo() + "' "
+                + "AND Curriculo_id_Curriculo='" + p.getCurriculo_id_Curriculo() + "' ;";
+        ResultSet rs = stmt().executeQuery(sql1);
+
+        if (!rs.next()) {
+            String sql = "INSERT INTO formacao "
+                    + "(nomeInstitui, dataInicio, dataTermino, id_Tipo, Curriculo_id_Curriculo)"
+                    + " VALUES(?,?,?,?,?)";
             stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, p.getNomeInstitui());
             stmt.setString(2, p.getDataInicio());
@@ -41,7 +51,8 @@ public class FormacaoDao {
             stmt.setString(5, p.getCurriculo_id_Curriculo());
             stmt.executeUpdate();
             stmt.close();
-            return true;
+        }
+        return true;
     }
 
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
@@ -124,7 +135,7 @@ public class FormacaoDao {
         String sql = "SELECT * FROM formacao where Curriculo_id_Curriculo = " + idC;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        TipoFormacaoDao tipoFormacaoDao ;
+        TipoFormacaoDao tipoFormacaoDao;
         while (rs.next()) {
             tipoFormacaoDao = new TipoFormacaoDao();
             FormacaoBean formacaoBean = new FormacaoBean();
@@ -145,7 +156,7 @@ public class FormacaoDao {
         String sql = "SELECT * FROM formacao where id_Formacao = " + idC;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        TipoFormacaoDao tipoFormacaoDao ;
+        TipoFormacaoDao tipoFormacaoDao;
         while (rs.next()) {
             tipoFormacaoDao = new TipoFormacaoDao();
             FormacaoBean formacaoBean = new FormacaoBean();

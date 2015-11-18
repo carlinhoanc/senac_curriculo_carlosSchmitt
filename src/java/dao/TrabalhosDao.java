@@ -30,16 +30,26 @@ public class TrabalhosDao {
 
     public boolean insere(TrabalhosPublicacosBean p) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
-        String sql = "INSERT INTO tbpublicados"
-                + "(nome, ano, pais, TipoPublicados_id_TipoPublicados, Curriculo_id_Curriculo) VALUES(?,?,?,?,?)";
-        stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-        stmt.setString(1, p.getNome());
-        stmt.setInt(2, p.getAno());
-        stmt.setString(3, p.getPais().getId());
-        stmt.setString(4, p.getId_TipoPublicados().getId());
-        stmt.setString(5, p.getId_Curriculo());
-        stmt.executeUpdate();
-        stmt.close();
+
+        String sql1 = "SELECT * FROM tbpublicados "
+                + "WHERE nome= '" + p.getNome() + "' "
+                + "AND ano = '" + p.getAno() + "' "
+                + "AND pais= '" + p.getPais().getId() + "' "
+                + "AND TipoPublicados_id_TipoPublicados='" + p.getId_TipoPublicados().getId() + "' "
+                + "AND Curriculo_id_Curriculo = '" + p.getId_Curriculo() + "' ;";
+        ResultSet rs = stmt().executeQuery(sql1);
+        if (!rs.next()) {
+            String sql = "INSERT INTO tbpublicados"
+                    + "(nome, ano, pais, TipoPublicados_id_TipoPublicados, Curriculo_id_Curriculo) VALUES(?,?,?,?,?)";
+            stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, p.getNome());
+            stmt.setInt(2, p.getAno());
+            stmt.setString(3, p.getPais().getId());
+            stmt.setString(4, p.getId_TipoPublicados().getId());
+            stmt.setString(5, p.getId_Curriculo());
+            stmt.executeUpdate();
+            stmt.close();
+        }
         return true;
     }
 

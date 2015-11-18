@@ -30,15 +30,20 @@ public class TipoTrabalhoDao {
 
     public boolean insere(TipoTrabalhoPublicadosBean tipopublicados) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
+        String sql1 = "SELECT * FROM tipopublicados WHERE descricao= '" + tipopublicados.getDescricao() + "' ";
+        ResultSet rs = stmt().executeQuery(sql1);
+
         String sql = "INSERT INTO tipopublicados(descricao) VALUES(?)";
         try {
-            stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, tipopublicados.getDescricao());
-            stmt.executeUpdate();
-            stmt.close();
-
-            return true;
-
+            if (!rs.next()) {
+                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, tipopublicados.getDescricao());
+                stmt.executeUpdate();
+                stmt.close();
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e);
             return false;
