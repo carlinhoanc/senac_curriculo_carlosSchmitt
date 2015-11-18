@@ -30,14 +30,15 @@ public class PessoaDeleta implements Acao {
         String idCurri = null;
         String id_tipo = null;
         String retorna = null;
+        
+        if (curriculoDao.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curriculoDao.idCurriPorPessoa(idP);
+        }
 
         if (session.getAttribute("id_tipo") != null) {
             if (session.getAttribute("id_tipo").equals("2")) {
-                if (curriculoDao.idCurriPorPessoa(idd).equals("0")) {
-                    idCurri = "" + session.getAttribute("id_curri");
-                } else {
-                    idCurri = curriculoDao.idCurriPorPessoa(idP);
-                }
                 id_tipo = "2";
                 retorna = "/paginas/pessoa/lista.jsp";
                 enderecoDao.deleta(Integer.parseInt(idP));
@@ -56,6 +57,17 @@ public class PessoaDeleta implements Acao {
             id_tipo = "0";
             retorna = "/Logoff";
             pessoaDao.desativa(Integer.parseInt(idd));
+        }
+        if (idP.equals(idd)) {
+            id_tipo = "0";
+            retorna = "/Logoff";
+            enderecoDao.deleta(Integer.parseInt(idP));
+            if (!idCurri.equals("0")) {
+                formacaoDao.deletaPorCurriculo(idCurri);
+                trabalhosDao.deletaPorCurriculo(idCurri);
+                curriculoDao.deleta(Integer.parseInt(idCurri));
+            }
+            pessoaDao.delete(Integer.parseInt(idP));
         }
 
         List<PessoaBean> pessoas = pessoaDao.listarPessoa(id_tipo);

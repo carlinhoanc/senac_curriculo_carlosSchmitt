@@ -68,6 +68,7 @@ public class PessoaDao {
             return false;
         }
     }
+
     public boolean insereNaoAdmin(PessoaBean pessoa, int tipUser) throws SQLException, ClassNotFoundException, Exception {
         EnderecoDao end = new EnderecoDao();
         PreparedStatement stmt = null;
@@ -110,25 +111,49 @@ public class PessoaDao {
     public boolean delete(int id) throws Exception {
         PreparedStatement stmt = null;
         boolean removidoSucesso = false;
-        String sql = "DELETE FROM pessoa WHERE id_Pessoa = ?";
-        try {
-            stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
-            int ok = stmt.executeUpdate();
-            if (ok == 1) {
-                System.out.println("Endereco Pessoa com sucesso no BD!");
-                removidoSucesso = true;
-            } else {
-                System.out.println("Erro ao remover Pessoa no BD! 00");
+
+        String sql1 = "SELECT id_tipo FROM pessoa WHERE id_Pessoa= '" + id + "' ";
+
+        ResultSet rs = stmt().executeQuery(sql1);
+        int id_tipo = 1;
+        while (rs.next()) {
+            id_tipo = rs.getInt("id_tipo");
+        }
+
+        int contar_adm = 2;
+        if (id_tipo == 2) {
+            sql1 = "SELECT COUNT(id_tipo) as conta FROM pessoa WHERE id_tipo= '2' ";
+            rs = stmt().executeQuery(sql1);
+            while (rs.next()) {
+                contar_adm = rs.getInt("conta");
             }
-            stmt.close();
-            return removidoSucesso;
+        }
+
+        try {
+            if (contar_adm > 1) {
+                String sql = "DELETE FROM pessoa WHERE id_Pessoa = ?";
+
+                stmt = connection.prepareStatement(sql);
+                stmt.setInt(1, id);
+                int ok = stmt.executeUpdate();
+                if (ok == 1) {
+                    System.out.println("Endereco Pessoa com sucesso no BD!");
+                    removidoSucesso = false;
+                } else {
+                    System.out.println("Erro ao remover Pessoa no BD! 00");
+                }
+                stmt.close();
+                return true;
+            } else {
+                return false;
+            }
+
         } catch (SQLException e) {
             System.out.println("Erro ao remover Pessoa no BD!");
             throw new RuntimeException(e);
         }
     }
-    
+
     public boolean desativa(int id) throws Exception {
         PreparedStatement stmt = null;
         boolean removidoSucesso = false;
@@ -177,6 +202,8 @@ public class PessoaDao {
             stmt.setInt(11, Integer.parseInt(pessoa.getId_Pessoa()));
             int ok = stmt.executeUpdate();
 
+            System.out.println(pessoa.getTelefone());
+
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
@@ -185,6 +212,7 @@ public class PessoaDao {
             FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
         }
     }
+
     public boolean atualizaUser(PessoaBean pessoa) throws ClassNotFoundException, Exception {
         boolean atualizadoSucesso = false;
         String sql = "UPDATE pessoa SET nome=?,sobreNome=?,idade=?,sexo=?,cpf=?, "
@@ -224,13 +252,13 @@ public class PessoaDao {
         EnderecoDao enderecoDAO;
         TipoDeUsuarioDao tipoUserDao;
         String sql = null;
-        
-        if(id_tipo.equals("2")){
+
+        if (id_tipo.equals("2")) {
             sql = "SELECT * FROM pessoa ";
-        }else{
+        } else {
             sql = "SELECT * FROM pessoa WHERE id_tipo != 2 AND ativo = 1";
         }
-     
+
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);

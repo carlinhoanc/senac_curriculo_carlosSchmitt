@@ -5,6 +5,7 @@ import bean.PessoaBean;
 import dao.PessoaDao;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class PessoaAtualizar implements Acao {
 
@@ -34,7 +35,14 @@ public class PessoaAtualizar implements Acao {
         pessoa.setEndereco(endereco);
         PessoaDao pessoaDAO = new PessoaDao();
 
-        pessoaDAO.atualizaUser(pessoa);
+        HttpSession session = req.getSession();
+        if (session.getAttribute("id_tipo").equals("2")) {
+            pessoa.setId_tipo(Integer.parseInt(req.getParameter("id_tipo")));
+            pessoa.setAtivo(Integer.parseInt(req.getParameter("ativo")));
+            pessoaDAO.atualiza(pessoa);
+        } else {
+            pessoaDAO.atualizaUser(pessoa);
+        }
 
         PessoaListarPessoa obj = new PessoaListarPessoa();
         return obj.executar(req, res);
