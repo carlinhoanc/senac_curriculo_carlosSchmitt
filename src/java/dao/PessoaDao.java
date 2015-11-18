@@ -55,9 +55,7 @@ public class PessoaDao {
                 stmt.setInt(11, pessoa.getAtivo());
                 stmt.executeUpdate();
                 stmt.close();
-
                 return true;
-
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e);
                 return false;
@@ -94,9 +92,7 @@ public class PessoaDao {
                 stmt.setInt(11, 1);
                 stmt.executeUpdate();
                 stmt.close();
-
                 return true;
-
             } catch (SQLException | ClassNotFoundException e) {
                 System.out.println(e);
                 return false;
@@ -147,10 +143,11 @@ public class PessoaDao {
             } else {
                 return false;
             }
-
         } catch (SQLException e) {
             System.out.println("Erro ao remover Pessoa no BD!");
             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
     }
 
@@ -173,6 +170,8 @@ public class PessoaDao {
         } catch (SQLException e) {
             System.out.println("Erro ao desativar Pessoa no BD!");
             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
     }
 
@@ -200,10 +199,7 @@ public class PessoaDao {
             stmt.setInt(9, pessoa.getId_tipo());
             stmt.setInt(10, pessoa.getAtivo());
             stmt.setInt(11, Integer.parseInt(pessoa.getId_Pessoa()));
-            int ok = stmt.executeUpdate();
-
-            System.out.println(pessoa.getTelefone());
-
+            stmt.executeUpdate();
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
@@ -236,7 +232,6 @@ public class PessoaDao {
             stmt.setString(8, pessoa.getTelefone());
             stmt.setInt(9, Integer.parseInt(pessoa.getId_Pessoa()));
             stmt.executeUpdate();
-
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
@@ -247,19 +242,17 @@ public class PessoaDao {
     }
 
     public List<PessoaBean> listarPessoa(String id_tipo) throws ClassNotFoundException, Exception {
-
         List<PessoaBean> pessoas = new ArrayList<>();
         EnderecoDao enderecoDAO;
         TipoDeUsuarioDao tipoUserDao;
         String sql = null;
+        PreparedStatement stmt = null;
 
         if (id_tipo.equals("2")) {
             sql = "SELECT * FROM pessoa ";
         } else {
             sql = "SELECT * FROM pessoa WHERE id_tipo != 2 AND ativo = 1";
         }
-
-        PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
         try {
@@ -267,7 +260,6 @@ public class PessoaDao {
                 enderecoDAO = new EnderecoDao();
                 tipoUserDao = new TipoDeUsuarioDao();
                 PessoaBean pessoa = new PessoaBean();
-
                 pessoa.setId_Pessoa(rs.getString("id_Pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setSobreNome(rs.getString("sobreNome"));
@@ -279,7 +271,6 @@ public class PessoaDao {
                 pessoa.setTelefone(rs.getString("telefone"));
                 pessoa.setTipo(tipoUserDao.obtemTipoUser(pessoa.getId_Pessoa()));
                 pessoas.add(pessoa);
-
             }
             stmt.close();
             return pessoas;

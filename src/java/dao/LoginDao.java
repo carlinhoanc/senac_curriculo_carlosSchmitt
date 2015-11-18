@@ -20,40 +20,54 @@ public class LoginDao {
         return stmt;
     }
 
-    public LoginDao() {
+    static Connection connection;
 
+    public LoginDao() throws ClassNotFoundException {
+        LoginDao.connection = new FabricaConexao().getConnection();
     }
 
-    @SuppressWarnings({"null", "ConvertToTryWithResources"})
-    public static int fazerLogin(PessoaBean pessoa) throws SQLException, ClassNotFoundException {
+    public static int fazerLogin(PessoaBean pessoa) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         String sql = "SELECT id_Pessoa FROM pessoa WHERE "
                 + "ativo = 1 "
                 + "AND senha LIKE '" + pessoa.getSenha() + "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "'";
-        ResultSet rs = stmt().executeQuery(sql);
-        int retorno;
-        if (!rs.next()) {
-            retorno = 0;
-        } else {
-            retorno = rs.getInt("id_Pessoa");
+        int retorno = 0;
+        try {
+            ResultSet rs = stmt().executeQuery(sql);
+            if (!rs.next()) {
+                retorno = 0;
+            } else {
+                retorno = rs.getInt("id_Pessoa");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
+
         return retorno;
     }
 
-    @SuppressWarnings({"null", "ConvertToTryWithResources"})
-    public static int fazerLoginAdmin(PessoaBean pessoa) throws SQLException, ClassNotFoundException {
+    public static int fazerLoginAdmin(PessoaBean pessoa) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         String sql = "SELECT id_Pessoa FROM pessoa WHERE senha LIKE '" + pessoa.getSenha() + "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "' "
                 + "AND id_tipo= " + pessoa.getTipo();
-        ResultSet rs = stmt().executeQuery(sql);
-        int retorno;
-        if (!rs.next()) {
-            retorno = 0;
-        } else {
-            retorno = rs.getInt("id_Pessoa");
+        int retorno = 0;
+        try {
+            ResultSet rs = stmt().executeQuery(sql);
+            if (!rs.next()) {
+                retorno = 0;
+            } else {
+                retorno = rs.getInt("id_Pessoa");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        } finally {
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
+
         return retorno;
     }
 }

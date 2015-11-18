@@ -32,7 +32,7 @@ public class CidadeDao {
         PreparedStatement stmt = null;
         CidadeBean cidade = null;
         String sql = "SELECT * FROM cidade WHERE id =" + id;
-
+        
         try {
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);

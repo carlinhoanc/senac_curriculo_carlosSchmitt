@@ -70,6 +70,8 @@ public class TipoFormacaoDao {
         } catch (SQLException e) {
             System.out.println("Erro ao remover Pessoa no BD!");
             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
     }
 
@@ -144,14 +146,19 @@ public class TipoFormacaoDao {
         String sql = "SELECT * FROM tipoformacao WHERE id_Tipo = " + id;
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
 
-        while (rs.next()) {
-            tipoFormacaoBean.setId_Tipo(rs.getString("id_Tipo"));
-            tipoFormacaoBean.setDescricao(rs.getString("descricao"));
+        try (ResultSet rs = stmt().executeQuery(sql)) {
+            while (rs.next()) {
+                tipoFormacaoBean.setId_Tipo(rs.getString("id_Tipo"));
+                tipoFormacaoBean.setDescricao(rs.getString("descricao"));
+            }
+            stmt.close();
+        } catch (SQLException | ClassNotFoundException e) {
+
+            System.out.println(e);
+        } finally {
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
-        stmt.close();
-        rs.close();
         return tipoFormacaoBean;
     }
 }

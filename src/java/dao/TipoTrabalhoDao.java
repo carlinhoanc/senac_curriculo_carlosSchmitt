@@ -71,6 +71,8 @@ public class TipoTrabalhoDao {
         } catch (SQLException e) {
             System.out.println("Erro ao remover Pessoa no BD!");
             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
     }
 
@@ -82,6 +84,7 @@ public class TipoTrabalhoDao {
         try {
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.executeUpdate();
+            stmt.close();
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
@@ -144,14 +147,18 @@ public class TipoTrabalhoDao {
         String sql = "SELECT * FROM tipopublicados WHERE id_TipoPublicados = " + id;
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
 
-        while (rs.next()) {
-            tipopublicados.setId(rs.getString("id_TipoPublicados"));
-            tipopublicados.setDescricao(rs.getString("descricao"));
+        try (ResultSet rs = stmt().executeQuery(sql)) {
+            while (rs.next()) {
+                tipopublicados.setId(rs.getString("id_TipoPublicados"));
+                tipopublicados.setDescricao(rs.getString("descricao"));
+            }
+            stmt.close();
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
+        } finally {
+            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
-        stmt.close();
-        rs.close();
         return tipopublicados;
     }
 }

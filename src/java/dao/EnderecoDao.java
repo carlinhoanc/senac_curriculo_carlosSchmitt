@@ -19,7 +19,7 @@ public class EnderecoDao {
         Statement stmt = com().createStatement();
         return stmt;
     }
-
+    
     static Connection connection;
 
     public EnderecoDao() throws ClassNotFoundException {
@@ -72,6 +72,8 @@ public class EnderecoDao {
         } catch (SQLException e) {
             System.out.println("Erro ao remover Endereco no BD!");
             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
         }
     }
 
@@ -82,7 +84,6 @@ public class EnderecoDao {
                 + "WHERE id_Endereco = (SELECT p.Endereco_id_Endereco from pessoa p WHERE p.id_Pessoa = ?)";
         try {
             stmt = connection.prepareStatement(sql);
-
             stmt.setString(1, p.getNomeRua());
             stmt.setInt(2, p.getNumero());
             stmt.setString(3, p.getComplemento());
@@ -91,10 +92,9 @@ public class EnderecoDao {
             stmt.setString(6, p.getCep());
             stmt.setInt(7, Integer.parseInt(id));
             stmt.executeUpdate();
-            
+            stmt.close();
             atualizadoSucesso = true;
             return atualizadoSucesso;
-
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Endereco no BD!");
             throw new RuntimeException(e);
@@ -122,7 +122,6 @@ public class EnderecoDao {
                 endereco.setBairro(rs.getString("bairro"));
                 endereco.setCidade(cidadeDao.obtemCidade(endereco.getId()));
                 endereco.setCep(rs.getString("cep"));
-
             }
             stmt.close();
             return endereco;

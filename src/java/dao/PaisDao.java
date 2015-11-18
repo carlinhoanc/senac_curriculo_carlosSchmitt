@@ -52,7 +52,6 @@ public class PaisDao {
 
     public List<PaisBean> listarPaises() throws ClassNotFoundException, Exception {
         List<PaisBean> paisBean = new ArrayList<>();
-
         String sql = "SELECT * FROM pais";
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);

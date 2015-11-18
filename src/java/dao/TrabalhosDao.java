@@ -37,19 +37,26 @@ public class TrabalhosDao {
                 + "AND pais= '" + p.getPais().getId() + "' "
                 + "AND TipoPublicados_id_TipoPublicados='" + p.getId_TipoPublicados().getId() + "' "
                 + "AND Curriculo_id_Curriculo = '" + p.getId_Curriculo() + "' ;";
-        ResultSet rs = stmt().executeQuery(sql1);
-        if (!rs.next()) {
-            String sql = "INSERT INTO tbpublicados"
-                    + "(nome, ano, pais, TipoPublicados_id_TipoPublicados, Curriculo_id_Curriculo) VALUES(?,?,?,?,?)";
-            stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, p.getNome());
-            stmt.setInt(2, p.getAno());
-            stmt.setString(3, p.getPais().getId());
-            stmt.setString(4, p.getId_TipoPublicados().getId());
-            stmt.setString(5, p.getId_Curriculo());
-            stmt.executeUpdate();
-            stmt.close();
+        try {
+            ResultSet rs = stmt().executeQuery(sql1);
+            if (!rs.next()) {
+                String sql = "INSERT INTO tbpublicados"
+                        + "(nome, ano, pais, TipoPublicados_id_TipoPublicados, Curriculo_id_Curriculo) VALUES(?,?,?,?,?)";
+                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, p.getNome());
+                stmt.setInt(2, p.getAno());
+                stmt.setString(3, p.getPais().getId());
+                stmt.setString(4, p.getId_TipoPublicados().getId());
+                stmt.setString(5, p.getId_Curriculo());
+                stmt.executeUpdate();
+                stmt.close();
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
+        
         return true;
     }
 
@@ -71,7 +78,9 @@ public class TrabalhosDao {
             return removidoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao remover Trabalhos no BD!");
-            throw new RuntimeException(e);
+             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
     }
 
@@ -93,7 +102,9 @@ public class TrabalhosDao {
             return removidoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao remover Trabalhos no BD!");
-            throw new RuntimeException(e);
+             throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
     }
 
@@ -104,7 +115,6 @@ public class TrabalhosDao {
                 + "WHERE id_TbPublicados = ?";
         try {
             stmt = connection.prepareStatement(sql);
-
             stmt.setString(1, p.getNome());
             stmt.setInt(2, p.getAno());
             stmt.setString(3, p.getPais().getId());
@@ -128,21 +138,27 @@ public class TrabalhosDao {
         List<TrabalhosPublicacosBean> result = new ArrayList<>();
         String sql = "SELECT * FROM tbpublicados where Curriculo_id_Curriculo = " + idC;
         stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
-        PaisDao paisdao;
-        TipoTrabalhoDao tipoTrab;
-        while (rs.next()) {
-            tipoTrab = new TipoTrabalhoDao();
-            paisdao = new PaisDao();
-            TrabalhosPublicacosBean trabalhoBean = new TrabalhosPublicacosBean();
-            trabalhoBean.setId_TbPublicados(rs.getInt("id_TbPublicados"));
-            trabalhoBean.setId_TipoPublicados(tipoTrab.listarTipoID(rs.getString("TipoPublicados_id_TipoPublicados")));
-            trabalhoBean.setNome(rs.getString("nome"));
-            trabalhoBean.setAno(rs.getInt("ano"));
-            trabalhoBean.setPais(paisdao.seledctPorID(rs.getString("pais")));
-            result.add(trabalhoBean);
+        try {
+            ResultSet rs = stmt().executeQuery(sql);
+            PaisDao paisdao;
+            TipoTrabalhoDao tipoTrab;
+            while (rs.next()) {
+                tipoTrab = new TipoTrabalhoDao();
+                paisdao = new PaisDao();
+                TrabalhosPublicacosBean trabalhoBean = new TrabalhosPublicacosBean();
+                trabalhoBean.setId_TbPublicados(rs.getInt("id_TbPublicados"));
+                trabalhoBean.setId_TipoPublicados(tipoTrab.listarTipoID(rs.getString("TipoPublicados_id_TipoPublicados")));
+                trabalhoBean.setNome(rs.getString("nome"));
+                trabalhoBean.setAno(rs.getInt("ano"));
+                trabalhoBean.setPais(paisdao.seledctPorID(rs.getString("pais")));
+                result.add(trabalhoBean);
+            }
+            stmt.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            FabricaConexao.fechaConexao(TrabalhosDao.connection, stmt());
         }
-        stmt.close();
         return result;
     }
 
