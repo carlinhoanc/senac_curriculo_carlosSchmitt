@@ -19,10 +19,14 @@
         <h2>Tipos de trabalhos</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
 
-            <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoNovo">Novo</a>
-            <br/>
-            <br/>
-            <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoListarTipoTrabalho">Listar</a>
+            <div class="page-header">
+                <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoNovo"
+                       type="button" class="btn btn-primary">Novo</a>
+                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoListarTipoTrabalho"
+                       type="button" class="btn btn-success">Listar</a>
+                </div>
+            </div>
 
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">

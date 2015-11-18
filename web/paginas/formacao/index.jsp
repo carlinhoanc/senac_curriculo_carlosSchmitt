@@ -18,10 +18,14 @@
         <h2>Tipos de Forma&ccedil;&atilde;o</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
 
-            <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo">Novo</a>
-            <br/>
-            <br/>
-            <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoListarTipoFormacao">Listar</a>
+            <div class="page-header">
+                <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo"
+                       type="button" class="btn btn-primary">Novo</a>
+                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoListarTipoFormacao"
+                       type="button" class="btn btn-success">Listar</a>
+                </div>
+            </div>
 
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">

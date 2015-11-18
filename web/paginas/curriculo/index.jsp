@@ -16,13 +16,18 @@
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <c:if test="${sessionScope.id_tipo == '2' }">
-            
+
             <h2>Cadastros de Tipos de trabalhos e formao</h2>
 
-            <a href="${pageContext.request.contextPath}/paginas/trabalhos/index.jsp">Tipos de Trabalhos</a>
-            <br/>
-            <br/>
-            <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp">Forma&ccedil;&atilde;o</a>
+            <div class="page-header">
+                <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
+                    <a href="${pageContext.request.contextPath}/paginas/trabalhos/index.jsp"
+                       type="button" class="btn btn-primary">Trabalhos</a>
+
+                    <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp"
+                       type="button" class="btn btn-success" >Forma&ccedil;&atilde;o</a>
+                </div>
+            </div>
 
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
