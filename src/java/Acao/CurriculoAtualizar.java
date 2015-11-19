@@ -24,14 +24,15 @@ public class CurriculoAtualizar implements Acao {
         String idd = "" + session.getAttribute("id_pessoa");
         String temCurri = "" + session.getAttribute("temCurri");
 
+        
         CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
 
-        String idCurri = "" + session.getAttribute("id_curri");
-        if (idCurri.equals("0")) {
-            session.setAttribute("id_curri", "0");
+        String idCurri = null;
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
         } else {
-            session.setAttribute("id_curri", idCurri);
+            idCurri = curri.idCurriPorPessoa(idd);
         }
 
         curriBeans.setExpProfissional(request.getParameter("expProfissional"));
@@ -41,6 +42,7 @@ public class CurriculoAtualizar implements Acao {
         curriBeans.setId(Integer.parseInt(idCurri));
         curriBeans.setResumo(request.getParameter("resumo"));
 
+        System.out.println(idCurri);
         if (curri.atualizar(curriBeans) == true) {
             request.setAttribute("msg", "Pessoa inserida com sucesso");
         } else {
