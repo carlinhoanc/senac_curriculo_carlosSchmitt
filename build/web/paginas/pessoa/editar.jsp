@@ -196,6 +196,8 @@
                             </div>
                         </div>
                     </fieldset>
+                
+                <input type="hidden" id="editarPerfil" name="editarPerfil" value="naoEdita" />
                 </c:if>
                 <br/>
                 <br/>

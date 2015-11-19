@@ -37,11 +37,19 @@ public class PessoaAtualizar implements Acao {
 
         HttpSession session = req.getSession();
         if (session.getAttribute("id_tipo").equals("2")) {
-            pessoa.setId_tipo(Integer.parseInt(req.getParameter("id_tipo")));
-            pessoa.setAtivo(Integer.parseInt(req.getParameter("ativo")));
-            pessoaDAO.atualiza(pessoa);
+            if (req.getParameter("editarPerfil").equals("editar")) {
+                pessoaDAO.atualizaUser(pessoa);
+                System.out.println("nao altera a parada");
+            } else {
+                pessoa.setId_tipo(Integer.parseInt(req.getParameter("id_tipo")));
+                pessoa.setAtivo(Integer.parseInt(req.getParameter("ativo")));
+                pessoaDAO.atualiza(pessoa);
+                System.out.println(req.getParameter("ativo"));
+                System.out.println("admin");
+            }
         } else {
             pessoaDAO.atualizaUser(pessoa);
+            System.out.println("nao admin");
         }
 
         PessoaListarPessoa obj = new PessoaListarPessoa();

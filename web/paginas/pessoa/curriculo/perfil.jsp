@@ -125,6 +125,7 @@
             </div>
         </fieldset>
         <br/><br/>
+        <input type="hidden" id="editarPerfil" name="editarPerfil" value="editar" />
         <input type="hidden" id="id_Pessoa" name="id_Pessoa" value="${editar.id_Pessoa}" />
     </c:forEach>
 
