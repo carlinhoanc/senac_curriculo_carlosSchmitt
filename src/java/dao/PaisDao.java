@@ -47,16 +47,15 @@ public class PaisDao {
         } finally {
             FabricaConexao.fechaConexao(PaisDao.connection, stmt());
         }
-
     }
 
     public List<PaisBean> listarPaises() throws ClassNotFoundException, Exception {
         List<PaisBean> paisBean = new ArrayList<>();
         String sql = "SELECT * FROM pais";
+        try {
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        try {
             while (rs.next()) {
                 PaisBean paises = new PaisBean();
                 paises.setId(rs.getString("id"));
@@ -64,6 +63,7 @@ public class PaisDao {
                 paisBean.add(paises);
             }
             stmt.close();
+            stmt().close();
             return paisBean;
         } catch (SQLException e) {
             System.out.println(e);

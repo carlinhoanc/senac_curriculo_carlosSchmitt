@@ -20,14 +20,14 @@ public class LoginDao {
         return stmt;
     }
 
-    static Connection connection;
+    private static Connection connection;
 
     public LoginDao() throws ClassNotFoundException {
         LoginDao.connection = new FabricaConexao().getConnection();
     }
 
     public static int fazerLogin(PessoaBean pessoa) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
+
         String sql = "SELECT id_Pessoa FROM pessoa WHERE "
                 + "ativo = 1 "
                 + "AND senha LIKE '" + pessoa.getSenha() + "' "
@@ -40,17 +40,17 @@ public class LoginDao {
             } else {
                 retorno = rs.getInt("id_Pessoa");
             }
-        } catch (Exception e) {
+            stmt().close();
+            return retorno;
+        } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e);
+            return retorno;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(LoginDao.connection);
         }
-
-        return retorno;
     }
 
     public static int fazerLoginAdmin(PessoaBean pessoa) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         String sql = "SELECT id_Pessoa FROM pessoa WHERE senha LIKE '" + pessoa.getSenha() + "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "' "
                 + "AND id_tipo= " + pessoa.getTipo();
@@ -62,12 +62,13 @@ public class LoginDao {
             } else {
                 retorno = rs.getInt("id_Pessoa");
             }
+            stmt().close();
+            return retorno;
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e);
+            return retorno;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(LoginDao.connection);
         }
-
-        return retorno;
     }
 }

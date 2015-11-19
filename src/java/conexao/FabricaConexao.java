@@ -22,8 +22,9 @@ public class FabricaConexao {
             Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection("jdbc:mysql://localhost/carlos_senac_4", "root", "zaxs1425");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+
         }
+        return null;
     }
 
     private static void fecha(Connection conn, Statement stmt,
@@ -44,8 +45,26 @@ public class FabricaConexao {
         }
     }
 
+    public static void fechaConexao(Connection conn, Statement stmt, ResultSet rs) throws Exception {
+        fecha(conn, stmt, rs);
+    }
+
     public static void fechaConexao(Connection conn, Statement stmt) throws Exception {
         fecha(conn, stmt, null);
+    }
+
+    public static void fechaConexao(Connection conn) throws Exception {
+        fecha(conn, null, null);
+    }
+
+    
+    /**
+     * usado para testar conexao
+     */
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+        try (Connection connection = new FabricaConexao().getConnection()) {
+            System.out.println("Conexão aberta!");
+        }
     }
 
 }

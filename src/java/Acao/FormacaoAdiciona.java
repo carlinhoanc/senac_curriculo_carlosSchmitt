@@ -43,6 +43,8 @@ public class FormacaoAdiciona implements Acao {
 
         FormacaoDao formacaoDao = new FormacaoDao();
         formacaoDao.insere(formacaoBean);
+        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(idCurri);
+        request.setAttribute("formacao", formacao);
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
@@ -54,9 +56,6 @@ public class FormacaoAdiciona implements Acao {
 
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
-
-        List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu(idCurri);
-        request.setAttribute("formacao", formacao);
 
         TrabalhosDao trabalhosDao = new TrabalhosDao();
         List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);

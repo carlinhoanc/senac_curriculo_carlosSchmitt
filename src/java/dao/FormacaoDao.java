@@ -53,13 +53,14 @@ public class FormacaoDao {
                 stmt.executeUpdate();
                 stmt.close();
             }
-        } catch (SQLException | ClassNotFoundException e) {
+            stmt().close();
+            return true;
+        } catch (SQLException e) {
             System.out.println("Erro ao remover Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
-        return true;
     }
 
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
@@ -75,6 +76,7 @@ public class FormacaoDao {
                 removidoSucesso = true;
             } else {
                 System.out.println("Erro ao remover Formação no BD!");
+                removidoSucesso = false;
             }
             stmt.close();
             return removidoSucesso;
@@ -82,7 +84,7 @@ public class FormacaoDao {
             System.out.println("Erro ao remover Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
     }
 
@@ -99,6 +101,7 @@ public class FormacaoDao {
                 removidoSucesso = true;
             } else {
                 System.out.println("Erro ao remover Formação no BD!");
+                removidoSucesso = false;
             }
             stmt.close();
             return removidoSucesso;
@@ -106,7 +109,7 @@ public class FormacaoDao {
             System.out.println("Erro ao remover Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
     }
 
@@ -128,13 +131,14 @@ public class FormacaoDao {
             stmt.setString(4, p.getId_Tipo().getId_Tipo());
             stmt.setInt(5, p.getId());
             stmt.executeUpdate();
+            stmt.close();
             atualizadoSucesso = true;
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
     }
 
@@ -158,12 +162,13 @@ public class FormacaoDao {
                 result.add(formacaoBean);
             }
             stmt.close();
+            stmt().close();
+            return result;
         } catch (Exception e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
-        return result;
     }
 
     public List<FormacaoBean> listarFormacaoId(String idC) throws SQLException, ClassNotFoundException, Exception {
@@ -171,7 +176,8 @@ public class FormacaoDao {
         List<FormacaoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM formacao where id_Formacao = " + idC;
         stmt = com().prepareStatement(sql);
-        try (ResultSet rs = stmt().executeQuery(sql)) {
+        try {
+            ResultSet rs = stmt().executeQuery(sql);
             TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {
                 tipoFormacaoDao = new TipoFormacaoDao();
@@ -184,22 +190,23 @@ public class FormacaoDao {
                 result.add(formacaoBean);
             }
             stmt.close();
+            stmt().close();
+            return result;
         } catch (Exception e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
-        return result;
     }
 
     public FormacaoBean obtemFormacao(String id_curri) throws Exception {
         FormacaoBean formacaoBean = null;
         String sql = "SELECT * FROM formacao WHERE Curriculo_id_Curriculo = " + id_curri;
-        PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
-        TipoFormacaoDao tipoFormacaoDao;
         try {
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql);
+            TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {
                 tipoFormacaoDao = new TipoFormacaoDao();
                 formacaoBean = new FormacaoBean();
@@ -210,12 +217,13 @@ public class FormacaoDao {
                 formacaoBean.setId_Tipo(tipoFormacaoDao.listarTipoID(rs.getString("id_Tipo")));
             }
             stmt.close();
+            stmt().close();
             return formacaoBean;
         } catch (SQLException e) {
             System.out.println("Erro ao buscar tbpublicados no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection, stmt());
+            FabricaConexao.fechaConexao(FormacaoDao.connection);
         }
     }
 

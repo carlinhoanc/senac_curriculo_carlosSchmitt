@@ -12,31 +12,21 @@ import java.util.List;
 
 public class TipoTrabalhoDao {
 
-    public static Connection com() throws SQLException, ClassNotFoundException {
-        Connection con = new FabricaConexao().getConnection();
-        return con;
-    }
-
-    public static Statement stmt() throws SQLException, ClassNotFoundException {
-        Statement stmt = com().createStatement();
-        return stmt;
-    }
-
-    static Connection connection;
+    private final Connection connection;
 
     public TipoTrabalhoDao() throws ClassNotFoundException {
-        TipoTrabalhoDao.connection = new FabricaConexao().getConnection();
+        this.connection = new FabricaConexao().getConnection();
     }
 
     public boolean insere(TipoTrabalhoPublicadosBean tipopublicados) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         String sql1 = "SELECT * FROM tipopublicados WHERE descricao= '" + tipopublicados.getDescricao() + "' ";
-        ResultSet rs = stmt().executeQuery(sql1);
+        PreparedStatement stmt = connection.prepareStatement(sql1, Statement.RETURN_GENERATED_KEYS);
+        ResultSet rs = stmt.executeQuery();
 
         String sql = "INSERT INTO tipopublicados(descricao) VALUES(?)";
         try {
             if (!rs.next()) {
-                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, tipopublicados.getDescricao());
                 stmt.executeUpdate();
                 stmt.close();
@@ -44,20 +34,19 @@ public class TipoTrabalhoDao {
             } else {
                 return false;
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return false;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
     public boolean delete(int id) throws Exception {
-        PreparedStatement stmt = null;
         boolean removidoSucesso = false;
         String sql = "DELETE FROM tipopublicados WHERE id_TipoPublicados = ?";
         try {
-            stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setInt(1, id);
             int ok = stmt.executeUpdate();
             if (ok == 1) {
@@ -72,7 +61,7 @@ public class TipoTrabalhoDao {
             System.out.println("Erro ao remover Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -90,7 +79,7 @@ public class TipoTrabalhoDao {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(TipoTrabalhoDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -98,8 +87,8 @@ public class TipoTrabalhoDao {
         List<TipoTrabalhoPublicadosBean> tipopublicadoss = new ArrayList<>();
         String sql = "SELECT * FROM tipopublicados ";
         PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
+        stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
         try {
             while (rs.next()) {
                 TipoTrabalhoPublicadosBean tipopublicados = new TipoTrabalhoPublicadosBean();
@@ -114,7 +103,7 @@ public class TipoTrabalhoDao {
             System.out.println("Erro ao buscar tipopublicadoss no BD!");
             return tipopublicadoss;
         } finally {
-            FabricaConexao.fechaConexao(TipoTrabalhoDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -122,8 +111,8 @@ public class TipoTrabalhoDao {
         List<TipoTrabalhoPublicadosBean> tipopublicadoss = new ArrayList<>();
         String sql = "SELECT * FROM tipopublicados WHERE id_TipoPublicados = " + id;
         PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
+        stmt = connection.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
         try {
             while (rs.next()) {
                 TipoTrabalhoPublicadosBean tipopublicados = new TipoTrabalhoPublicadosBean();
@@ -138,7 +127,7 @@ public class TipoTrabalhoDao {
             System.out.println("Erro ao buscar tipopublicadoss no BD!");
             return tipopublicadoss;
         } finally {
-            FabricaConexao.fechaConexao(TipoTrabalhoDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -146,18 +135,18 @@ public class TipoTrabalhoDao {
         TipoTrabalhoPublicadosBean tipopublicados = new TipoTrabalhoPublicadosBean();
         String sql = "SELECT * FROM tipopublicados WHERE id_TipoPublicados = " + id;
         PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
+        stmt = connection.prepareStatement(sql);
 
-        try (ResultSet rs = stmt().executeQuery(sql)) {
+        try (ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 tipopublicados.setId(rs.getString("id_TipoPublicados"));
                 tipopublicados.setDescricao(rs.getString("descricao"));
             }
             stmt.close();
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
         return tipopublicados;
     }

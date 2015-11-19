@@ -71,7 +71,7 @@
                     <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                         <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp" 
                            type="button" class="btn btn-danger">Voltar</a>
-                           
+
                         <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo"
                            type="button" class="btn btn-primary">Novo</a>
                     </div>

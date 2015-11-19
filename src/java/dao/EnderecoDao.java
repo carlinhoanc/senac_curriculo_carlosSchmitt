@@ -48,7 +48,7 @@ public class EnderecoDao {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(EnderecoDao.connection);
         }
     }
 
@@ -73,7 +73,7 @@ public class EnderecoDao {
             System.out.println("Erro ao remover Endereco no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(EnderecoDao.connection);
         }
     }
 
@@ -99,7 +99,7 @@ public class EnderecoDao {
             System.out.println("Erro ao atualizar Endereco no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(EnderecoDao.connection);
         }
     }
 
@@ -108,10 +108,10 @@ public class EnderecoDao {
         CidadeDao cidadeDao;
         String sql = "SELECT e.* FROM endereco e INNER JOIN pessoa p ON e.id_Endereco = p.Endereco_id_Endereco "
                 + "WHERE p.id_Pessoa = " + cdPessoa;
+        try {
         PreparedStatement stmt = null;
         stmt = com().prepareStatement(sql);
         ResultSet rs = stmt().executeQuery(sql);
-        try {
             while (rs.next()) {
                 cidadeDao = new CidadeDao();
                 endereco = new EnderecoBean();
@@ -124,12 +124,13 @@ public class EnderecoDao {
                 endereco.setCep(rs.getString("cep"));
             }
             stmt.close();
+            stmt().close();
             return endereco;
         } catch (SQLException e) {
             System.out.println("Erro ao buscar endereco no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
+            FabricaConexao.fechaConexao(EnderecoDao.connection);
         }
     }
 

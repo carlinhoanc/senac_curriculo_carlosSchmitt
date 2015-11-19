@@ -32,15 +32,15 @@ public class PessoaDao {
 
     public boolean insere(PessoaBean pessoa, int tipUser) throws SQLException, ClassNotFoundException, Exception {
         EnderecoDao end = new EnderecoDao();
-        PreparedStatement stmt = null;
         String sql1 = "SELECT id_Pessoa FROM pessoa WHERE cpf= '" + pessoa.getCpf() + "' OR email = '" + pessoa.getEmail() + "'";
-        ResultSet rs = stmt().executeQuery(sql1);
-        int idEndereco;
-        if (!rs.next()) {
-            idEndereco = end.insere(pessoa.getEndereco());
-            String sql = "INSERT INTO pessoa( nome, sobreNome, idade, sexo, cpf, Endereco_id_Endereco, "
-                    + "senha , id_tipo, email, telefone, ativo) VALUES(?,?,?,?,?,?,?,?,?,?, ?)";
-            try {
+        try {
+            ResultSet rs = stmt().executeQuery(sql1);
+            int idEndereco;
+            if (!rs.next()) {
+                PreparedStatement stmt = null;
+                idEndereco = end.insere(pessoa.getEndereco());
+                String sql = "INSERT INTO pessoa( nome, sobreNome, idade, sexo, cpf, Endereco_id_Endereco, "
+                        + "senha , id_tipo, email, telefone, ativo) VALUES(?,?,?,?,?,?,?,?,?,?, ?)";
                 stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, pessoa.getNome());
                 stmt.setString(2, pessoa.getSobreNome());
@@ -55,29 +55,31 @@ public class PessoaDao {
                 stmt.setInt(11, pessoa.getAtivo());
                 stmt.executeUpdate();
                 stmt.close();
+                stmt().close();
                 return true;
-            } catch (SQLException | ClassNotFoundException e) {
-                System.out.println(e);
+            } else {
+                stmt().close();
                 return false;
-            } finally {
-                FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
             }
-        } else {
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
             return false;
+        } finally {
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
     public boolean insereNaoAdmin(PessoaBean pessoa, int tipUser) throws SQLException, ClassNotFoundException, Exception {
         EnderecoDao end = new EnderecoDao();
-        PreparedStatement stmt = null;
         String sql1 = "SELECT id_Pessoa FROM pessoa WHERE cpf= '" + pessoa.getCpf() + "' OR email = '" + pessoa.getEmail() + "'";
-        ResultSet rs = stmt().executeQuery(sql1);
-        int idEndereco;
-        if (!rs.next()) {
-            idEndereco = end.insere(pessoa.getEndereco());
-            String sql = "INSERT INTO pessoa( nome, sobreNome, idade, sexo, cpf, Endereco_id_Endereco, "
-                    + "senha , id_tipo, email, telefone, ativo) VALUES(?,?,?,?,?,?,?,?,?,?, ?)";
-            try {
+        try {
+            ResultSet rs = stmt().executeQuery(sql1);
+            int idEndereco;
+            if (!rs.next()) {
+                PreparedStatement stmt = null;
+                idEndereco = end.insere(pessoa.getEndereco());
+                String sql = "INSERT INTO pessoa( nome, sobreNome, idade, sexo, cpf, Endereco_id_Endereco, "
+                        + "senha , id_tipo, email, telefone, ativo) VALUES(?,?,?,?,?,?,?,?,?,?, ?)";
                 stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, pessoa.getNome());
                 stmt.setString(2, pessoa.getSobreNome());
@@ -92,54 +94,53 @@ public class PessoaDao {
                 stmt.setInt(11, 1);
                 stmt.executeUpdate();
                 stmt.close();
+                stmt().close();
                 return true;
-            } catch (SQLException | ClassNotFoundException e) {
-                System.out.println(e);
+            } else {
+                stmt().close();
                 return false;
-            } finally {
-                FabricaConexao.fechaConexao(EnderecoDao.connection, stmt());
             }
-        } else {
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println(e);
             return false;
+        } finally {
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
     public boolean delete(int id) throws Exception {
-        PreparedStatement stmt = null;
-        boolean removidoSucesso = false;
-
         String sql1 = "SELECT id_tipo FROM pessoa WHERE id_Pessoa= '" + id + "' ";
-
-        ResultSet rs = stmt().executeQuery(sql1);
-        int id_tipo = 1;
-        while (rs.next()) {
-            id_tipo = rs.getInt("id_tipo");
-        }
-
-        int contar_adm = 2;
-        if (id_tipo == 2) {
-            sql1 = "SELECT COUNT(id_tipo) as conta FROM pessoa WHERE id_tipo= '2' ";
-            rs = stmt().executeQuery(sql1);
-            while (rs.next()) {
-                contar_adm = rs.getInt("conta");
-            }
-        }
-
         try {
-            if (contar_adm > 1) {
-                String sql = "DELETE FROM pessoa WHERE id_Pessoa = ?";
 
-                stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql1);
+            int id_tipo = 1;
+            while (rs.next()) {
+                id_tipo = rs.getInt("id_tipo");
+            }
+
+            int contar_adm = 2;
+            if (id_tipo == 2) {
+                sql1 = "SELECT COUNT(id_tipo) as conta FROM pessoa WHERE id_tipo= '2' ";
+                rs = stmt().executeQuery(sql1);
+                while (rs.next()) {
+                    contar_adm = rs.getInt("conta");
+                }
+            }
+            stmt().close();
+            if (contar_adm > 1) {
+                PreparedStatement stmt = null;
+                String sql = "DELETE FROM pessoa WHERE id_Pessoa = ?";
+                stmt = com().prepareStatement(sql);
                 stmt.setInt(1, id);
                 int ok = stmt.executeUpdate();
+                stmt.close();
                 if (ok == 1) {
                     System.out.println("Endereco Pessoa com sucesso no BD!");
-                    removidoSucesso = false;
+                    return true;
                 } else {
                     System.out.println("Erro ao remover Pessoa no BD! 00");
+                    return false;
                 }
-                stmt.close();
-                return true;
             } else {
                 return false;
             }
@@ -147,16 +148,16 @@ public class PessoaDao {
             System.out.println("Erro ao remover Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
     public boolean desativa(int id) throws Exception {
-        PreparedStatement stmt = null;
         boolean removidoSucesso = false;
         String sql = "UPDATE pessoa SET ativo=0  WHERE id_Pessoa = ?";
         try {
-            stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
             stmt.setInt(1, id);
             int ok = stmt.executeUpdate();
             if (ok == 1) {
@@ -171,7 +172,7 @@ public class PessoaDao {
             System.out.println("Erro ao desativar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
@@ -187,7 +188,8 @@ public class PessoaDao {
             return false;
         }
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getSobreNome());
             stmt.setInt(3, pessoa.getIdade());
@@ -200,12 +202,13 @@ public class PessoaDao {
             stmt.setInt(10, pessoa.getAtivo());
             stmt.setInt(11, Integer.parseInt(pessoa.getId_Pessoa()));
             stmt.executeUpdate();
+            stmt.close();
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
@@ -221,7 +224,8 @@ public class PessoaDao {
             return false;
         }
         try {
-            PreparedStatement stmt = connection.prepareStatement(sql);
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getSobreNome());
             stmt.setInt(3, pessoa.getIdade());
@@ -232,12 +236,13 @@ public class PessoaDao {
             stmt.setString(8, pessoa.getTelefone());
             stmt.setInt(9, Integer.parseInt(pessoa.getId_Pessoa()));
             stmt.executeUpdate();
+            stmt.close();
             return atualizadoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
@@ -253,9 +258,9 @@ public class PessoaDao {
         } else {
             sql = "SELECT * FROM pessoa WHERE id_tipo != 2 AND ativo = 1";
         }
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
         try {
+            stmt = com().prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
                 enderecoDAO = new EnderecoDao();
                 tipoUserDao = new TipoDeUsuarioDao();
@@ -273,32 +278,31 @@ public class PessoaDao {
                 pessoas.add(pessoa);
             }
             stmt.close();
+            stmt().close();
             return pessoas;
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("Erro ao buscar pessoas no BD!");
-            return pessoas;
+            return null;
         } finally {
-            FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 
     public List<PessoaBean> listarPessoaID(String id) throws ClassNotFoundException, Exception {
-
         List<PessoaBean> pessoas = new ArrayList<>();
         EnderecoDao enderecoDAO;
         TipoDeUsuarioDao tipoUserDao;
         String sql = "SELECT * FROM pessoa WHERE id_Pessoa = " + id;
 
-        PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
         try {
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
                 enderecoDAO = new EnderecoDao();
                 tipoUserDao = new TipoDeUsuarioDao();
                 PessoaBean pessoa = new PessoaBean();
-
                 pessoa.setId_Pessoa(rs.getString("id_Pessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setSobreNome(rs.getString("sobreNome"));
@@ -314,13 +318,14 @@ public class PessoaDao {
                 pessoas.add(pessoa);
             }
             stmt.close();
+            stmt().close();
             return pessoas;
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("Erro ao buscar pessoas no BD!");
-            return pessoas;
+            return null;
         } finally {
-            FabricaConexao.fechaConexao(PessoaDao.connection, stmt());
+            FabricaConexao.fechaConexao(PessoaDao.connection);
         }
     }
 }

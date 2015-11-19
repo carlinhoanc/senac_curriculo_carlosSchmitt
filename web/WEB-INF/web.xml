@@ -8,7 +8,6 @@
     <welcome-file-list>
         <welcome-file>/Pessoa?acao=PessoaListarPessoa</welcome-file>
     </welcome-file-list>
-
     <error-page>
         <error-code>404</error-code>
         <!--<location>/Erro404</location>-->

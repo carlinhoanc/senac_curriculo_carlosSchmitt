@@ -30,9 +30,9 @@ public class TipoDeUsuarioDao {
         PreparedStatement stmt = null;
         TipoAcessoBean tipouser = null;
         String sql = "SELECT t.* FROM tipouser t INNER JOIN pessoa p ON t.id_tipo = p.id_tipo WHERE p.id_Pessoa = " + cdPessoa;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
         try {
+            stmt = com().prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
                 tipouser = new TipoAcessoBean();
                 tipouser.setId(rs.getInt("id_tipo"));
@@ -40,13 +40,14 @@ public class TipoDeUsuarioDao {
                 tipouser.setDescricao(rs.getString("descricao"));
             }
             stmt.close();
+            stmt().close();
             return tipouser;
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("Erro ao buscar Tipo de user no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(this.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 }
