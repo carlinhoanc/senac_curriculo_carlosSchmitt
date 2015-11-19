@@ -29,10 +29,10 @@ public class TipoFormacaoDao {
     }
 
     public boolean insere(TipoFormacaoBean tipoformacao) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         String sql1 = "SELECT * FROM tipoformacao WHERE descricao= '" + tipoformacao.getDescricao() + "' ";
         String sql = "INSERT INTO tipoformacao(descricao) VALUES(?)";
         try {
+            PreparedStatement stmt = null;
             ResultSet rs = stmt().executeQuery(sql1);
             if (!rs.next()) {
                 stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
@@ -157,7 +157,7 @@ public class TipoFormacaoDao {
             return tipoFormacaoBean;
         } catch (SQLException e) {
             System.out.println(e);
-            return  null;
+            return null;
         } finally {
             FabricaConexao.fechaConexao(TipoFormacaoDao.connection);
         }

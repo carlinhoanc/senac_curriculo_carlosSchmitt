@@ -29,10 +29,8 @@ public class TrabalhosDao {
     }
 
     public boolean insere(TrabalhosPublicacosBean p) throws SQLException, ClassNotFoundException, Exception {
-        String sql1 = "SELECT * FROM tbpublicados "
-                + "WHERE nome= '" + p.getNome() + "' "
-                + "AND ano = '" + p.getAno() + "' "
-                + "AND pais= '" + p.getPais().getId() + "' "
+        String sql1 = "SELECT * FROM tbpublicados WHERE nome= '" + p.getNome().replace("'", "") + "' "
+                + "AND ano = '" + p.getAno() + "' AND pais= '" + p.getPais().getId() + "' "
                 + "AND TipoPublicados_id_TipoPublicados='" + p.getId_TipoPublicados().getId() + "' "
                 + "AND Curriculo_id_Curriculo = '" + p.getId_Curriculo() + "' ;";
         try {
@@ -49,8 +47,8 @@ public class TrabalhosDao {
                 stmt.setString(5, p.getId_Curriculo());
                 stmt.executeUpdate();
                 stmt.close();
-                stmt().close();
             }
+            stmt().close();
             return true;
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -60,21 +58,20 @@ public class TrabalhosDao {
     }
 
     public boolean deletaPorCurriculo(String id) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
-        boolean removidoSucesso = false;
         String sql = "DELETE FROM tbpublicados WHERE Curriculo_id_Curriculoo  = ?";
         try {
+            PreparedStatement stmt = null;
             stmt = com().prepareStatement(sql);
             stmt.setString(1, id);
             int ok = stmt.executeUpdate();
+            stmt.close();
             if (ok == 1) {
                 System.out.println("Trabalhos removido com sucesso no BD!");
-                removidoSucesso = true;
+                return true;
             } else {
                 System.out.println("Erro ao remover Trabalhos no BD!");
+                return false;
             }
-            stmt.close();
-            return removidoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao remover Trabalhos no BD!");
             throw new RuntimeException(e);
@@ -84,20 +81,20 @@ public class TrabalhosDao {
     }
 
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         String sql = "DELETE FROM tbpublicados WHERE id_TbPublicados  = ?";
         try {
+            PreparedStatement stmt = null;
             stmt = com().prepareStatement(sql);
             stmt.setString(1, id);
             int ok = stmt.executeUpdate();
+            stmt.close();
             if (ok == 1) {
                 System.out.println("Trabalhos removido com sucesso no BD!");
                 return true;
             } else {
                 System.out.println("Erro ao remover Trabalhos no BD!");
+                return false;
             }
-            stmt.close();
-            return false;
         } catch (SQLException e) {
             System.out.println("Erro ao remover Trabalhos no BD!");
             throw new RuntimeException(e);
@@ -108,8 +105,7 @@ public class TrabalhosDao {
 
     public boolean atualiza(TrabalhosPublicacosBean p, String id) throws Exception {
         PreparedStatement stmt = null;
-        String sql = "UPDATE tbpublicados SET nome=? ,ano=? ,pais=? ,TipoPublicados_id_TipoPublicados=? ,"
-                + "WHERE id_TbPublicados = ?";
+        String sql = "UPDATE tbpublicados SET nome=? ,ano=? ,pais=? ,TipoPublicados_id_TipoPublicados=? WHERE id_TbPublicados = ?";
         try {
             stmt = com().prepareStatement(sql);
             stmt.setString(1, p.getNome());

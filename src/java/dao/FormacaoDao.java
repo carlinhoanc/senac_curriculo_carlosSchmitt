@@ -29,16 +29,14 @@ public class FormacaoDao {
     }
 
     public boolean insere(FormacaoBean p) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
-
         String sql1 = "SELECT * FROM formacao "
                 + "WHERE nomeInstitui= '" + p.getNomeInstitui() + "' "
                 + "AND dataInicio='" + p.getDataInicio() + "' "
                 + "AND dataTermino= '" + p.getDataTermino() + "' "
                 + "AND id_Tipo='" + p.getId_Tipo().getId_Tipo() + "' "
                 + "AND Curriculo_id_Curriculo='" + p.getCurriculo_id_Curriculo() + "' ;";
-
         try {
+            PreparedStatement stmt = null;
             ResultSet rs = stmt().executeQuery(sql1);
             if (!rs.next()) {
                 String sql = "INSERT INTO formacao "
@@ -64,10 +62,10 @@ public class FormacaoDao {
     }
 
     public boolean deleta(String id) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         boolean removidoSucesso = false;
         String sql = "DELETE FROM formacao WHERE id_Formacao  = ?";
         try {
+            PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, id);
             int ok = stmt.executeUpdate();
@@ -89,10 +87,10 @@ public class FormacaoDao {
     }
 
     public boolean deletaPorCurriculo(String id) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         boolean removidoSucesso = false;
         String sql = "DELETE FROM formacao WHERE Curriculo_id_Curriculoo  = ?";
         try {
+            PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(id));
             int ok = stmt.executeUpdate();
@@ -114,15 +112,10 @@ public class FormacaoDao {
     }
 
     public boolean atualiza(FormacaoBean p) throws Exception {
-        PreparedStatement stmt = null;
         boolean atualizadoSucesso = false;
-        String sql = "UPDATE formacao SET "
-                + "nomeInstitui= ? ,"
-                + "dataInicio=?,"
-                + "dataTermino=?,"
-                + "id_Tipo=? "
-                + "WHERE id_Formacao = ?";
+        String sql = "UPDATE formacao SET nomeInstitui= ? ,dataInicio=?, dataTermino=?, id_Tipo=? WHERE id_Formacao = ?";
         try {
+            PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, p.getNomeInstitui());
             stmt.setString(2, p.getDataInicio());
@@ -143,12 +136,11 @@ public class FormacaoDao {
     }
 
     public List<FormacaoBean> listarFormacaoIdCu(String idC) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         List<FormacaoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM formacao where Curriculo_id_Curriculo = " + idC;
-        stmt = com().prepareStatement(sql);
-
         try {
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
             TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {
@@ -172,11 +164,11 @@ public class FormacaoDao {
     }
 
     public List<FormacaoBean> listarFormacaoId(String idC) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         List<FormacaoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM formacao where id_Formacao = " + idC;
-        stmt = com().prepareStatement(sql);
         try {
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
             TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {

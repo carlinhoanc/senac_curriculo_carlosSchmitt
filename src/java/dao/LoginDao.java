@@ -3,7 +3,6 @@ package dao;
 import bean.PessoaBean;
 import conexao.FabricaConexao;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -27,10 +26,7 @@ public class LoginDao {
     }
 
     public static int fazerLogin(PessoaBean pessoa) throws SQLException, ClassNotFoundException, Exception {
-
-        String sql = "SELECT id_Pessoa FROM pessoa WHERE "
-                + "ativo = 1 "
-                + "AND senha LIKE '" + pessoa.getSenha() + "' "
+        String sql = "SELECT id_Pessoa FROM pessoa WHERE ativo = 1 AND senha LIKE '" + pessoa.getSenha() + "' "
                 + "AND email LIKE '" + pessoa.getEmail() + "'";
         int retorno = 0;
         try {
@@ -52,8 +48,7 @@ public class LoginDao {
 
     public static int fazerLoginAdmin(PessoaBean pessoa) throws SQLException, ClassNotFoundException, Exception {
         String sql = "SELECT id_Pessoa FROM pessoa WHERE senha LIKE '" + pessoa.getSenha() + "' "
-                + "AND email LIKE '" + pessoa.getEmail() + "' "
-                + "AND id_tipo= " + pessoa.getTipo();
+                + "AND email LIKE '" + pessoa.getEmail() + "' AND id_tipo= " + pessoa.getTipo();
         int retorno = 0;
         try {
             ResultSet rs = stmt().executeQuery(sql);

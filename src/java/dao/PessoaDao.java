@@ -111,7 +111,6 @@ public class PessoaDao {
     public boolean delete(int id) throws Exception {
         String sql1 = "SELECT id_tipo FROM pessoa WHERE id_Pessoa= '" + id + "' ";
         try {
-
             ResultSet rs = stmt().executeQuery(sql1);
             int id_tipo = 1;
             while (rs.next()) {
@@ -153,21 +152,20 @@ public class PessoaDao {
     }
 
     public boolean desativa(int id) throws Exception {
-        boolean removidoSucesso = false;
         String sql = "UPDATE pessoa SET ativo=0  WHERE id_Pessoa = ?";
         try {
             PreparedStatement stmt = null;
             stmt = com().prepareStatement(sql);
             stmt.setInt(1, id);
             int ok = stmt.executeUpdate();
+            stmt.close();
             if (ok == 1) {
                 System.out.println("Pessoa desativada com sucesso no BD!");
-                removidoSucesso = true;
+                return true;
             } else {
                 System.out.println("Erro ao desativar Pessoa no BD!");
+                return false;
             }
-            stmt.close();
-            return removidoSucesso;
         } catch (SQLException e) {
             System.out.println("Erro ao desativar Pessoa no BD!");
             throw new RuntimeException(e);
@@ -177,10 +175,8 @@ public class PessoaDao {
     }
 
     public boolean atualiza(PessoaBean pessoa) throws ClassNotFoundException, Exception {
-        boolean atualizadoSucesso = false;
         String sql = "UPDATE pessoa SET nome=?,sobreNome=?,idade=?,sexo=?,cpf=?, "
-                + "senha=?,email=?,telefone=?, id_tipo=? , ativo=? "
-                + "WHERE id_Pessoa= ?";
+                + "senha=?,email=?,telefone=?, id_tipo=? , ativo=? WHERE id_Pessoa= ?";
         EnderecoBean endereco = pessoa.getEndereco();
         EnderecoDao enderecoDAO = new EnderecoDao();
         String idd = pessoa.getId_Pessoa();
@@ -203,7 +199,7 @@ public class PessoaDao {
             stmt.setInt(11, Integer.parseInt(pessoa.getId_Pessoa()));
             stmt.executeUpdate();
             stmt.close();
-            return atualizadoSucesso;
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
@@ -213,10 +209,8 @@ public class PessoaDao {
     }
 
     public boolean atualizaUser(PessoaBean pessoa) throws ClassNotFoundException, Exception {
-        boolean atualizadoSucesso = false;
         String sql = "UPDATE pessoa SET nome=?,sobreNome=?,idade=?,sexo=?,cpf=?, "
-                + "senha=?,email=?,telefone=? "
-                + "WHERE id_Pessoa= ?";
+                + "senha=?,email=?,telefone=? WHERE id_Pessoa= ?";
         EnderecoBean endereco = pessoa.getEndereco();
         EnderecoDao enderecoDAO = new EnderecoDao();
         String idd = pessoa.getId_Pessoa();
@@ -237,7 +231,7 @@ public class PessoaDao {
             stmt.setInt(9, Integer.parseInt(pessoa.getId_Pessoa()));
             stmt.executeUpdate();
             stmt.close();
-            return atualizadoSucesso;
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
             throw new RuntimeException(e);
@@ -251,7 +245,6 @@ public class PessoaDao {
         EnderecoDao enderecoDAO;
         TipoDeUsuarioDao tipoUserDao;
         String sql = null;
-        PreparedStatement stmt = null;
 
         if (id_tipo.equals("2")) {
             sql = "SELECT * FROM pessoa ";
@@ -259,6 +252,7 @@ public class PessoaDao {
             sql = "SELECT * FROM pessoa WHERE id_tipo != 2 AND ativo = 1";
         }
         try {
+            PreparedStatement stmt = null;
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
@@ -294,7 +288,6 @@ public class PessoaDao {
         EnderecoDao enderecoDAO;
         TipoDeUsuarioDao tipoUserDao;
         String sql = "SELECT * FROM pessoa WHERE id_Pessoa = " + id;
-
         try {
             PreparedStatement stmt = null;
             stmt = com().prepareStatement(sql);

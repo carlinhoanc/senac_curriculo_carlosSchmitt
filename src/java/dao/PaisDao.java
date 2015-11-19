@@ -29,10 +29,10 @@ public class PaisDao {
     }
 
     public PaisBean seledctPorID(String id) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         PaisBean cidade = null;
         String sql = "SELECT * FROM pais WHERE id =" + id;
         try {
+            PreparedStatement stmt = null;
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
@@ -53,9 +53,9 @@ public class PaisDao {
         List<PaisBean> paisBean = new ArrayList<>();
         String sql = "SELECT * FROM pais";
         try {
-        PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
+            PreparedStatement stmt = null;
+            stmt = com().prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
                 PaisBean paises = new PaisBean();
                 paises.setId(rs.getString("id"));
