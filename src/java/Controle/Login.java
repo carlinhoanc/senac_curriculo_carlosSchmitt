@@ -17,7 +17,7 @@ import dao.TipoFormacaoDao;
 import dao.TrabalhosDao;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -72,6 +72,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("temCurri", "1");
                 }
 
+                
                 session.setAttribute("ativo", pessoa.getAtivo());
                 session.setAttribute("id_tipo", "" + pessoa.getTipo().getId());
                 session.setAttribute("id_pessoa", "" + pessoa.getId_Pessoa());
@@ -79,6 +80,8 @@ public class Login extends HttpServlet {
                 session.setAttribute("sobrenome", pessoa.getSobreNome());
                 session.setAttribute("email", pessoa.getEmail());
 
+                System.out.println(session.getAttribute("id_pessoa"));
+                
                 List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt(pessoa.getId_Pessoa()));
                 request.setAttribute("curriculo", curriculo);
 

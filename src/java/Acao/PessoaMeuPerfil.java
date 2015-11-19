@@ -36,6 +36,8 @@ public class PessoaMeuPerfil implements Acao {
         PessoaDao pessoaDAO = new PessoaDao();
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         request.setAttribute("edita", pessoas);
+        
+        System.out.println(session.getAttribute("id_tipo"));
 
         CurriculoDao curri = new CurriculoDao();
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));

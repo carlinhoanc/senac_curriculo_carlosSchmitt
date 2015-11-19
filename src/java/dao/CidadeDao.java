@@ -32,7 +32,6 @@ public class CidadeDao {
         PreparedStatement stmt = null;
         CidadeBean cidade = null;
         String sql = "SELECT * FROM cidade WHERE id =" + id;
-        
         try {
             stmt = com().prepareStatement(sql);
             ResultSet rs = stmt().executeQuery(sql);
@@ -43,6 +42,7 @@ public class CidadeDao {
                 cidade.setNome(rs.getString("nome"));
             }
             stmt.close();
+            stmt().close();
             return cidade;
         } catch (SQLException | ClassNotFoundException e) {
             return null;
@@ -55,9 +55,9 @@ public class CidadeDao {
         PreparedStatement stmt = null;
         CidadeBean cidade = null;
         String sql = "SELECT c.* FROM cidade c INNER JOIN endereco e ON c.id = e.id_cidade WHERE e.id_Endereco = " + cdPessoa;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
         try {
+            stmt = com().prepareStatement(sql);
+            ResultSet rs = stmt().executeQuery(sql);
             while (rs.next()) {
                 cidade = new CidadeBean();
                 cidade.setEstados(rs.getString("estados"));
@@ -65,6 +65,7 @@ public class CidadeDao {
                 cidade.setNome(rs.getString("nome"));
             }
             stmt.close();
+            stmt().close();
             return cidade;
         } catch (SQLException e) {
             System.out.println(e);
@@ -89,6 +90,7 @@ public class CidadeDao {
                 cidade.setNome(rs.getString("nome"));
             }
             stmt.close();
+            stmt().close();
             return cidade;
         } catch (SQLException | ClassNotFoundException e) {
             return null;
@@ -113,6 +115,7 @@ public class CidadeDao {
                 cidades.add(cidade);
             }
             stmt.close();
+            stmt().close();
             rs.clearWarnings();
             return cidades;
         } catch (SQLException | ClassNotFoundException e) {
@@ -139,6 +142,7 @@ public class CidadeDao {
                 cidades.add(cidade);
             }
             stmt.close();
+            stmt().close();
             return cidades;
         } catch (SQLException | ClassNotFoundException e) {
             return null;
