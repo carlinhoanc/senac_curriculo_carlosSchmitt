@@ -6,36 +6,23 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CurriculoDao {
 
-    public static Connection com() throws SQLException, ClassNotFoundException {
-        Connection con = new FabricaConexao().getConnection();
-        return con;
-    }
-
-    public static Statement stmt() throws SQLException, ClassNotFoundException {
-        Statement stmt = com().createStatement();
-        return stmt;
-    }
-
-    private static Connection connection;
-
-    public CurriculoDao() throws ClassNotFoundException {
-        CurriculoDao.connection = new FabricaConexao().getConnection();
-    }
+    private Connection connection;
 
     public boolean insere(CurriculoBean curri) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         String sql1 = "SELECT id_Curriculo FROM curriculo WHERE pessoa_idPessoa= '" + curri.getIdPessoa() + "'";
         try {
-            ResultSet rs = stmt().executeQuery(sql1);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql1);
+            ResultSet rs = stmt.executeQuery();
             if (!rs.next()) {
                 String sql = "INSERT INTO curriculo( resumo, expProfissional, forBasica, formMedio, pessoa_idPessoa) VALUES(?,?,?,?,?)";
-                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, curri.getResumo());
                 stmt.setString(2, curri.getExpProfissional());
                 stmt.setString(3, curri.getForBasica());
@@ -43,15 +30,14 @@ public class CurriculoDao {
                 stmt.setString(5, curri.getIdPessoa());
                 stmt.executeUpdate();
                 stmt.close();
-                stmt().close();
                 return true;
             } else {
                 return false;
             }
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -59,15 +45,16 @@ public class CurriculoDao {
         PreparedStatement stmt = null;
         String sql = "DELETE FROM curriculo WHERE id_Curriculo = ?";
         try {
-            stmt = com().prepareStatement(sql);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
             stmt.close();
             return true;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -76,8 +63,9 @@ public class CurriculoDao {
         List<CurriculoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM curriculo";
         try {
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 CurriculoBean curriBean = new CurriculoBean();
                 curriBean.setId(Integer.parseInt(rs.getString("id_Curriculo")));
@@ -89,12 +77,11 @@ public class CurriculoDao {
                 result.add(curriBean);
             }
             stmt.close();
-            stmt().close();
             return result;
-        } catch (SQLException | ClassNotFoundException | NumberFormatException e) {
+        } catch (SQLException | NumberFormatException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -103,8 +90,9 @@ public class CurriculoDao {
         List<CurriculoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM curriculo where pessoa_idPessoa = " + idC;
         try {
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 CurriculoBean curriBean = new CurriculoBean();
                 curriBean.setId(Integer.parseInt(rs.getString("id_Curriculo")));
@@ -116,59 +104,57 @@ public class CurriculoDao {
                 result.add(curriBean);
             }
             stmt.close();
-            stmt().close();
             return result;
-        } catch (SQLException | ClassNotFoundException | NumberFormatException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            return result;
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
     public List<CurriculoBean> listaCurriculoUnico(int idC) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         List<CurriculoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM curriculo where id_Curriculo = " + idC;
         try {
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
-            while (rs.next()) {
-                CurriculoBean curriBean = new CurriculoBean();
-                curriBean.setId(Integer.parseInt(rs.getString("id_Curriculo")));
-                curriBean.setResumo(rs.getString("resumo"));
-                curriBean.setExpProfissional(rs.getString("expProfissional"));
-                curriBean.setForBasica(rs.getString("forBasica"));
-                curriBean.setFormMedio(rs.getString("formMedio"));
-                curriBean.setIdPessoa(rs.getString("pessoa_idPessoa"));
-                result.add(curriBean);
+            this.connection = new FabricaConexao().getConnection();
+            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    CurriculoBean curriBean = new CurriculoBean();
+                    curriBean.setId(Integer.parseInt(rs.getString("id_Curriculo")));
+                    curriBean.setResumo(rs.getString("resumo"));
+                    curriBean.setExpProfissional(rs.getString("expProfissional"));
+                    curriBean.setForBasica(rs.getString("forBasica"));
+                    curriBean.setFormMedio(rs.getString("formMedio"));
+                    curriBean.setIdPessoa(rs.getString("pessoa_idPessoa"));
+                    result.add(curriBean);
+                }
             }
-            stmt.close();
-            stmt().close();
             return result;
-        } catch (SQLException | ClassNotFoundException | NumberFormatException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            return result;
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
     public String idCurri(String idC) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         String sql = "SELECT * FROM curriculo where id_Curriculo = " + idC;
+        String id = "0";
         try {
-            stmt = com().prepareStatement(sql);
-            String id = "0";
-            ResultSet rs = stmt().executeQuery(sql);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 id = rs.getString("id_Curriculo");
             }
             stmt.close();
-            stmt().close();
             return id;
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            return id;
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -177,39 +163,41 @@ public class CurriculoDao {
         String sql = "SELECT * FROM curriculo where pessoa_idPessoa = " + idC;
         String id = "0";
         try {
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 id = rs.getString("id_Curriculo");
             }
             stmt.close();
-            stmt().close();
             return id;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             return id;
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
     public boolean atualizar(CurriculoBean curri) throws SQLException, ClassNotFoundException, Exception {
-        PreparedStatement stmt = null;
         String sql = "UPDATE curriculo"
                 + " SET resumo='" + curri.getResumo() + "',"
                 + "expProfissional='" + curri.getExpProfissional() + "',"
                 + "forBasica='" + curri.getForBasica() + "',"
                 + "formMedio='" + curri.getFormMedio() + "'"
                 + "WHERE id_Curriculo= " + curri.getId();
+
         try {
-            stmt = com().prepareStatement(sql);
+            this.connection = new FabricaConexao().getConnection();
+            PreparedStatement stmt = null;
+            stmt = connection.prepareStatement(sql);
             stmt.executeUpdate();
             stmt.close();
-            return false;
+            return true;
         } catch (SQLException e) {
             System.out.println("Erro ao atualizar Pessoa no BD!");
-            throw new RuntimeException(e);
+            return false;
         } finally {
-            FabricaConexao.fechaConexao(CurriculoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 }

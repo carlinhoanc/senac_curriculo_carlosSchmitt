@@ -5,7 +5,7 @@ import bean.FormacaoBean;
 import bean.PaisBean;
 import bean.PessoaBean;
 import bean.TipoFormacaoBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PaisDao;
@@ -53,7 +53,7 @@ public class TrabalhoDeleta implements Acao {
             idCurri = curri.idCurriPorPessoa(idd);
         }
         
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
         
         FormacaoDao formacaoDao = new FormacaoDao();

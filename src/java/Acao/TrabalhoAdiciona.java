@@ -4,7 +4,7 @@ import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
@@ -35,7 +35,7 @@ public class TrabalhoAdiciona implements Acao {
 
         TipoTrabalhoDao tipodao = new TipoTrabalhoDao();
         PaisDao paisDao = new PaisDao();
-        TrabalhosPublicacosBean trabalhoBean = new TrabalhosPublicacosBean();
+        TrabalhosBean trabalhoBean = new TrabalhosBean();
 
         trabalhoBean.setNome(request.getParameter("nome"));
         trabalhoBean.setAno(Integer.parseInt(request.getParameter("ano")));
@@ -62,7 +62,7 @@ public class TrabalhoAdiciona implements Acao {
         List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
         request.setAttribute("curriculo", curriculo);
 
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();

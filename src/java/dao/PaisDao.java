@@ -6,35 +6,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaisDao {
 
-    public static Connection com() throws SQLException, ClassNotFoundException {
-        Connection con = new FabricaConexao().getConnection();
-        return con;
-    }
-
-    public static Statement stmt() throws SQLException, ClassNotFoundException {
-        Statement stmt = com().createStatement();
-        return stmt;
-    }
-
-    static Connection connection;
-
-    public PaisDao() throws ClassNotFoundException {
-        PaisDao.connection = new FabricaConexao().getConnection();
-    }
+    private Connection connection;
 
     public PaisBean seledctPorID(String id) throws SQLException, ClassNotFoundException, Exception {
         PaisBean cidade = null;
         String sql = "SELECT * FROM pais WHERE id =" + id;
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 cidade = new PaisBean();
                 cidade.setId(rs.getString("id"));
@@ -42,10 +28,10 @@ public class PaisDao {
             }
             stmt.close();
             return cidade;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -53,9 +39,10 @@ public class PaisDao {
         List<PaisBean> paisBean = new ArrayList<>();
         String sql = "SELECT * FROM pais";
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 PaisBean paises = new PaisBean();
                 paises.setId(rs.getString("id"));
@@ -63,14 +50,13 @@ public class PaisDao {
                 paisBean.add(paises);
             }
             stmt.close();
-            stmt().close();
             return paisBean;
         } catch (SQLException e) {
             System.out.println(e);
             System.out.println("Erro ao buscar paises no BD!");
             return paisBean;
         } finally {
-            FabricaConexao.fechaConexao(PaisDao.connection, stmt());
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 }

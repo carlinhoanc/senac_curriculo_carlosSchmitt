@@ -4,7 +4,7 @@ import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
@@ -24,16 +24,10 @@ public class CurriculoAtualizar implements Acao {
         String idd = "" + session.getAttribute("id_pessoa");
         String temCurri = "" + session.getAttribute("temCurri");
 
-        
         CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
 
-        String idCurri = null;
-        if (curri.idCurriPorPessoa(idd).equals("0")) {
-            idCurri = "" + session.getAttribute("id_curri");
-        } else {
-            idCurri = curri.idCurriPorPessoa(idd);
-        }
+        String idCurri = "" + session.getAttribute("id_curri");
 
         curriBeans.setExpProfissional(request.getParameter("expProfissional"));
         curriBeans.setForBasica(request.getParameter("forBasica"));
@@ -42,7 +36,6 @@ public class CurriculoAtualizar implements Acao {
         curriBeans.setId(Integer.parseInt(idCurri));
         curriBeans.setResumo(request.getParameter("resumo"));
 
-        System.out.println(idCurri);
         if (curri.atualizar(curriBeans) == true) {
             request.setAttribute("msg", "Pessoa inserida com sucesso");
         } else {
@@ -57,11 +50,11 @@ public class CurriculoAtualizar implements Acao {
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         request.setAttribute("edita", pessoas);
 
-        List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
+        List<CurriculoBean> curriculo = curri.listaCurriculoUnico(Integer.parseInt(idCurri));
         request.setAttribute("curriculo", curriculo);
 
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();

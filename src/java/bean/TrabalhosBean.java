@@ -1,6 +1,6 @@
 package bean;
 
-public class TrabalhosPublicacosBean {
+public class TrabalhosBean {
  
     private int id_TbPublicados;
     

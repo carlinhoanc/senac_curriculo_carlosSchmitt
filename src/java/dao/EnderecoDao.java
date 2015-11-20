@@ -6,32 +6,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class EnderecoDao {
 
-    public static Connection com() throws SQLException, ClassNotFoundException {
-        Connection con = new FabricaConexao().getConnection();
-        return con;
-    }
-
-    public static Statement stmt() throws SQLException, ClassNotFoundException {
-        Statement stmt = com().createStatement();
-        return stmt;
-    }
-    
-    static Connection connection;
-
-    public EnderecoDao() throws ClassNotFoundException {
-        EnderecoDao.connection = new FabricaConexao().getConnection();
-    }
+    private Connection connection;
 
     public int insere(EnderecoBean p) throws SQLException, ClassNotFoundException, Exception {
         PreparedStatement stmt = null;
         int idInserido = 1;
         String sql = "INSERT INTO endereco(nomeRua, numero, complemento, bairro, id_cidade, cep) VALUES(?,?,?,?,?,?)";
         try {
-            stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             stmt.setString(1, p.getNomeRua());
             stmt.setInt(2, p.getNumero());
             stmt.setString(3, p.getComplemento());
@@ -45,10 +31,10 @@ public class EnderecoDao {
             }
             stmt.close();
             return idInserido;
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -58,6 +44,7 @@ public class EnderecoDao {
         String sql = "DELETE FROM endereco WHERE id_Endereco IN "
                 + "(SELECT p.Endereco_id_Endereco from pessoa p WHERE p.id_Pessoa = ?)";
         try {
+            this.connection = new FabricaConexao().getConnection();
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, id);
             int ok = stmt.executeUpdate();
@@ -73,7 +60,7 @@ public class EnderecoDao {
             System.out.println("Erro ao remover Endereco no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -83,6 +70,7 @@ public class EnderecoDao {
         String sql = "UPDATE endereco SET nomeRua=? ,numero=? ,complemento=? ,bairro=? ,id_cidade=? ,cep=? "
                 + "WHERE id_Endereco = (SELECT p.Endereco_id_Endereco from pessoa p WHERE p.id_Pessoa = ?)";
         try {
+            this.connection = new FabricaConexao().getConnection();
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, p.getNomeRua());
             stmt.setInt(2, p.getNumero());
@@ -99,7 +87,7 @@ public class EnderecoDao {
             System.out.println("Erro ao atualizar Endereco no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -109,9 +97,10 @@ public class EnderecoDao {
         String sql = "SELECT e.* FROM endereco e INNER JOIN pessoa p ON e.id_Endereco = p.Endereco_id_Endereco "
                 + "WHERE p.id_Pessoa = " + cdPessoa;
         try {
-        PreparedStatement stmt = null;
-        stmt = com().prepareStatement(sql);
-        ResultSet rs = stmt().executeQuery(sql);
+            this.connection = new FabricaConexao().getConnection();
+            PreparedStatement stmt = null;
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 cidadeDao = new CidadeDao();
                 endereco = new EnderecoBean();
@@ -124,13 +113,12 @@ public class EnderecoDao {
                 endereco.setCep(rs.getString("cep"));
             }
             stmt.close();
-            stmt().close();
             return endereco;
         } catch (SQLException e) {
             System.out.println("Erro ao buscar endereco no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(EnderecoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 

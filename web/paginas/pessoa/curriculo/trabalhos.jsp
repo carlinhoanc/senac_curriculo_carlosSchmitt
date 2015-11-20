@@ -8,12 +8,12 @@
             <p><b>Nome do trabalho: </b>${trabalho.nome}</p>
             <p><b>Ano: </b>${trabalho.ano}</p>
             <p><b>Pais: </b>${trabalho.pais.nome}</p>
-            <p><b>Tipo de trabalho</b>${trabalho.id_TipoPublicados.descricao}</p>
+            <p><b>Tipo de trabalho: </b>${trabalho.id_TipoPublicados.descricao}</p>
 
             <div>
                 <form id="editaPessoa${trabalho.id_TbPublicados}" 
                       action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoEditar" method="post" >
-                    <input type="hidden" value="${trabalho.id_TbPublicados}}" name="id_trabalho" id="id_pessoa" />
+                    <input type="hidden" value="${trabalho.id_TbPublicados}" name="id_trabalho" id="id_trabalho" />
 
                     <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
                         <button type="submit" class="btn btn-primary">Alterar</button>

@@ -6,7 +6,7 @@ import bean.FormacaoBean;
 import bean.PaisBean;
 import bean.PessoaBean;
 import bean.TipoFormacaoBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
@@ -40,7 +40,9 @@ public class Login extends HttpServlet {
         pessoaModel.setEmail(nome);
 
         String retorno = null;
-        int insereP = LoginDao.fazerLogin(pessoaModel);
+
+        LoginDao loginDao = new LoginDao();
+        int insereP = loginDao.fazerLogin(pessoaModel);
         
         if (insereP == 0) {
             request.setAttribute("falhalogin", "erro");
@@ -71,7 +73,6 @@ public class Login extends HttpServlet {
                     session.setAttribute("id_curri", idCurri);
                     session.setAttribute("temCurri", "1");
                 }
-
                 
                 session.setAttribute("ativo", pessoa.getAtivo());
                 session.setAttribute("id_tipo", "" + pessoa.getTipo().getId());
@@ -80,13 +81,11 @@ public class Login extends HttpServlet {
                 session.setAttribute("sobrenome", pessoa.getSobreNome());
                 session.setAttribute("email", pessoa.getEmail());
 
-                System.out.println(session.getAttribute("id_pessoa"));
-                
-                List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt(pessoa.getId_Pessoa()));
+                List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt(""+session.getAttribute("id_pessoa")));
                 request.setAttribute("curriculo", curriculo);
 
                 TrabalhosDao trabalhosDao = new TrabalhosDao();
-                List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
+                List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
                 request.setAttribute("trabalhos", trabalhos);
 
                 FormacaoDao formacaoDao = new FormacaoDao();
@@ -105,7 +104,7 @@ public class Login extends HttpServlet {
             request.setAttribute("cidades", lista);
             request.setAttribute("edita", pessoas);
 
-            retorno = "/paginas/pessoa/meuperfil.jsp";
+            retorno = "/Pessoa?acao=PessoaListarPessoa";
             RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
             disp.forward(request, response);
         }

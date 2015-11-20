@@ -4,7 +4,7 @@ import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
@@ -44,7 +44,7 @@ public class PessoaCurriculo implements Acao {
             }
         }
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu("" + idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();

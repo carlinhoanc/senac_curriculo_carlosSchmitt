@@ -4,7 +4,7 @@ import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PessoaBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
@@ -60,7 +60,7 @@ public class FormacaoAtualiza implements Acao {
         request.setAttribute("formacao", formacao);
 
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
         session.setAttribute("temCurri", "1");

@@ -4,7 +4,7 @@ import bean.CurriculoBean;
 import bean.FormacaoBean;
 import bean.PaisBean;
 import bean.TipoFormacaoBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PaisDao;
@@ -37,7 +37,7 @@ public class TrabalhoListarTrabalho implements Acao {
         request.setAttribute("curriculo", curriculo);
 
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();

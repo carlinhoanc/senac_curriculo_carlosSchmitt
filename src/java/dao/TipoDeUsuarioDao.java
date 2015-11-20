@@ -6,33 +6,19 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TipoDeUsuarioDao {
 
-    public Connection com() throws SQLException, ClassNotFoundException {
-        Connection con = new FabricaConexao().getConnection();
-        return con;
-    }
-
-    public Statement stmt() throws SQLException, ClassNotFoundException {
-        Statement stmt = com().createStatement();
-        return stmt;
-    }
-
-    private final Connection connection;
-
-    public TipoDeUsuarioDao() throws ClassNotFoundException {
-        connection = new FabricaConexao().getConnection();
-    }
+    private Connection connection;
 
     public TipoAcessoBean obtemTipoUser(String cdPessoa) throws Exception {
         PreparedStatement stmt = null;
         TipoAcessoBean tipouser = null;
         String sql = "SELECT t.* FROM tipouser t INNER JOIN pessoa p ON t.id_tipo = p.id_tipo WHERE p.id_Pessoa = " + cdPessoa;
         try {
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            this.connection = new FabricaConexao().getConnection();
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 tipouser = new TipoAcessoBean();
                 tipouser.setId(rs.getInt("id_tipo"));
@@ -40,7 +26,6 @@ public class TipoDeUsuarioDao {
                 tipouser.setDescricao(rs.getString("descricao"));
             }
             stmt.close();
-            stmt().close();
             return tipouser;
         } catch (SQLException e) {
             System.out.println(e);

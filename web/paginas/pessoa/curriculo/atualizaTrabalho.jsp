@@ -66,6 +66,8 @@
                         </div>
                     </div>
                 </div>
+                        <input type="hidden" name="id_trabalho" id="id_trabalho" value="${trabalhos.id_TbPublicados}" />
+                               
             </c:forEach>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <a class="btn btn-danger" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Cancelar</a>

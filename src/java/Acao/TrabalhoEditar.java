@@ -3,7 +3,7 @@ package Acao;
 import bean.FormacaoBean;
 import bean.PaisBean;
 import bean.TipoTrabalhoPublicadosBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
 import dao.PaisDao;
@@ -29,6 +29,7 @@ public class TrabalhoEditar implements Acao {
         } else {
             idCurri = curri.idCurriPorPessoa(idd);
         }
+        String id_trab = request.getParameter("id_trabalho");
         
         PaisDao paisDao = new PaisDao();
         List<PaisBean> paises = paisDao.listarPaises();
@@ -39,7 +40,7 @@ public class TrabalhoEditar implements Acao {
         request.setAttribute("tipoTrabalho", tipoTrabalho);
 
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        List<TrabalhosBean> trabalhos = trabalhosDao.listarTrabalho(id_trab);
         request.setAttribute("trabalhos", trabalhos);
 
         FormacaoDao formacaoDao = new FormacaoDao();

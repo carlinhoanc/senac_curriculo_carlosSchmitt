@@ -3,12 +3,14 @@ package Acao;
 import bean.CidadeBean;
 import bean.CurriculoBean;
 import bean.FormacaoBean;
+import bean.PaisBean;
 import bean.PessoaBean;
 import bean.TipoTrabalhoPublicadosBean;
-import bean.TrabalhosPublicacosBean;
+import bean.TrabalhosBean;
 import dao.CidadeDao;
 import dao.CurriculoDao;
 import dao.FormacaoDao;
+import dao.PaisDao;
 import dao.PessoaDao;
 import dao.TipoTrabalhoDao;
 import dao.TrabalhosDao;
@@ -25,17 +27,30 @@ public class TrabalhoAtualiza implements Acao {
         HttpSession session = request.getSession();
         String idCurri = null;
         String idd = "" + session.getAttribute("id_pessoa");
-
-        TipoTrabalhoPublicadosBean tipos = new TipoTrabalhoPublicadosBean();
-        tipos.setId(request.getParameter("id_TipoPublicados"));
-        tipos.setDescricao(request.getParameter("descricao"));
-        TipoTrabalhoDao tiposDao = new TipoTrabalhoDao();
-
-        if (tiposDao.atualiza(tipos) == true) {
-            request.setAttribute("msg", "Pessoa inserida com sucesso");
+        
+        CurriculoDao curri = new CurriculoDao();
+        List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
+        request.setAttribute("curriculo", curriculo);
+             
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
         } else {
-            request.setAttribute("msg", "Erro ao inserirr pessoa");
+            idCurri = curri.idCurriPorPessoa(idd);
         }
+
+        TrabalhosBean trabalhos = new TrabalhosBean();
+        TrabalhosDao trabalhoDao = new TrabalhosDao();
+        TipoTrabalhoDao tiposDao = new TipoTrabalhoDao();
+        PaisDao paisD = new PaisDao();
+        
+        trabalhos.setNome(request.getParameter("nome"));
+        trabalhos.setAno(Integer.parseInt(request.getParameter("ano")));
+        trabalhos.setPais(paisD.seledctPorID(request.getParameter("pais")));
+        trabalhos.setId_Curriculo(idCurri);
+        trabalhos.setId_TipoPublicados(tiposDao.listarTipoID(request.getParameter("id_tipoTrab")));
+        
+        trabalhos.setId_TbPublicados(Integer.parseInt(request.getParameter("id_trabalho")));
+        trabalhoDao.atualiza(trabalhos, request.getParameter("id_trabalho"));
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
@@ -45,19 +60,9 @@ public class TrabalhoAtualiza implements Acao {
         List<PessoaBean> pessoas = pessoaDAO.listarPessoaID(idd);
         request.setAttribute("edita", pessoas);
 
-        CurriculoDao curri = new CurriculoDao();
-        List<CurriculoBean> curriculo = curri.listaCurriculoPessoa(Integer.parseInt(idd));
-        request.setAttribute("curriculo", curriculo);
-
-        
-        if (curri.idCurriPorPessoa(idd).equals("0")) {
-            idCurri = "" + session.getAttribute("id_curri");
-        } else {
-            idCurri = curri.idCurriPorPessoa(idd);
-        }
         TrabalhosDao trabalhosDao = new TrabalhosDao();
-        List<TrabalhosPublicacosBean> trabalhos = trabalhosDao.listarTrabalhosIdCu(idCurri);
-        request.setAttribute("trabalhos", trabalhos);
+        List<TrabalhosBean> trabalhoLista = trabalhosDao.listarTrabalhosIdCu(idCurri);
+        request.setAttribute("trabalhos", trabalhoLista);
 
         FormacaoDao formacaoDao = new FormacaoDao();
         List<FormacaoBean> formacao = formacaoDao.listarFormacaoIdCu("" + idCurri);

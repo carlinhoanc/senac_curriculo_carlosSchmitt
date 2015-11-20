@@ -6,27 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FormacaoDao {
 
-    public static Connection com() throws SQLException, ClassNotFoundException {
-        Connection con = new FabricaConexao().getConnection();
-        return con;
-    }
-
-    public static Statement stmt() throws SQLException, ClassNotFoundException {
-        Statement stmt = com().createStatement();
-        return stmt;
-    }
-
-    static Connection connection;
-
-    public FormacaoDao() throws ClassNotFoundException {
-        FormacaoDao.connection = new FabricaConexao().getConnection();
-    }
+    private Connection connection;
 
     public boolean insere(FormacaoBean p) throws SQLException, ClassNotFoundException, Exception {
         String sql1 = "SELECT * FROM formacao "
@@ -36,13 +21,15 @@ public class FormacaoDao {
                 + "AND id_Tipo='" + p.getId_Tipo().getId_Tipo() + "' "
                 + "AND Curriculo_id_Curriculo='" + p.getCurriculo_id_Curriculo() + "' ;";
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
-            ResultSet rs = stmt().executeQuery(sql1);
+            stmt = connection.prepareStatement(sql1);
+            ResultSet rs = stmt.executeQuery();
             if (!rs.next()) {
                 String sql = "INSERT INTO formacao "
                         + "(nomeInstitui, dataInicio, dataTermino, id_Tipo, Curriculo_id_Curriculo)"
                         + " VALUES(?,?,?,?,?)";
-                stmt = com().prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+                stmt = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
                 stmt.setString(1, p.getNomeInstitui());
                 stmt.setString(2, p.getDataInicio());
                 stmt.setString(3, p.getDataTermino());
@@ -51,13 +38,13 @@ public class FormacaoDao {
                 stmt.executeUpdate();
                 stmt.close();
             }
-            stmt().close();
+            stmt.close();
             return true;
         } catch (SQLException e) {
             System.out.println("Erro ao remover Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -65,6 +52,7 @@ public class FormacaoDao {
         boolean removidoSucesso = false;
         String sql = "DELETE FROM formacao WHERE id_Formacao  = ?";
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, id);
@@ -82,7 +70,7 @@ public class FormacaoDao {
             System.out.println("Erro ao remover Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -90,6 +78,7 @@ public class FormacaoDao {
         boolean removidoSucesso = false;
         String sql = "DELETE FROM formacao WHERE Curriculo_id_Curriculoo  = ?";
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(id));
@@ -107,7 +96,7 @@ public class FormacaoDao {
             System.out.println("Erro ao remover Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -115,6 +104,7 @@ public class FormacaoDao {
         boolean atualizadoSucesso = false;
         String sql = "UPDATE formacao SET nomeInstitui= ? ,dataInicio=?, dataTermino=?, id_Tipo=? WHERE id_Formacao = ?";
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
             stmt.setString(1, p.getNomeInstitui());
@@ -131,7 +121,7 @@ public class FormacaoDao {
             System.out.println("Erro ao atualizar Formação no BD!");
             throw new RuntimeException(e);
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -139,9 +129,10 @@ public class FormacaoDao {
         List<FormacaoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM formacao where Curriculo_id_Curriculo = " + idC;
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {
                 tipoFormacaoDao = new TipoFormacaoDao();
@@ -154,12 +145,11 @@ public class FormacaoDao {
                 result.add(formacaoBean);
             }
             stmt.close();
-            stmt().close();
             return result;
         } catch (Exception e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -167,9 +157,10 @@ public class FormacaoDao {
         List<FormacaoBean> result = new ArrayList<>();
         String sql = "SELECT * FROM formacao where id_Formacao = " + idC;
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
             TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {
                 tipoFormacaoDao = new TipoFormacaoDao();
@@ -182,12 +173,11 @@ public class FormacaoDao {
                 result.add(formacaoBean);
             }
             stmt.close();
-            stmt().close();
             return result;
         } catch (Exception e) {
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
@@ -195,9 +185,10 @@ public class FormacaoDao {
         FormacaoBean formacaoBean = null;
         String sql = "SELECT * FROM formacao WHERE Curriculo_id_Curriculo = " + id_curri;
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
-            stmt = com().prepareStatement(sql);
-            ResultSet rs = stmt().executeQuery(sql);
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
             TipoFormacaoDao tipoFormacaoDao;
             while (rs.next()) {
                 tipoFormacaoDao = new TipoFormacaoDao();
@@ -209,13 +200,12 @@ public class FormacaoDao {
                 formacaoBean.setId_Tipo(tipoFormacaoDao.listarTipoID(rs.getString("id_Tipo")));
             }
             stmt.close();
-            stmt().close();
             return formacaoBean;
         } catch (SQLException e) {
             System.out.println("Erro ao buscar tbpublicados no BD!");
             return null;
         } finally {
-            FabricaConexao.fechaConexao(FormacaoDao.connection);
+            FabricaConexao.fechaConexao(this.connection);
         }
     }
 
