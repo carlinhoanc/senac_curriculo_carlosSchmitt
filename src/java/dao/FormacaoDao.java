@@ -76,12 +76,11 @@ public class FormacaoDao {
 
     public boolean deletaPorCurriculo(String id) throws SQLException, ClassNotFoundException, Exception {
         boolean removidoSucesso = false;
-        String sql = "DELETE FROM formacao WHERE Curriculo_id_Curriculoo  = ?";
+        String sql = "DELETE FROM formacao WHERE Curriculo_id_Curriculo = " + id;
         try {
             this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, Integer.parseInt(id));
             int ok = stmt.executeUpdate();
             if (ok == 1) {
                 System.out.println("Formação removido com sucesso no BD!");

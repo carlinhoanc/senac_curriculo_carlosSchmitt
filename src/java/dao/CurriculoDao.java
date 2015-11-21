@@ -117,18 +117,20 @@ public class CurriculoDao {
         String sql = "SELECT * FROM curriculo where id_Curriculo = " + idC;
         try {
             this.connection = new FabricaConexao().getConnection();
-            try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    CurriculoBean curriBean = new CurriculoBean();
-                    curriBean.setId(Integer.parseInt(rs.getString("id_Curriculo")));
-                    curriBean.setResumo(rs.getString("resumo"));
-                    curriBean.setExpProfissional(rs.getString("expProfissional"));
-                    curriBean.setForBasica(rs.getString("forBasica"));
-                    curriBean.setFormMedio(rs.getString("formMedio"));
-                    curriBean.setIdPessoa(rs.getString("pessoa_idPessoa"));
-                    result.add(curriBean);
-                }
+            PreparedStatement stmt = null;
+            stmt = connection.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery(sql);
+                System.out.println(sql);
+            while (rs.next()) {
+                System.out.println("ddddggg");
+                CurriculoBean curriBean = new CurriculoBean();
+                curriBean.setId(Integer.parseInt(rs.getString("id_Curriculo")));
+                curriBean.setResumo(rs.getString("resumo"));
+                curriBean.setExpProfissional(rs.getString("expProfissional"));
+                curriBean.setForBasica(rs.getString("forBasica"));
+                curriBean.setFormMedio(rs.getString("formMedio"));
+                curriBean.setIdPessoa(rs.getString("pessoa_idPessoa"));
+                result.add(curriBean);
             }
             return result;
         } catch (SQLException e) {

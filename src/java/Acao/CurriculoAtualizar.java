@@ -27,7 +27,14 @@ public class CurriculoAtualizar implements Acao {
         CurriculoBean curriBeans = new CurriculoBean();
         CurriculoDao curri = new CurriculoDao();
 
-        String idCurri = "" + session.getAttribute("id_curri");
+        String idCurri = null;
+        if (curri.idCurriPorPessoa(idd).equals("0")) {
+            idCurri = "" + session.getAttribute("id_curri");
+        } else {
+            idCurri = curri.idCurriPorPessoa(idd);
+        }
+        
+        System.out.println(idCurri);
 
         curriBeans.setExpProfissional(request.getParameter("expProfissional"));
         curriBeans.setForBasica(request.getParameter("forBasica"));

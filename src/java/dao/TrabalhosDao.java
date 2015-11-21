@@ -45,11 +45,12 @@ public class TrabalhosDao {
     }
 
     public boolean deletaPorCurriculo(String id) throws SQLException, ClassNotFoundException, Exception {
-        String sql = "DELETE FROM tbpublicados WHERE Curriculo_id_Curriculoo  = ?";
+        String sql = "DELETE FROM tbpublicados WHERE Curriculo_id_Curriculo  = " + id;
+        System.out.println(sql);
         try {
+            this.connection = new FabricaConexao().getConnection();
             PreparedStatement stmt = null;
             stmt = connection.prepareStatement(sql);
-            stmt.setString(1, id);
             int ok = stmt.executeUpdate();
             stmt.close();
             if (ok == 1) {
