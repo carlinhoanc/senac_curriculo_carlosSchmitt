@@ -1,4 +1,4 @@
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -23,13 +23,11 @@
                 <div class="row">
                     <div class="col-md-6" >
                         <label>Nome</label>
-                        <input required="" name="nome" type="text" id="nome"
-                               value="${trabalhos.nome}" placeholder="Digite nome" />
+                        <input required="" name="nome" type="text" id="nome" value="${trabalhos.nome}" placeholder="Digite nome" />
                     </div>
                     <div class="col-md-6" >
                         <label>Ano</label>
-                        <input required="" name="ano" id="ano" value="${trabalhos.ano}" 
-                               placeholder="Digite ano" type="number" min="1960" max="2050"/>
+                        <input required="" name="ano" id="ano" value="${trabalhos.ano}" placeholder="Digite ano" type="number" min="1960" max="2050"/>
                     </div>
                 </div>
                 <div class="row">
@@ -66,8 +64,7 @@
                         </div>
                     </div>
                 </div>
-                        <input type="hidden" name="id_trabalho" id="id_trabalho" value="${trabalhos.id_TbPublicados}" />
-                               
+                <input type="hidden" name="id_trabalho" id="id_trabalho" value="${trabalhos.id_TbPublicados}" />
             </c:forEach>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <a class="btn btn-danger" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Cancelar</a>
@@ -75,6 +72,5 @@
             </div>
         </form>
     </div>
-
     <%@ include file="../../../includes/footer.jsp" %>
 </body>

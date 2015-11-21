@@ -1,6 +1,4 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div style="height: 50px"></div>
 <div class="row">
     <c:forEach var="trabalho" items="${trabalhos}">
@@ -9,16 +7,12 @@
             <p><b>Ano: </b>${trabalho.ano}</p>
             <p><b>Pais: </b>${trabalho.pais.nome}</p>
             <p><b>Tipo de trabalho: </b>${trabalho.id_TipoPublicados.descricao}</p>
-
             <div>
-                <form id="editaPessoa${trabalho.id_TbPublicados}" 
-                      action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoEditar" method="post" >
+                <form id="editaPessoa${trabalho.id_TbPublicados}" action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoEditar" method="post" >
                     <input type="hidden" value="${trabalho.id_TbPublicados}" name="id_trabalho" id="id_trabalho" />
-
                     <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
                         <button type="submit" class="btn btn-primary">Alterar</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" 
-                                data-target="#myModal${trabalho.id_TbPublicados}" >Deletar</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal${trabalho.id_TbPublicados}" >Deletar</button>
                     </div>
                 </form>
 
@@ -27,15 +21,10 @@
                         <div class="modal-content">
                             <div class="modal-footer ">
                                 <div class="page-header">
-                                    <h3>
-                                        Deseja realmente deletar ?
-                                    </h3>
+                                    <h3>Deseja realmente deletar ?</h3>
                                 </div>
-                                <form id="deletaPessoa${trabalho.id_TbPublicados}" 
-                                      action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoDeleta" method="post" >
-
+                                <form id="deletaPessoa${trabalho.id_TbPublicados}" action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoDeleta" method="post" >
                                     <input type="hidden" value="${trabalho.id_TbPublicados}" name="id_trabalho" id="id_pessoa" />
-
                                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -53,11 +42,7 @@
         </div>
     </c:forEach>
 </div>
-
-
-
-<br/>
-<br/>
+<br/><br/>
 <c:if test="${sessionScope.temCurri == '0' }">
     <div class="jumbotron">
         <h1>ATen&ccedil;&atilde;o</h1>

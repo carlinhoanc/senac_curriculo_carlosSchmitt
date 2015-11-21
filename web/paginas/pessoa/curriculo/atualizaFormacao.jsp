@@ -1,4 +1,4 @@
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,18 +11,15 @@
     <script src="${pageContext.request.contextPath}/resource/js/pt-br.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/bootstrap-datetimepicker.js"></script>
 </head>
-
 <body>
     <%@ include file="../../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <form action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoAtualiza" method="post" >
             <c:forEach var="formacao" items="${formacao}">
-
                 <div class="row">
                     <div class="col-md-6" >
                         <label>Nome da Institui&ccedil;&atilde;o</label>
-                        <input required="" name="nomeInstitui" type="text" id="nomeInstitui" 
-                               value="${formacao.nomeInstitui}" placeholder="Digite nome da Institui&ccedil;&atilde;o" />
+                        <input required="" name="nomeInstitui" type="text" id="nomeInstitui" value="${formacao.nomeInstitui}" placeholder="Digite nome da Institui&ccedil;&atilde;o" />
                     </div>
                     <div class="col-md-6" >
                         <label>Forma&ccedil;&atilde;o Academica</label>
@@ -44,10 +41,7 @@
                         <label>Data Inicio</label>
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" 
-                                       name="dataInicio" id="dataInicio" value="${formacao.dataInicio}" 
-                                       placeholder="Digite data Inicio" required="" />
-
+                                <input type='text' class="form-control" name="dataInicio" id="dataInicio" value="${formacao.dataInicio}" placeholder="Digite data Inicio" required="" />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -68,10 +62,7 @@
                         <label>Data Término</label>
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker1'>
-                                <input type='text' class="form-control" 
-                                       required="" name="dataTermino" id="dataTermino"
-                                       value="${formacao.dataTermino}" placeholder="Digite data Término"  />
-
+                                <input type='text' class="form-control" required="" name="dataTermino" id="dataTermino" value="${formacao.dataTermino}" placeholder="Digite data Término"  />
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -88,7 +79,6 @@
                         </script>
                     </div>
                 </div>
-
                 <input type="hidden" value="${formacao.id}" id="id_formacao" name="id_formacao" />
             </c:forEach>
 
@@ -98,6 +88,5 @@
             </div>
         </form>
     </div>
-
     <%@ include file="../../../includes/footer.jsp" %>
 </body>

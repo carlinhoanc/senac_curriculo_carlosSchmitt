@@ -5,8 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
     <%@ include file="../../../includes/heard.jsp" %>
-    
-    
     <title>Adicionar trabalho</title>
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script>
@@ -55,12 +53,10 @@
                     </div>
                 </div>
             </div>
-
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
     </div>
-
     <%@ include file="../../../includes/footer.jsp" %>
 </body>

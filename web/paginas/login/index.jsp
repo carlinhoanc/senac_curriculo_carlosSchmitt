@@ -1,14 +1,7 @@
-<%-- 
-    Document   : index
-    Created on : 23/10/2015, 19:30:39
-    Author     : CarlosRoberto
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        
         <title>JSP Page</title>
     </head>
     <body>

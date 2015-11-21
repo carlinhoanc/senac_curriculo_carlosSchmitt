@@ -1,17 +1,9 @@
-<%-- 
-    Document   : newjspNovo
-    Created on : 07/10/2015, 08:38:56
-    Author     : CarlosRoberto
---%>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <head>
     <%@ include file="../../includes/heard.jsp" %>
-    
-    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
@@ -25,7 +17,6 @@
         });
     </script>
 </head>
-
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
@@ -40,12 +31,8 @@
                             <h5><b>Nome: </b>${editar.nome} ${editar.sobreNome}</h5>
                             <h5><b>Idade: </b>${editar.idade}</h5>
                             <h5><b>Sexo: </b>
-                                <c:if test= "${editar.sexo == 'M'}">
-                                    Masculino
-                                </c:if>
-                                <c:if test= "${editar.sexo == 'F'}">
-                                    Feminino
-                                </c:if>
+                                <c:if test= "${editar.sexo == 'M'}">Masculino</c:if>
+                                <c:if test= "${editar.sexo == 'F'}">Feminino</c:if>
                             </h5>
                             <h5><b>CPF: </b>${editar.cpf}</h5>
                             <h5><b>Telefone: </b>${editar.telefone}</h5>
@@ -74,24 +61,15 @@
                     <div class="row">
                         <div class="col-md-6" >  
                             <b>Resumo</b>
-                            <div>
-                                ${curriculo.resumo}
-                            </div>
-
+                            <div>${curriculo.resumo}</div>
                             <b>Experiência Profissional</b>
-                            <div>
-                                ${curriculo.expProfissional}
-                            </div>
+                            <div>${curriculo.expProfissional}</div>
                         </div>
                         <div class="col-md-6" >  
                             <b>Forma&ccedil;&atilde;o Básica</b>
-                            <div>
-                                ${curriculo.forBasica}
-                            </div>
+                            <div>${curriculo.forBasica}</div>
                             <b>Forma&ccedil;&atilde;o Média</b>
-                            <div>
-                                ${curriculo.formMedio}
-                            </div>
+                            <div>${curriculo.formMedio}</div>
                         </div>
                     </div>
                 </fieldset>
@@ -131,7 +109,5 @@
             </div>
         </form>
     </div>
-
     <%@ include file="../../includes/footer.jsp" %>
-
 </body>

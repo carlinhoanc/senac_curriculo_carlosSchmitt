@@ -1,7 +1,5 @@
-
-<%@page session="true" %>
+<%@ page session="true" %>
 <form action="${pageContext.request.contextPath}/Curriculo?acao=CurriculoAdiciona" method="post" >
-
     <div class="row">
         <label>Resumo</label>
     <textarea id="resumo" name="resumo" ></textarea>
@@ -25,5 +23,4 @@
     <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
         <input type="submit" value="Salvar" class="btn btn-success" />
     </div>
-
 </form>

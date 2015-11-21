@@ -1,10 +1,4 @@
-<%-- 
-    Document   : newjspindex
-    Created on : 07/10/2015, 08:44:55
-    Author     : CarlosRoberto
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>  

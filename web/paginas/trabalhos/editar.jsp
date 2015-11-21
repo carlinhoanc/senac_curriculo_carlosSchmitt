@@ -1,8 +1,3 @@
-<%-- 
-    Document   : newjspNovo
-    Created on : 07/10/2015, 08:38:56
-    Author     : CarlosRoberto
---%>
 <%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
@@ -10,12 +5,10 @@
 <head> 
     <%@ include file="../../includes/heard.jsp" %>
 </head>
-
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-
-        <% if (id_tipo.equals("2")) { %>
+        <c:if test="${sessionScope.id_tipo == '2' }">
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoAtualizar" method="post" >
             <c:forEach var="editar" items="${edita}">
                 <h2>Editar tipo de trabalho: ${editar.descricao} </h2>
@@ -30,16 +23,13 @@
                     </div>
                 </fieldset>
             </c:forEach>
-            <br/>
-            <br/>
-
+            <br/><br/>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoListarTipoFormacao" type="button"  class="btn btn-danger">Cancelar</a>
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
-
-        <% }%>
+        </c:if>
     </div>
     <%@ include file="../../includes/footer.jsp" %>
 </body>

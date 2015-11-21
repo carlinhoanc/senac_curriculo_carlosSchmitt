@@ -47,10 +47,8 @@
     </head>
     <body>
         <%@ include file="../../includes/topo.jsp" %>
-
         <div class="container theme-showcase" style="padding-top: 70px" role="main">
             <h2>Lista de Curriculos</h2>
-
             <div class="table-responsive">
                 <table class="listagem table">
                     <thead>  
@@ -134,8 +132,7 @@
                                                     <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
                                                         <button type="submit" class="btn btn-primary">Alterar</button>
                                                         <c:if test="${sessionScope.id_tipo == '2' }">
-                                                            <button type="button" class="btn btn-danger" data-toggle="modal" 
-                                                                    data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
+                                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
                                                         </c:if>
                                                     </div>
                                                 </form>
@@ -145,15 +142,10 @@
                                                         <div class="modal-content">
                                                             <div class="modal-footer ">
                                                                 <div class="page-header">
-                                                                    <h3>
-                                                                        Deseja realmente deletar ?
-                                                                    </h3>
+                                                                    <h3>Deseja realmente deletar ?</h3>
                                                                 </div>
-                                                                <form id="deletaPessoa${pessoas.id_Pessoa}" 
-                                                                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
-
+                                                                <form id="deletaPessoa${pessoas.id_Pessoa}" action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
                                                                     <input type="hidden" value="${pessoas.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
-
                                                                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                                                         <div class="btn-group" role="group">
                                                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -167,7 +159,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </c:if>
                                     </div>
                                 </td>
@@ -180,7 +171,6 @@
                 </table>
             </div>
         </div>
-
         <%@ include file="../../includes/footer.jsp" %>
     </body>
 </html>

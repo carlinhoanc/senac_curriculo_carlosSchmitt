@@ -1,8 +1,6 @@
-
-<%@page session="true" %>
+<%@ page session="true" %>
 <form action="${pageContext.request.contextPath}/Curriculo?acao=CurriculoAtualizar" method="post" >
     <c:forEach var="curriculo" items="${curriculo}">
-
         <div class="row">
             <label>Resumo</label>
             <textarea id="resumo" name="resumo" >${curriculo.resumo}</textarea>
@@ -26,6 +24,5 @@
         <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
             <input type="submit" value="Atualzar" class="btn btn-success" />
         </div>
-
     </c:forEach>
 </form>

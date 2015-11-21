@@ -1,4 +1,4 @@
-<%@page session="true" %>
+<%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -13,7 +13,6 @@
 </head>
 
 <body>
-    
     <%@ include file="../../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <form action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoAdiciona" method="post" >
@@ -37,10 +36,7 @@
                     <label>Data Inicio</label>
                     <div class="form-group">
                         <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" 
-                                   name="dataInicio" id="dataInicio" value="" 
-                                   placeholder="Digite data Inicio" required="" />
-
+                            <input type='text' class="form-control" name="dataInicio" id="dataInicio" value="" placeholder="Digite data Inicio" required="" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -70,7 +66,6 @@
                             </span>
                         </div>
                     </div>
-
                     <script type="text/javascript">
                         var $fr = jQuery.noConflict();
                         $fr(function () {
@@ -81,13 +76,10 @@
                     </script>
                 </div>
             </div>
-
-
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
     </div>
-
     <%@ include file="../../../includes/footer.jsp" %>
 </body>

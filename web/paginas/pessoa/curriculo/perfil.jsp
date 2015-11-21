@@ -7,15 +7,11 @@
             <div class="row">
                 <div class="col-md-6" >
                     <label>Nome</label>
-                    <input type="text" id="nome" name="nome"
-                           value="${editar.nome}"
-                           placeholder="Digite nome" required="required" />
+                    <input type="text" id="nome" name="nome" value="${editar.nome}" placeholder="Digite nome" required="required" />
                 </div>
                 <div class="col-md-6" >
                     <label>Sobre nome</label>
-                    <input type="text" id="sobreNome" name="sobreNome"
-                           value="${editar.sobreNome}"
-                           placeholder="Digite Sobrenome" required="required" />
+                    <input type="text" id="sobreNome" name="sobreNome" value="${editar.sobreNome}" placeholder="Digite Sobrenome" required="required" />
                 </div>
                 <div class="limpar"></div>
             </div>
@@ -23,9 +19,7 @@
             <div class="row">
                 <div class="col-md-6" >
                     <label>Idade</label>
-                    <input type="number" min="1" max="99 "id="idade"
-                           value="${editar.idade}"
-                           name="idade" placeholder="Digite Idade" required="required" />
+                    <input type="number" min="1" max="99 "id="idade" value="${editar.idade}" name="idade" placeholder="Digite Idade" required="required" />
                 </div>
                 <div class="col-md-6" >
                     <label>Sexo</label>
@@ -71,7 +65,6 @@
                 </div>
                 <div class="limpar"></div>
             </div>
-
         </fieldset>
 
         <fieldset class="mt20 mb20">
@@ -110,7 +103,6 @@
                         <select id="id_cidade" name="id_cidade" class="chosen-select"  tabindex="2" required="">
                             <option>Selecione uma Cidade</option>
                             <c:forEach items="${cidades}" var="cidade" >
-
                                 <c:if test = "${editar.endereco.cidade.id == cidade.id }" >
                                     <option value="${cidade.id}" selected="">${cidade.cidadeUF}</option>
                                 </c:if>
@@ -129,7 +121,6 @@
         <input type="hidden" id="id_Pessoa" name="id_Pessoa" value="${editar.id_Pessoa}" />
     </c:forEach>
 
-
     <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
         <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaListarPessoa" type="button"  class="btn btn-danger">Voltar</a>
         <input type="submit" value="Salvar" class="btn btn-success" />
@@ -137,23 +128,17 @@
 </form>
 
 <c:if test="${sessionScope.id_tipo == '1' }">
-    <button type="button" class="btn btn-danger" data-toggle="modal" 
-            data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal${pessoas.id_Pessoa}" >Deletar</button>
 </c:if>
 <div class="modal fade" id="myModal${editar.id_Pessoa}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-footer ">
                 <div class="page-header">
-                    <h3>
-                        Deseja realmente deletar ?
-                    </h3>
+                    <h3>Deseja realmente deletar ?</h3>
                 </div>
-                <form id="deletaPessoa${editar.id_Pessoa}" 
-                      action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
-
+                <form id="deletaPessoa${editar.id_Pessoa}" action="${pageContext.request.contextPath}/Pessoa?acao=PessoaDeleta" method="post" >
                     <input type="hidden" value="${editar.id_Pessoa}" name="id_pessoa" id="id_pessoa" />
-
                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -167,7 +152,6 @@
         </div>
     </div>
 </div>
-
 <script>
     var $clo = jQuery.noConflict();
     $clo(".chosen-select").chosen({no_results_text: "Oops, não encontrado!", single_text: "Selecione uma op&ccedil;&atilde;o"});

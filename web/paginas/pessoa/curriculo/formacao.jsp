@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <div style="height: 50px"></div>
 <div class="row">
     <c:forEach var="formacaos" items="${formacao}">
@@ -10,14 +9,11 @@
             <p><b>Data Término: </b>${formacaos.dataTermino}</p>
 
             <div>
-                <form id="editaPessoa${formacaos.id}" 
-                      action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoEditar" method="post" >
+                <form id="editaPessoa${formacaos.id}" action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoEditar" method="post" >
                     <input type="hidden" value="${formacaos.id}" name="id_formacaos" id="id_pessoa" />
-
                     <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
                         <button type="submit" class="btn btn-primary">Alterar</button>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" 
-                                data-target="#myModal${formacaos.id}" >Deletar</button>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal${formacaos.id}" >Deletar</button>
                     </div>
                 </form>
 
@@ -26,15 +22,10 @@
                         <div class="modal-content">
                             <div class="modal-footer ">
                                 <div class="page-header">
-                                    <h3>
-                                        Deseja realmente deletar ?
-                                    </h3>
+                                    <h3>Deseja realmente deletar ?</h3>
                                 </div>
-                                <form id="deletaPessoa${formacaos.id}" 
-                                      action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoDeleta" method="post" >
-
+                                <form id="deletaPessoa${formacaos.id}" action="${pageContext.request.contextPath}/Curriculo?acao=FormacaoDeleta" method="post" >
                                     <input type="hidden" value="${formacaos.id}" name="id_formacaos" id="id_pessoa" />
-
                                     <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                         <div class="btn-group" role="group">
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -52,11 +43,7 @@
         </div>
     </c:forEach>
 </div>
-
-
-
-<br/>
-<br/>
+<br/><br/>
 <c:if test="${sessionScope.temCurri == '0' }">
     <div class="jumbotron">
         <h1>ATen&ccedil;&atilde;o</h1>
@@ -66,8 +53,6 @@
 </c:if>
 <c:if test="${sessionScope.temCurri != '0' }">
     <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-        <a href="${pageContext.request.contextPath}/Curriculo?acao=FormacaoNovo" class="btn btn-danger" >
-            Novo
-        </a>
+        <a href="${pageContext.request.contextPath}/Curriculo?acao=FormacaoNovo" class="btn btn-danger" >Novo</a>
     </div>
 </c:if>

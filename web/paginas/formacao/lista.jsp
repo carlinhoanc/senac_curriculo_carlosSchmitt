@@ -1,17 +1,8 @@
-<%-- 
-    Document   : Lista
-    Created on : 07/10/2015, 08:36:22
-    Author     : CarlosRoberto
---%>
-
-
-<!DOCTYPE html>
 <html>
     <%@ page session="true" %>
     <%@ page language="java"%> 
     <%@ page import="java.util.*" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
     <head>
         <%@ include file="../../includes/heard.jsp" %>
         <title>Lista Tipos de forma&ccedil;&atilde;o</title>
@@ -26,15 +17,11 @@
                         <div class="col-md-6">
                             <div><b>ID:</b> ${tipoFormacao.id_Tipo}</div>
                             <div><b>Descri&ccedil;&atilde;o:</b> ${tipoFormacao.descricao}</div>
-
-                            <form id="editaPessoa${tipoFormacao.id_Tipo}" 
-                                  action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoEditar" method="post" >
+                            <form id="editaPessoa${tipoFormacao.id_Tipo}" action="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoEditar" method="post" >
                                 <input type="hidden" value="${tipoFormacao.id_Tipo}" name="id_Tipo" id="id_Tipo" />
-
                                 <div class="btn-group btn-group  grupo_botoes" role="group" aria-label="...">
                                     <button type="submit" class="btn btn-primary">Alterar</button>
-                                    <button type="button" class="btn btn-danger" data-toggle="modal"
-                                            data-target="#myModal${tipoFormacao.id_Tipo}" >Deletar</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal${tipoFormacao.id_Tipo}" >Deletar</button>
                                 </div>
                             </form>
 
@@ -45,11 +32,8 @@
                                             <div class="page-header">
                                                 <h3>Deseja realmente deletar ?</h3>
                                             </div>
-                                            <form id="deletaPessoa${tipoFormacao.id_Tipo}" 
-                                                  action="${pageContext.request.contextPath}/Pessoa?acao=TipoFormacaoDeleta" method="post" >
-
+                                            <form id="deletaPessoa${tipoFormacao.id_Tipo}" action="${pageContext.request.contextPath}/Pessoa?acao=TipoFormacaoDeleta" method="post" >
                                                 <input type="hidden" value="${tipoFormacao.id_Tipo}" name="id_Tipo" id="id_Tipo" />
-
                                                 <div class="btn-group btn-group-justified" role="group" aria-label="...">
                                                     <div class="btn-group" role="group">
                                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -69,18 +53,14 @@
                 </div>
                 <div class="page-header">
                     <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                        <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp" 
-                           type="button" class="btn btn-danger">Voltar</a>
+                        <a href="${pageContext.request.contextPath}/paginas/formacao/index.jsp" type="button" class="btn btn-danger">Voltar</a>
 
-                        <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo"
-                           type="button" class="btn btn-primary">Novo</a>
+                        <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoFormacaoNovo" type="button" class="btn btn-primary">Novo</a>
                     </div>
                 </div>
             </div>
         </c:if>
-    </div>
-</div>
 
-<%@ include file="../../includes/footer.jsp" %>
-</body>
+        <%@ include file="../../includes/footer.jsp" %>
+    </body>
 </html>

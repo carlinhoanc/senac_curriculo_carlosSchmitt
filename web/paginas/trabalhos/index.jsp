@@ -1,9 +1,3 @@
-<%-- 
-    Document   : newjspNovo
-    Created on : 07/10/2015, 08:38:56
-    Author     : CarlosRoberto
---%>
-
 <%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
@@ -18,13 +12,10 @@
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <h2>Tipos de trabalhos</h2>
         <c:if test="${sessionScope.id_tipo == '2' }">
-
             <div class="page-header">
                 <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoNovo"
-                       type="button" class="btn btn-primary">Novo</a>
-                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoListarTipoTrabalho"
-                       type="button" class="btn btn-success">Listar</a>
+                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoNovo" type="button" class="btn btn-primary">Novo</a>
+                    <a href="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoListarTipoTrabalho" type="button" class="btn btn-success">Listar</a>
                 </div>
             </div>
 

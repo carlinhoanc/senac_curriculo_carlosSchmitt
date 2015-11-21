@@ -1,8 +1,3 @@
-<%-- 
-    Document   : newjspNovo
-    Created on : 07/10/2015, 08:38:56
-    Author     : CarlosRoberto
---%>
 <%@ page session="true" %>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
@@ -14,10 +9,9 @@
 
 <body>
     <%@ include file="../../includes/topo.jsp" %>
-
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <h2>Cadastrar novo tipo de trabalho</h2>
-        <% if (id_tipo.equals("2")) { %>
+        <c:if test="${sessionScope.id_tipo == '2' }">
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoAdiciona" method="post" >
             <fieldset>
                 <div class="win100">
@@ -31,7 +25,7 @@
                 <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </form>
-        <% }%>
+        </c:if>
     </div>
     <%@ include file="../../includes/footer.jsp" %>
 </body>

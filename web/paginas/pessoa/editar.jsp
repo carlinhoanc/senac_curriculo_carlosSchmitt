@@ -1,18 +1,10 @@
-<%-- 
-    Document   : newjspNovo
-    Created on : 07/10/2015, 08:38:56
-    Author     : CarlosRoberto
---%>
 <%@ page language="java"%> 
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <head>
     <%@ include file="../../includes/heard.jsp" %>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resource/css/chosen.css">
-    
-    
     <script src="${pageContext.request.contextPath}/resource/js/maskedinput.js"></script>
     <script src="${pageContext.request.contextPath}/resource/js/chosen.jquery.js"></script>
     <script>
@@ -29,28 +21,20 @@
 <body>
     <%@ include file="../../includes/topo.jsp" %>
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
-
         <form action="${pageContext.request.contextPath}/Pessoa?acao=PessoaAtualizar" method="post" >
             <c:forEach var="editar" items="${edita}">
-
                 <h2>Editar Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</h2>
                 <title>Editar Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</title>
-
                 <fieldset>
                     <legend>Dados Pessoais de  ${editar.nome} ${editar.sobreNome}</legend>
-
                     <div class="row">
                         <div class="col-md-6" >
                             <label>Nome</label>
-                            <input type="text" id="nome" name="nome"
-                                   value="${editar.nome}"
-                                   placeholder="Digite nome" required="required" />
+                            <input type="text" id="nome" name="nome" value="${editar.nome}" placeholder="Digite nome" required="required" />
                         </div>
                         <div class="col-md-6" >
                             <label>Sobre nome</label> 
-                            <input type="text" id="sobreNome" name="sobreNome"
-                                   value="${editar.sobreNome}"
-                                   placeholder="Digite Sobrenome" required="required" />
+                            <input type="text" id="sobreNome" name="sobreNome" value="${editar.sobreNome}" placeholder="Digite Sobrenome" required="required" />
                         </div>
                         <div class="limpar"></div>
                     </div>
@@ -58,9 +42,7 @@
                     <div class="row">
                         <div class="col-md-6" >
                             <label>Idade</label>
-                            <input type="number" min="1" max="99 "id="idade"
-                                   value="${editar.idade}"
-                                   name="idade" placeholder="Digite Idade" required="required" />
+                            <input type="number" min="1" max="99 "id="idade" value="${editar.idade}" name="idade" placeholder="Digite Idade" required="required" />
                         </div>
                         <div class="col-md-6" >
                             <label>Sexo</label>
@@ -106,7 +88,6 @@
                         </div>
                         <div class="limpar"></div>
                     </div>
-
                 </fieldset>
 
                 <fieldset class="mt20 mb20">
@@ -199,8 +180,7 @@
                 
                 <input type="hidden" id="editarPerfil" name="editarPerfil" value="naoEdita" />
                 </c:if>
-                <br/>
-                <br/>
+                <br/><br/>
                 <input type="hidden" id="id_Pessoa" name="id_Pessoa" value="${editar.id_Pessoa}" />
             </c:forEach>
 
