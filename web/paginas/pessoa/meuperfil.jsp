@@ -39,12 +39,16 @@
                         <li role="presentation">
                             <a href="#trabalhos" aria-controls="trabalhos" role="tab" data-toggle="tab">Trabalhos publicados</a>
                         </li>
+                        <li role="presentation">
+                            <a href="#acessos" aria-controls="acessos" role="tab" data-toggle="tab">Acesso</a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="perfil">
                             <%@ include file="../../paginas/pessoa/curriculo/perfil.jsp" %>
                         </div>
+                        
                         <div role="tabpanel" class="tab-pane" id="curriculo">
                             <c:if test="${sessionScope.temCurri == '0' }">
                                 <%@ include file="../../paginas/pessoa/curriculo/curriculo.jsp" %>
@@ -60,6 +64,10 @@
 
                         <div role="tabpanel" class="tab-pane" id="trabalhos">
                             <%@ include file="../../paginas/pessoa/curriculo/trabalhos.jsp" %>
+                        </div>
+                        
+                        <div role="tabpanel"  class="tab-pane" id="acessos" >
+                            <%@ include file="../../paginas/pessoa/curriculo/acessos.jsp" %>
                         </div>
                     </div>
                 </c:when>    

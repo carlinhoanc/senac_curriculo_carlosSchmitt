@@ -10,7 +10,7 @@
     </welcome-file-list>
     <error-page>
         <error-code>404</error-code>
-        <!--<location>/Erro404</location>-->
         <location>/Pessoa?acao=PessoaListarPessoa</location>
     </error-page>
+    
 </web-app>

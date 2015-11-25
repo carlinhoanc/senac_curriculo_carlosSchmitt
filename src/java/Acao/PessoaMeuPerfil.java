@@ -28,6 +28,8 @@ public class PessoaMeuPerfil implements Acao {
         } else {
             idd = request.getParameter("id_pessoa");
         }
+        
+        System.out.println(idd);
 
         CidadeDao cidades = new CidadeDao();
         List<CidadeBean> lista = cidades.listaCidades();
