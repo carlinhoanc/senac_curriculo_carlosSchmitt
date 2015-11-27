@@ -13,10 +13,13 @@
             $maskk("#ano").mask("099999");
         });
     </script>
+
+    <script src="${pageContext.request.contextPath}/resource/js/localStorage.js"></script>
 </head>
 
 <body>
     <%@ include file="../../../includes/topo.jsp" %>
+    
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TrabalhoAtualiza" method="post" >
             <c:forEach var="trabalhos" items="${trabalhos}">
@@ -68,7 +71,7 @@
             </c:forEach>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
                 <a class="btn btn-danger" href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Cancelar</a>
-                <input type="submit" value="Atualizar" class="btn btn-success" />
+                <input type="submit" value="Atualizar" id="btnSalvar" class="btn btn-success" />
             </div>
         </form>
     </div>

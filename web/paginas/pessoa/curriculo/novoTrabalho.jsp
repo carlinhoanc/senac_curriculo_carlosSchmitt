@@ -13,6 +13,8 @@
             $maskk("#ano").mask("099999");
         });
     </script>
+
+    <script src="${pageContext.request.contextPath}/resource/js/localStorage.js"></script>
 </head>
 
 <body>
@@ -54,7 +56,7 @@
                 </div>
             </div>
             <div class="btn-group btn-group grupo_botoes" role="group" aria-label="...">
-                <input type="submit" value="Salvar" class="btn btn-success" />
+                <input type="submit" value="Salvar" id="btnSalvar" class="btn btn-success" />
             </div>
         </form>
     </div>

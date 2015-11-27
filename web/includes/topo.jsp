@@ -15,6 +15,9 @@
                 <li role="presentation">
                     <a href="${pageContext.request.contextPath}/Pessoa?acao=PessoaMeuPerfil">Meu Perfil</a>
                 </li>
+                <li role="presentation">
+                    <a href="${pageContext.request.contextPath}/paginas/historico.jsp">Histórico Trabalhos</a>
+                </li>
             </c:if>
 
             <c:if test="${sessionScope.id_tipo == '2' }">

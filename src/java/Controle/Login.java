@@ -17,12 +17,14 @@ import dao.TipoFormacaoDao;
 import dao.TrabalhosDao;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,13 +45,27 @@ public class Login extends HttpServlet {
         LoginDao loginDao = new LoginDao();
         int insereP = loginDao.fazerLogin(pessoaModel);
         HttpSession session = request.getSession();
-        
+
         if (insereP == 0) {
             session.setAttribute("loginErrado", "0");
             retorno = "/paginas/login/login.jsp";
             RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
             disp.forward(request, response);
         } else {
+
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, 1);
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            String formatted = format1.format(cal.getTime());
+
+            // Cria  o objeto Cookie
+            Cookie cookieNome = new Cookie("Nome", nome);
+            Cookie cookieData = new Cookie("Data", formatted);
+
+            //Adiciona os Cookies no reponse
+            response.addCookie(cookieNome);
+            response.addCookie(cookieData);
+
             String idCurri;
             session.setAttribute("loginCorreto", "1");
 

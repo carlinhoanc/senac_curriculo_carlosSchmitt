@@ -5,8 +5,10 @@
 <head> 
     <%@ include file="../../includes/heard.jsp" %>
 </head>
+
 <body>
     <%@ include file="../../includes/topo.jsp" %>
+    
     <div class="container theme-showcase" style="padding-top: 70px" role="main">
         <c:if test="${sessionScope.id_tipo == '2' }">
         <form action="${pageContext.request.contextPath}/Curriculo?acao=TipoTrabalhoAtualizar" method="post" >
