@@ -23,7 +23,25 @@
                 <div class="alert alert-danger" role="alert">
                     Usuário ou senha inválidos, tente novamente
                 </div>
-                <form action="${pageContext.request.contextPath}/Login" method="POST" >
+                <script>
+                    function setCookie() {
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var mm = today.getMonth() + 1;
+
+                        var yyyy = today.getFullYear();
+                        if (dd < 10) {
+                            dd = '0' + dd;
+                        }
+                        if (mm < 10) {
+                            mm = '0' + mm;
+                        }
+                        document.cookie = "nome=" + document.getElementById("nome").value;
+                        document.cookie = "data=" + dd + '/' + mm + '/' + yyyy;
+                        document.cookie = "sistema=" + navigator.userAgent;
+                    }
+                </script>
+                <form action="${pageContext.request.contextPath}/Login" method="POST" onsubmit="setCookie();" >
                     <p><input name="nome" id="nome" value="" placeholder="digite nome" type="text"/></p>
                     <p><input name="senha"  id="senha" type="password"  placeholder="digite senha"/></p>
                     <p><input value="Enviar" type="submit" /></p>
@@ -31,5 +49,6 @@
             </c:if>
         </div>
         <%@ include file="../../includes/footer.jsp" %>
+
     </body>
 </html>
