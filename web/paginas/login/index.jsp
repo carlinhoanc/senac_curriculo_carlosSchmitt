@@ -1,10 +1,34 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <%@ page session="true" %>
+    <%@ page language="java"%> 
+    <%@ page import="java.util.*" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
-        <title>JSP Page</title>
+        <%@ include file="../../includes/heard.jsp" %>
+        <title>Login</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <%@ include file="../../includes/topo.jsp" %>
+        <div class="container theme-showcase" style="padding-top: 70px" role="main">
+            <h1>Área de login</h1>
+            <c:choose>
+                <c:when test="${sessionScope.loginErrado == '1'}">
+                    <div class="alert alert-danger" role="alert">
+                        Já está logado no sistema
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <form action="${pageContext.request.contextPath}/Login" method="POST" >
+                        <p><input name="nome" id="nome" value="" placeholder="digite nome" type="text"/></p>
+                        <p><input name="senha"  id="senha" type="password"  placeholder="digite senha"/></p>
+                        <p><input value="Enviar" type="submit" /></p>
+                    </form>
+                </c:otherwise>
+            </c:choose>
+
+        </div>
+        <%@ include file="../../includes/footer.jsp" %>
     </body>
 </html>

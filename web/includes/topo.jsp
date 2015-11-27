@@ -31,7 +31,7 @@
                 </c:when>
                 <c:otherwise>
                     <li role="presentation"> 
-                        <a href="Login">Login</a>
+                        <a href="${pageContext.request.contextPath}/paginas/login/index.jsp">Login</a>
                     </li>
                 </c:otherwise>
             </c:choose>

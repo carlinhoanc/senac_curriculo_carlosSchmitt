@@ -40,18 +40,18 @@ public class Login extends HttpServlet {
         pessoaModel.setEmail(nome);
 
         String retorno = null;
-
         LoginDao loginDao = new LoginDao();
         int insereP = loginDao.fazerLogin(pessoaModel);
+        HttpSession session = request.getSession();
         
         if (insereP == 0) {
-            request.setAttribute("falhalogin", "erro");
+            session.setAttribute("loginErrado", "0");
             retorno = "/paginas/login/login.jsp";
             RequestDispatcher disp = getServletContext().getRequestDispatcher(retorno);
             disp.forward(request, response);
         } else {
             String idCurri;
-            HttpSession session = request.getSession();
+            session.setAttribute("loginCorreto", "1");
 
             CidadeDao cidades = new CidadeDao();
             List<CidadeBean> lista = cidades.listaCidades();
@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("id_curri", idCurri);
                     session.setAttribute("temCurri", "1");
                 }
-                
+
                 session.setAttribute("ativo", pessoa.getAtivo());
                 session.setAttribute("id_tipo", "" + pessoa.getTipo().getId());
                 session.setAttribute("id_pessoa", "" + pessoa.getId_Pessoa());
@@ -81,7 +81,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("sobrenome", pessoa.getSobreNome());
                 session.setAttribute("email", pessoa.getEmail());
 
-                List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt(""+session.getAttribute("id_pessoa")));
+                List<CurriculoBean> curriculo = curriDao.listaCurriculoPessoa(Integer.parseInt("" + session.getAttribute("id_pessoa")));
                 request.setAttribute("curriculo", curriculo);
 
                 TrabalhosDao trabalhosDao = new TrabalhosDao();
